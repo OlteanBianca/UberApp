@@ -2,104 +2,75 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using UberApp.Services;
 using Xamarin.Forms.Internals;
 
 namespace UberApp.Validators
 {
     [Preserve(AllMembers = true)]
-    public class ValidatablePair<T> : IValidatable<ValidatablePair<T>>
+    public class ValidatablePair<T> : NotifyPropertyChangedService, IValidatable<T>
     {
-        #region Fields
+        #region Private Fields
 
-        /// <summary>
-        /// Gets or Sets isValid
-        /// </summary>
         private bool isValid = true;
 
-        #endregion
-
-        #region PropertyChanged
-
-        /// <summary>
-        /// The PropertyChanged event declared.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        private List<string> _errors = new();
 
         #endregion
 
         #region Property
 
-        /// <summary>
-        /// Gets or Sets the Validation
-        /// </summary>
-        public List<IValidationRule<ValidatablePair<T>>> Validations { get; } = new List<IValidationRule<ValidatablePair<T>>>();
+        public List<IValidationRule<T>> Validations { get; } = new List<IValidationRule<T>>();
 
-        /// <summary>
-        /// Gets or sets a value indicating whether it is valid or not.
-        /// </summary>
         public bool IsValid
         {
-            get
-            {
-                return this.isValid;
-            }
-
+            get => isValid;
             set
             {
-                this.isValid = value;
-                this.NotifyPropertyChanged();
+                isValid = value;
+                OnPropertyChanged();
             }
         }
 
-        /// <summary>
-        /// Gets or Sets Errors
-        /// </summary>
-        public List<string> Errors { get; private set; } = new List<string>();
+        public List<string> Errors 
+        {
+            get => _errors;
+            private set
+            {
+                _errors = value;
+                OnPropertyChanged();
+            }
+        }
 
-        /// <summary>
-        /// Gets or sets Item1.
-        /// </summary>
         public ValidatableObject<T> Item1 { get; set; } = new ValidatableObject<T>();
 
-        /// <summary>
-        /// Gets or sets Item2.
-        /// </summary>
         public ValidatableObject<T> Item2 { get; set; } = new ValidatableObject<T>();
 
         #endregion
 
         #region Methods
 
-        /// <summary>
-        /// Validate the Items
-        /// </summary>
-        /// <returns>returns bool value</returns>
         public bool Validate()
         {
-            var item1IsValid = this.Item1.Validate();
-            var item2IsValid = this.Item2.Validate();
+            var item1IsValid = Item1.Validate();
+            var item2IsValid = Item2.Validate();
+
             if (item1IsValid && item2IsValid)
             {
-                this.Errors.Clear();
-                IEnumerable<string> errors = this.Validations.Where(v => !v.Check(this))
-                    .Select(v => v.ValidationMessage);
-                this.Errors = errors.ToList();
-                this.Item2.Errors.Clear();
-                this.Item2.Errors.AddRange(this.Errors);
-                this.Item2.IsValid = !this.Errors.Any();
+                if (Item1.Value.ToString() != Item2.Value.ToString())
+                {
+                    Errors.Clear();
+                    Errors = new() { "Passwords are not equal!" };
+                    IsValid = false;
+                    return IsValid;
+                }
+
+                Errors.Clear();
+                Errors = Validations.Where(c => !c.Check(Item1.Value)).Select(v => v.ValidationMessage).ToList();
             }
 
-            this.IsValid = !this.Item1.Errors.Any() && !this.Item2.Errors.Any();
-            return this.IsValid;
-        }
-
-        /// <summary>
-        /// The PropertyChanged event occurs when changing the value of property.
-        /// </summary>
-        /// <param name="propertyName">The PropertyName</param>
-        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            IsValid = !Item1.Errors.Any() && !Item2.Errors.Any() && !Errors.Any();
+            return IsValid;
         }
 
         #endregion

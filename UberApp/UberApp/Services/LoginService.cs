@@ -14,21 +14,28 @@ namespace UberApp.Services
 
         public void LoginClicked(object obj)
         {
-            //if (_viewModel.AreFieldsValid())
-            //{
-            //    // Do Something
-            //}
+            if (_viewModel.AreFieldsValid())
+            {
+
+            }
         }
 
         public void SignUpClicked(object obj)
         {
-            // Do Something
+            if(_viewModel.AreFieldsValid())
+            {
+
+            }
         }
 
         public void ResetPasswordClicked()
         {
-            // Do something
+            if (_viewModel.AreFieldsValid())
+            {
+
+            }
         }
+
 
         public void CloseApplicationClicked()
         {
@@ -37,8 +44,11 @@ namespace UberApp.Services
 
         public void OpenResetPasswordPageClicked()
         {
-            ResetPasswordPage resetPasswordPage = new();
-            Xamarin.Forms.Application.Current.MainPage = resetPasswordPage;
+            if (_viewModel.AreFieldsValid())
+            {
+                ResetPasswordPage resetPasswordPage = new();
+                Xamarin.Forms.Application.Current.MainPage = resetPasswordPage;
+            } 
         }
 
         public void OpenSignUpPageClicked()

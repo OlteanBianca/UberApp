@@ -7,20 +7,12 @@ namespace UberApp.Validators.Rules
     {
         #region Properties
 
-        /// <summary>
-        /// Gets or sets the Validation Message.
-        /// </summary>
         public string ValidationMessage { get; set; }
 
         #endregion
 
         #region Method
 
-        /// <summary>
-        /// Check the email has valid or not
-        /// </summary>
-        /// <param name="value">The value</param>
-        /// <returns>returns bool value</returns>
         public bool Check(T value)
         {
             try

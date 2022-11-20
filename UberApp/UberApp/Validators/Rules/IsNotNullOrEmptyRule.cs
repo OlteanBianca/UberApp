@@ -7,18 +7,12 @@ namespace UberApp.Validators.Rules
     {
         #region Properties
 
-        /// <summary>
-        /// Gets or sets the validation Message.
-        /// </summary>
         public string ValidationMessage { get; set; }
 
         #endregion
 
         #region Methods
 
-        /// <summary>
-        /// Check the Email has null or empty
-        /// </summary>
         public bool Check(T value)
         {
             if (value == null)
