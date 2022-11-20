@@ -16,8 +16,9 @@ namespace UberApp.Services
         {
             if (_viewModel.AreFieldsValid())
             {
-
-            }
+                ClientHomePage clientHomePage = new();
+                Xamarin.Forms.Application.Current.MainPage = clientHomePage;
+            }   
         }
 
         public void SignUpClicked(object obj)
