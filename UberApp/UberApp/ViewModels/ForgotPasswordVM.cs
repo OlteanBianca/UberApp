@@ -1,4 +1,6 @@
 ﻿using UberApp.Services;
+using UberApp.Validators.Rules;
+using UberApp.Validators;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -11,6 +13,26 @@ namespace UberApp.ViewModels
 
         public ForgotPasswordVM() : base()
         {
+        }
+
+        #endregion
+
+        #region Methods
+
+        public override bool AreFieldsValid()
+        {
+            bool isEmailValid = Email.Validate();
+            return isEmailValid;
+        }
+
+        public override void InitializeProperties()
+        {
+            Email = new ValidatableObject<string>();
+        }
+
+        public override void AddValidationRules()
+        {
+            Email.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Email required!" });
         }
 
         #endregion

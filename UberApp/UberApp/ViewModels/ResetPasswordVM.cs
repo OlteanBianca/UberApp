@@ -66,17 +66,18 @@ namespace UberApp.ViewModels
 
         #region Methods
 
-        public bool AreFieldsValid()
+        public override bool AreFieldsValid()
         {
-            bool isPassword = this.Password.Validate();
+            bool isPassword = Password.Validate();
             return isPassword;
         }
 
-        private new void InitializeProperties()
+        public override void InitializeProperties()
         {
             Password = new ValidatablePair<string>();
         }
-        private new void AddValidationRules()
+
+        public override void AddValidationRules()
         {
             Password.Item1.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Password Required" });
             Password.Item2.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Re-enter Password" });

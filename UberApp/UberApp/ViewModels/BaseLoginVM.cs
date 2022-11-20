@@ -8,7 +8,7 @@ namespace UberApp.ViewModels
 {
 
     [Preserve(AllMembers = true)]
-    public class BaseLoginVM : BaseVM
+    public abstract class BaseLoginVM : BaseVM
     {
         #region Fields
 
@@ -78,20 +78,11 @@ namespace UberApp.ViewModels
 
         #region Methods
 
-        public void InitializeProperties()
-        {
-            Email = new ValidatableObject<string>();
-            Password = new ValidatableObject<string>();
-            Name = new ValidatableObject<string>();
-        }
+        public abstract bool AreFieldsValid();
 
-        public void AddValidationRules()
-        {
-            Email.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Email Required" });
-            Name.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Name Required" });
-            Password.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Password Required" });
-            Email.Validations.Add(new IsValidEmailRule<string> { ValidationMessage = "Invalid Email" });
-        }
+        public abstract void InitializeProperties();
+
+        public abstract void AddValidationRules();
 
         #endregion
 

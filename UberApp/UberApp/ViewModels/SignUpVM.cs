@@ -1,4 +1,5 @@
-﻿using UberApp.Services;
+﻿using System;
+using UberApp.Services;
 using UberApp.Validators;
 using UberApp.Validators.Rules;
 using Xamarin.Forms;
@@ -39,6 +40,7 @@ namespace UberApp.ViewModels
             InitializeProperties();
             AddValidationRules();
         }
+
         #endregion
 
         #region Commands
@@ -67,7 +69,7 @@ namespace UberApp.ViewModels
 
         #region Methods
 
-        public bool AreFieldsValid()
+        public override bool AreFieldsValid()
         {
             bool isEmail = Email.Validate();
             bool isNameValid = Name.Validate();
@@ -75,15 +77,21 @@ namespace UberApp.ViewModels
             return isPasswordValid && isNameValid && isEmail;
         }
 
-        private new void InitializeProperties()
+        public override void InitializeProperties()
         {
             Password = new ValidatablePair<string>();
+            Name = new ValidatableObject<string>();
+            Email = new ValidatableObject<string>();
         }
 
-        private new void AddValidationRules()
+        public override void AddValidationRules()
         {
-            Password.Item1.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Password Required" });
-            Password.Item2.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Re-enter Password" });
+            Password.Item1.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Password Required!" });
+            Password.Item2.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Re-enter Password!" });
+            Email.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Email required!" });
+            Name.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Name required!" });
+            Name.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Name is already used!" });
+            Password.Validations.Add(new IsValidPasswordRule<string> { });
         }
 
         #endregion

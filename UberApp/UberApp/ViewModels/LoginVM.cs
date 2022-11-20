@@ -1,4 +1,6 @@
 ﻿using UberApp.Services;
+using UberApp.Validators;
+using UberApp.Validators.Rules;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -52,11 +54,23 @@ namespace UberApp.ViewModels
 
         #region methods
 
-        public bool AreFieldsValid()
+        public override bool AreFieldsValid()
         {
             bool isEmailValid = Email.Validate();
             bool isPasswordValid = Password.Validate();
             return isEmailValid && isPasswordValid;
+        }
+
+        public override void InitializeProperties()
+        {
+            Password = new ValidatableObject<string>();
+            Email = new ValidatableObject<string>();
+        }
+
+        public override void AddValidationRules()
+        {
+            Password.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Password Required!" });
+            Email.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Email required!" });
         }
 
         #endregion

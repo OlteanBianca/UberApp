@@ -156,7 +156,9 @@
 
                         <StackLayout>
                             <!--  Entry to get the confirm password from user  -->
-                            <border:SfBorder BorderColor="{Binding Source={x:Reference ConfirmPasswordEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource LoginFormBorderlessEntryBorderStyle}">
+                            <border:SfBorder BorderColor="{Binding Source={x:Reference ConfirmPasswordEntry}, 
+                                Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" 
+                                Style="{StaticResource LoginFormBorderlessEntryBorderStyle}">
                                 <Grid ColumnDefinitions="*, Auto">
 
                                     <control:BorderlessEntry
@@ -190,6 +192,15 @@
                                 IsVisible="{Binding Password.Item2.IsValid, Converter={StaticResource InverseBoolConverter}}"
                                 Style="{StaticResource SimpleLabelStyle}"
                                 Text="{Binding Password.Item2.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                TextColor="{DynamicResource Red}"
+                                VerticalOptions="FillAndExpand" />
+
+                            <Label
+                                x:Name="PasswordsValidationLabel"
+                                Margin="15,-3,0,0"
+                                IsVisible="{Binding Password.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                                Style="{StaticResource SimpleLabelStyle}"
+                                Text="{Binding Password.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
                                 TextColor="{DynamicResource Red}"
                                 VerticalOptions="FillAndExpand" />
                         </StackLayout>
