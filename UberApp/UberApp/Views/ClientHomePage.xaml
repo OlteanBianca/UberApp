@@ -10,13 +10,18 @@
     </ContentPage.BindingContext>
     
     <Grid>
-        <map:Map x:Name="ClientMap" IsShowingUser="true" MapType="Street" HasZoomEnabled="True">
-            <map:Map.ItemTemplate>
-                <DataTemplate>
-                    <map:Pin Position="{Binding Position}">
-                    </map:Pin>
-                </DataTemplate>
-            </map:Map.ItemTemplate>
+        <map:Map x:Name="ClientMap" 
+                 IsShowingUser="true" 
+                 MapType="Street" 
+                 MoveToLastRegionOnLayoutChange="True"
+                 HasZoomEnabled="True">
+            <map:Map.Pins>
+                <map:Pin Label="Santa Cruz"
+                       Address="The city with a boardwalk"
+                       Type="Place" 
+                       Position="{Binding PinPosition}">
+                </map:Pin>
+            </map:Map.Pins>
         </map:Map>
     </Grid>
 </ContentPage>
