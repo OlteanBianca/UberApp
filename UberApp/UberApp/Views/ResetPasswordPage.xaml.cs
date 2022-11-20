@@ -5,9 +5,9 @@ namespace UberApp.Views
 {
     [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ResetPasswordPageWithGradient
+    public partial class ResetPasswordPage
     {
-        public ResetPasswordPageWithGradient()
+        public ResetPasswordPage()
         {
             InitializeComponent();
         }

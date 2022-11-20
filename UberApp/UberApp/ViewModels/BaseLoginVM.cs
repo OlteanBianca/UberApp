@@ -1,13 +1,14 @@
 ﻿using UberApp.Services;
 using UberApp.Validators;
 using UberApp.Validators.Rules;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace UberApp.ViewModels
 {
 
     [Preserve(AllMembers = true)]
-    public class BaseLoginViewModel : BaseViewModel
+    public class BaseLoginVM : BaseVM
     {
         #region Fields
 
@@ -66,7 +67,7 @@ namespace UberApp.ViewModels
 
         #region Constructor
 
-        public BaseLoginViewModel()
+        public BaseLoginVM()
         {
             InitializeProperties();
             AddValidationRules();
@@ -90,6 +91,20 @@ namespace UberApp.ViewModels
             Name.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Name Required" });
             Password.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Password Required" });
             Email.Validations.Add(new IsValidEmailRule<string> { ValidationMessage = "Invalid Email" });
+        }
+
+        #endregion
+
+        #region Commands
+
+        private Command _closeApplicationCommand;
+        public Command CloseApplicationCommand
+        {
+            get
+            {
+                _closeApplicationCommand ??= new(LoginService.CloseApplicationClicked);
+                return _closeApplicationCommand;
+            }
         }
 
         #endregion

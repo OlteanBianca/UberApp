@@ -11,8 +11,8 @@ namespace UberApp
             InitializeComponent();
             Routing.RegisterRoute(nameof(SignUpPage), typeof(SignUpPage));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
-            Routing.RegisterRoute(nameof(ResetPasswordPageWithGradient), typeof(ResetPasswordPageWithGradient));
-            Routing.RegisterRoute(nameof(ForgotPasswordPageWithGradient), typeof(ForgotPasswordPageWithGradient));
+            Routing.RegisterRoute(nameof(ResetPasswordPage), typeof(ResetPasswordPage));
+            Routing.RegisterRoute(nameof(ForgotPasswordPage), typeof(ForgotPasswordPage));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

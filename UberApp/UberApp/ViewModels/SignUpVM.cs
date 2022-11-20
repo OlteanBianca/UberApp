@@ -7,7 +7,7 @@ using Xamarin.Forms.Internals;
 namespace UberApp.ViewModels
 {
     [Preserve(AllMembers = true)]
-    public class SignUpPageViewModel : BaseLoginViewModel
+    public class SignUpVM : BaseLoginVM
     {
         #region Fields
 
@@ -34,7 +34,7 @@ namespace UberApp.ViewModels
 
         #region Constructor
 
-        public SignUpPageViewModel() : base()
+        public SignUpVM() : base()
         {
             InitializeProperties();
             AddValidationRules();

@@ -5,9 +5,9 @@ namespace UberApp.Services
 {
     public class LoginService
     {
-        private readonly BaseLoginViewModel _viewModel;
+        private readonly BaseLoginVM _viewModel;
 
-        public LoginService(BaseLoginViewModel viewModel)
+        public LoginService(BaseLoginVM viewModel)
         {
             _viewModel = viewModel;
         }
@@ -25,28 +25,38 @@ namespace UberApp.Services
             // Do Something
         }
 
-        public void ForgotPasswordClicked(object obj)
+        public void ResetPasswordClicked()
         {
             // Do something
         }
 
-        public void ResetPasswordClicked(object obj)
+        public void CloseApplicationClicked()
         {
-            // Do something
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
 
-        public void OpenSignUpPageClicked(object obj)
+        public void OpenResetPasswordPageClicked()
         {
-            SignUpPageViewModel signUpPageViewModel = new ();
+            ResetPasswordPage resetPasswordPage = new();
+            Xamarin.Forms.Application.Current.MainPage = resetPasswordPage;
+        }
+
+        public void OpenSignUpPageClicked()
+        {
             SignUpPage signUpPage = new ();
             Xamarin.Forms.Application.Current.MainPage = signUpPage;
         }
 
-        public void OpenLoginPageClicked(object obj)
+        public void OpenLoginPageClicked()
         {
-            LoginPageViewModel loginPageViewModel = new();
             LoginPage loginPage = new();
             Xamarin.Forms.Application.Current.MainPage = loginPage;
+        }
+
+        public void OpenForgotPasswordPageClicked()
+        {
+            ForgotPasswordPage forgotPasswordPage = new();
+            Xamarin.Forms.Application.Current.MainPage = forgotPasswordPage;
         }
     }
 }

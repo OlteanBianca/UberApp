@@ -6,7 +6,7 @@ using Xamarin.Forms.Internals;
 namespace UberApp.ViewModels
 {
     [Preserve(AllMembers = true)]
-    public class ResetPasswordViewModel : BaseLoginViewModel
+    public class ResetPasswordVM : BaseLoginVM
     {
         #region Fields
 
@@ -33,7 +33,7 @@ namespace UberApp.ViewModels
 
         #region Constructor 
 
-        public ResetPasswordViewModel()
+        public ResetPasswordVM()
         {
             InitializeProperties();
             AddValidationRules();
@@ -53,6 +53,15 @@ namespace UberApp.ViewModels
             }
         }
 
+        private Command _openSignUpPageCommand;
+        public Command OpenSignUpPageCommand
+        {
+            get
+            {
+                _openSignUpPageCommand ??= new(LoginService.OpenSignUpPageClicked);
+                return _openSignUpPageCommand;
+            }
+        }
         #endregion
 
         #region Methods

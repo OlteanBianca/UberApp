@@ -82,10 +82,10 @@
         <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
     </FlyoutItem>
     <FlyoutItem Title="ForgotPassword" Icon="icon_feed.png">
-        <ShellContent Route="ForgotPasswordPageWithGradient" ContentTemplate="{DataTemplate local:ForgotPasswordPageWithGradient}" />
+        <ShellContent Route="ForgotPasswordPage" ContentTemplate="{DataTemplate local:ForgotPasswordPage}" />
     </FlyoutItem>
     <FlyoutItem Title="ResetPassword" Icon="icon_feed.png">
-        <ShellContent Route="ResetPasswordPageWithGradient" ContentTemplate="{DataTemplate local:ResetPasswordPageWithGradient}" />
+        <ShellContent Route="ResetPasswordPage" ContentTemplate="{DataTemplate local:ResetPasswordPage}" />
     </FlyoutItem>
     <FlyoutItem Title="SignUp" Icon="icon_feed.png">
         <ShellContent Route="SignUpPage" ContentTemplate="{DataTemplate local:SignUpPage}" />

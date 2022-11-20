@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace UberApp.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public class BaseVM : INotifyPropertyChanged
     {
 
         bool isBusy = false;

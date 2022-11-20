@@ -28,7 +28,7 @@
 
     <!--  Binding context for sign-up page  -->
     <ContentPage.BindingContext>
-        <viewModel:SignUpPageViewModel />
+        <viewModel:SignUpVM />
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
@@ -227,7 +227,7 @@
             <!--  Close button  -->
             <buttons:SfButton
                 Margin="8"
-                Command="{Binding BackButtonCommand}"
+                Command="{Binding CloseApplicationCommand}"
                 FontSize="20"
                 HorizontalOptions="End"
                 Style="{StaticResource IconButtonStyle}"

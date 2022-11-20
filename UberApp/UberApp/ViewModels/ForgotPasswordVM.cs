@@ -5,29 +5,27 @@ using Xamarin.Forms.Internals;
 namespace UberApp.ViewModels
 {
     [Preserve(AllMembers = true)]
-    public class LoginPageViewModel : BaseLoginViewModel
+    public class ForgotPasswordVM : BaseLoginVM
     {
         #region Constructor
 
-        public LoginPageViewModel() : base()
+        public ForgotPasswordVM() : base()
         {
-            AddValidationRules();
         }
 
         #endregion
 
         #region Commands
 
-        private Command _loginCommand;
-        public Command LoginCommand
+        private Command _openResetPasswordPageCommand;
+        public Command OpenResetPasswordPageCommand
         {
             get
             {
-                _loginCommand ??= new(LoginService.LoginClicked);
-                return _loginCommand;
+                _openResetPasswordPageCommand ??= new(LoginService.OpenResetPasswordPageClicked);
+                return _openResetPasswordPageCommand;
             }
         }
-
 
         private Command _openSignUpPageCommand;
         public Command OpenSignUpPageCommand
@@ -37,17 +35,6 @@ namespace UberApp.ViewModels
                 _openSignUpPageCommand ??= new(LoginService.OpenSignUpPageClicked);
                 return _openSignUpPageCommand;
             }
-        }
-
-        #endregion
-
-        #region methods
-
-        public bool AreFieldsValid()
-        {
-            bool isEmailValid = Email.Validate();
-            bool isPasswordValid = Password.Validate();
-            return isEmailValid && isPasswordValid;
         }
 
         #endregion
