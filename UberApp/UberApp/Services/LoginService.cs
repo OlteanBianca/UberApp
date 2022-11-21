@@ -1,4 +1,5 @@
-﻿using UberApp.ViewModels;
+﻿using UberApp.Models;
+using UberApp.ViewModels;
 using UberApp.Views;
 
 namespace UberApp.Services
