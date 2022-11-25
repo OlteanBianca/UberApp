@@ -1,32 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
-using UberApp.Services;
-using Xamarin.Essentials;
-using Xamarin.Forms;
+﻿using UberApp.Services;
 using Xamarin.Forms.Maps;
 
 namespace UberApp.ViewModels
 {
-    public class ClientHomeViewModel:NotifyPropertyChangedService
+    public class ClientHomeViewModel : NotifyPropertyChangedService
     {
+        #region Private Fields
+
         private Position _pinPosition;
+
+        #endregion
+
+        #region Properties
 
         public Position PinPosition
         {
             get { return _pinPosition; }
-            set { 
+            set
+            {
                 _pinPosition = value;
-                OnPropertyChanged("PinPosition");
+                OnPropertyChanged();
             }
         }
-       
+
+        #endregion
+
+        #region Methods
+
         public ClientHomeViewModel()
         {
-            var location = Geolocation.GetLocationAsync();
-            
-            this.PinPosition = new Position(location.Result.Latitude, (double)location.Result.Longitude);
+            //var location = Geolocation.GetLocationAsync();
+
+            //PinPosition = new Position(location.Result.Latitude, (double)location.Result.Longitude);
         }
+
+        #endregion
     }
 }

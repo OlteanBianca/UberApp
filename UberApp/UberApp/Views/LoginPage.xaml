@@ -12,7 +12,7 @@
     xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
     xmlns:local="clr-namespace:UberApp.Views"
     xmlns:viewModel="clr-namespace:UberApp.ViewModels"
-    BackgroundImageSource="{core:OnPlatformOrientationStringValue Default=LoginBackground.png,
+    BackgroundImageSource="{core:OnPlatformOrientationStringValue Default=background.jpg,
                                                                   iOSPhoneLandscape=LoginBackground-Landscape.png,
                                                                   iOSTabletLandscape=LoginBackground-Landscape.png}"
     NavigationPage.HasNavigationBar="False">
