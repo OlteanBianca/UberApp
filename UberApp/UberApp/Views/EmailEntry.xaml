@@ -18,7 +18,9 @@
 
     <ContentView.Content>
         <StackLayout>
-            <border:SfBorder BorderColor="{Binding Path=IsFocused, Source={x:Reference Email}, Converter={x:StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource LoginFormBorderlessEntryBorderStyle}">
+            <border:SfBorder BorderColor="{Binding Path=IsFocused, Source={x:Reference Email}, 
+                Converter={x:StaticResource ColorConverter}, ConverterParameter=0}"
+                             Style="{StaticResource LoginFormBorderlessEntryBorderStyle}">
 
                 <Grid ColumnDefinitions="*, Auto">
 

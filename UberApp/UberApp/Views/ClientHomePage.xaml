@@ -5,6 +5,7 @@
              x:Class="UberApp.Views.ClientHomePage"
              xmlns:viewmodel="clr-namespace:UberApp.ViewModels">
     
+    
     <ContentPage.BindingContext>
         <viewmodel:ClientHomeViewModel/>
     </ContentPage.BindingContext>
