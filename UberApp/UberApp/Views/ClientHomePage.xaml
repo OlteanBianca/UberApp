@@ -4,25 +4,35 @@
              xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              x:Class="UberApp.Views.ClientHomePage"
              xmlns:viewmodel="clr-namespace:UberApp.ViewModels">
-    
-    
+
+
     <ContentPage.BindingContext>
         <viewmodel:ClientHomeViewModel/>
     </ContentPage.BindingContext>
-    
+
     <Grid>
         <map:Map x:Name="ClientMap" 
                  IsShowingUser="true" 
                  MapType="Street" 
-                 MoveToLastRegionOnLayoutChange="True"
-                 HasZoomEnabled="True">
-            <map:Map.Pins>
-                <map:Pin Label="Santa Cruz"
-                       Address="The city with a boardwalk"
-                       Type="Place" 
-                       Position="{Binding PinPosition}">
-                </map:Pin>
-            </map:Map.Pins>
+                 MoveToLastRegionOnLayoutChange="False"
+                 TrafficEnabled="false"
+                 HasZoomEnabled="True"
+                 ItemsSource="{Binding Pins}">
+
+            <map:Map.ItemTemplate>
+                <DataTemplate>
+                    <map:Pin Label="{Binding Label}" 
+                        Position="{Binding Position}"
+                         Address="{Binding Address}"/>
+                </DataTemplate>
+            </map:Map.ItemTemplate>
+
         </map:Map>
+        <Button Text="Call Cab" x:Name="CallCab" HorizontalOptions="CenterAndExpand" VerticalOptions="End" Command="{Binding CallCabCommand}"/>
+        <Entry HorizontalOptions="StartAndExpand"
+               VerticalOptions="End"
+               BackgroundColor="Black"
+               TextColor="White"
+               x:Name="Address" Text="{Binding Address}" Placeholder="Where dp you want to go..."></Entry>
     </Grid>
 </ContentPage>
