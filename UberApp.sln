@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UberApp.Android", "UberApp\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UberApp.iOS", "UberApp\UberApp.iOS\UberApp.iOS.csproj", "{04D9E2BD-E86B-4B7C-982A-17ECD64F4C5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UberApp", "UberApp\UberApp\UberApp.csproj", "{DAEF31BC-109E-49A6-81C5-BEC4A136494F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UberApp", "UberApp\UberApp\UberApp.csproj", "{DAEF31BC-109E-49A6-81C5-BEC4A136494F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

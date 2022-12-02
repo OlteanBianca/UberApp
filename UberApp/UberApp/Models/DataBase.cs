@@ -1,26 +1,37 @@
-﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.IO;
-using System.Reflection;
-using System.Text;
+﻿using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace UberApp.Models
 {
     public class DataBase
     {
-        SqlConnection _sqlConnection;
-
+        private static readonly string baseUrl = "https://192.168.0.107:44358/Login/";
+        private readonly HttpClient httpClient;
 
         public DataBase()
         {
-            Stream resourceStream = GetType().GetTypeInfo().Assembly.GetManifestResourceStream("UberApp.appsettings.json");
+            httpClient = new();
+        }
 
-            var configuration = new ConfigurationBuilder().AddJsonStream(resourceStream).Build();
+        public async Task<bool> Check(string username)
+        {
+            var uri = new Uri(baseUrl);
+            try
+            {
+                var response = await httpClient.GetAsync(uri);
 
-            _sqlConnection = new(configuration["DefaultConnection"]);
-            _sqlConnection.Open();
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(@"ERROR {0}", ex.Message);
+            }
+
+            return true;
         }
     }
 }
