@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
+using UberApp.Models;
 using UberApp.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -65,7 +65,6 @@ namespace UberApp.ViewModels
 
         public Command CallCabCommand
         {
-
             get
             {
                 return new Command( async (e) =>
@@ -75,6 +74,8 @@ namespace UberApp.ViewModels
                     {
                         Pins.RemoveAt(0);
                     }
+
+                    var clientLocation = await Geolocation.GetLocationAsync();
 
                     var locations = await Geocoding.GetLocationsAsync(this.Address);
 
@@ -86,12 +87,15 @@ namespace UberApp.ViewModels
                         {
                             Label = this.Address,
                             Address = this.Address,
-                            Type = PinType.Place,
+                            Type = PinType.Generic,
                             Position = new Position(location.Latitude, location.Longitude)
                         };
+
                         Pins.Add(pin);
                         Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}");
                         Console.WriteLine($"Address is: {Address}");
+
+                        //Should send to db locatio and destination
                     }
                 });
             }

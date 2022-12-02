@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UberApp.Views.DriverHomePage"
+             xmlns:viewmodel="clr-namespace:UberApp.ViewModels" 
+             xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps">
+
+    <ContentPage.BindingContext>
+        <viewmodel:DriverHomeViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid BackgroundColor="White">
+        <ListView x:Name="EmployeeView"
+            ItemsSource="{Binding Requests}"
+                  SelectedItem="{Binding SelectedItemList}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell TextColor="Black" Text="{Binding DestinationLocation}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Text="PickOrder" x:Name="PickOrder" HorizontalOptions="CenterAndExpand" VerticalOptions="End" Command="{Binding PickOrder}"/>
+    </Grid>
+</ContentPage>
