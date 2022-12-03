@@ -9,8 +9,8 @@ namespace UberApp.ViewModels
     {
         #region Private Fields
 
-        private DriverPageService _driverPageService;
-        private Driver _driver;
+        private readonly DriverPageService _driverPageService;
+        private readonly Driver _driver;
 
         #endregion
 
@@ -19,7 +19,7 @@ namespace UberApp.ViewModels
         public ObservableCollection<Request> Requests { get; set; }
 
         #endregion
-     
+
         #region Constructors
         public DriverHomeVM(Driver driver)
         {
@@ -94,6 +94,16 @@ namespace UberApp.ViewModels
 
                 _refreshOrdersCommand ??= new(_driverPageService.RefreshOrders);
                 return _refreshOrdersCommand;
+            }
+        }
+
+        private Command _openLoginPageCommand;
+        public Command OpenLoginPageCommand
+        {
+            get
+            {
+                _openLoginPageCommand ??= new(_driverPageService.OpenLoginPageClicked);
+                return _openLoginPageCommand;
             }
         }
 

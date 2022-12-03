@@ -9,7 +9,7 @@ namespace UberApp.ViewModels
     [Preserve(AllMembers = true)]
     public class DriverLoginVM : BaseLoginVM
     {
-        #region Constructor
+        #region Constructors
 
         public DriverLoginVM(ValidatableObject<string> email) : base()
         {
@@ -43,7 +43,7 @@ namespace UberApp.ViewModels
 
         #endregion
 
-        #region methods
+        #region Public Methods
 
         public override bool AreFieldsValid()
         {

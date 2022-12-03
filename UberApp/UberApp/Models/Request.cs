@@ -6,7 +6,9 @@ namespace UberApp.Models
     [Table("Requests")]
     public class Request
     {
-        [PrimaryKey,AutoIncrement]
+        #region Public Properties
+
+        [PrimaryKey, AutoIncrement]
         public int RequestId { get; set; }
 
         [ForeignKey(typeof(Client))]
@@ -29,6 +31,10 @@ namespace UberApp.Models
         [OneToOne]
         public Driver Driver { get; set; }
 
+        #endregion
+
+        #region Constructors
+
         public Request() { }
 
         public Request(int clientId, int driverId, double clientLocationLatitudine, double clientLocationLongitudine, string destinationLocation, bool finished)
@@ -40,5 +46,7 @@ namespace UberApp.Models
             DestinationLocation = destinationLocation;
             Finished = finished;
         }
+
+        #endregion
     }
 }

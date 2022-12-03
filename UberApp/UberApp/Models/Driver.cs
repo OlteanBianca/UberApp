@@ -5,6 +5,8 @@ namespace UberApp.Models
 {
     public class Driver
     {
+        #region Public Properties
+
         [PrimaryKey, AutoIncrement]
         public int DriverId { get; set; }
 
@@ -19,6 +21,10 @@ namespace UberApp.Models
 
         public string CarModel { get; set; }
 
+        #endregion
+
+        #region Constructors
+
         public Driver() { }
 
         public Driver(string name, string password, string email, string licensePlate, string carModel)
@@ -29,5 +35,7 @@ namespace UberApp.Models
             LicensePlate = licensePlate;
             CarModel = carModel;
         }
+
+        #endregion
     }
 }

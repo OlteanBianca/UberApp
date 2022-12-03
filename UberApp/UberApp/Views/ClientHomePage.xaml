@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
-             x:Class="UberApp.Views.ClientHomePage"
-             xmlns:viewmodel="clr-namespace:UberApp.ViewModels">
+             xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" 
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             x:Class="UberApp.Views.ClientHomePage">
 
     <Grid>
         <map:Map x:Name="ClientMap" 
@@ -23,11 +23,18 @@
             </map:Map.ItemTemplate>
 
         </map:Map>
-        <Button Text="Call Cab" x:Name="CallCab" HorizontalOptions="CenterAndExpand" VerticalOptions="End" Command="{Binding CallCabCommand}"/>
-        <Entry HorizontalOptions="StartAndExpand"
-               VerticalOptions="End"
-               BackgroundColor="Black"
-               TextColor="White"
-               x:Name="Address" Text="{Binding Address}" Placeholder="Where dp you want to go..."></Entry>
+        <buttons:SfButton Command="{Binding OpenLoginPageCommand}"
+                          Style="{StaticResource TransparentButtonStyle}"
+                          Text="Sign Out"
+                          TextColor="{DynamicResource PrimaryColor}" />
+
+        <StackLayout Orientation="Vertical" VerticalOptions="End" HorizontalOptions="Start">
+            <Entry
+               BackgroundColor="White" WidthRequest="300"
+               TextColor="Black" 
+               x:Name="Address" Text="{Binding Address}" Placeholder="Where do you want to go..."></Entry>
+            <Button Text="Call Cab" x:Name="CallCab" FontSize="Subtitle"  
+                    Command="{Binding CallCabCommand}"/>
+        </StackLayout>
     </Grid>
 </ContentPage>

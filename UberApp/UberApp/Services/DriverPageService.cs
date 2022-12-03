@@ -1,4 +1,5 @@
 ﻿using UberApp.ViewModels;
+using UberApp.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -6,14 +7,24 @@ namespace UberApp.Services
 {
     public class DriverPageService
     {
+        #region Private Fields
+
         private readonly DataBaseService _dataBaseService;
         private readonly DriverHomeVM _driverHomeVM;
+
+        #endregion
+
+        #region Constructors
 
         public DriverPageService(DriverHomeVM vm)
         {
             _dataBaseService = new();
             _driverHomeVM = vm;
         }
+
+        #endregion
+
+        #region Public Methods
 
         public void RefreshOrders()
         {
@@ -45,5 +56,13 @@ namespace UberApp.Services
                 }
             }
         }
+
+        public void OpenLoginPageClicked()
+        {
+            LoginPage loginPage = new();
+            Application.Current.MainPage = loginPage;
+        }
+
+        #endregion
     }
 }

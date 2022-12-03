@@ -1,5 +1,4 @@
-﻿using System;
-using UberApp.Services;
+﻿using UberApp.Services;
 using UberApp.Validators;
 using UberApp.Validators.Rules;
 using Xamarin.Forms;
@@ -10,13 +9,13 @@ namespace UberApp.ViewModels
     [Preserve(AllMembers = true)]
     public class SignUpVM : BaseLoginVM
     {
-        #region Fields
+        #region Private Fields
 
         private ValidatablePair<string> _password;
 
         #endregion
 
-        #region Property
+        #region Public Properties
 
         public new ValidatablePair<string> Password
         {
@@ -33,7 +32,7 @@ namespace UberApp.ViewModels
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public SignUpVM() : base()
         {
@@ -65,9 +64,10 @@ namespace UberApp.ViewModels
                 return _openLoginPageCommand;
             }
         }
+
         #endregion
 
-        #region Methods
+        #region Public Methods
 
         public override bool AreFieldsValid()
         {
