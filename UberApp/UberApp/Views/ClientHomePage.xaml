@@ -5,10 +5,6 @@
              x:Class="UberApp.Views.ClientHomePage"
              xmlns:viewmodel="clr-namespace:UberApp.ViewModels">
 
-    <ContentPage.BindingContext>
-        <viewmodel:ClientHomeViewModel/>
-    </ContentPage.BindingContext>
-
     <Grid>
         <map:Map x:Name="ClientMap" 
                  IsShowingUser="true" 

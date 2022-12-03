@@ -1,6 +1,6 @@
 ﻿namespace UberApp.ViewModels
 {
-    public class OrderFlowViewModel
+    public class OrderFlowVM
     {
     }
 }

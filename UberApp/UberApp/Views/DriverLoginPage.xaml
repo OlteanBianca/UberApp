@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="UberApp.Views.LoginPage"
+    x:Class="UberApp.Views.DriverLoginPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:behaviour="clr-namespace:UberApp.Behaviors"
@@ -24,11 +24,6 @@
             <converter:NameValidationConverter x:Key="FirstValidationErrorConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-
-    <!--  Binding context for login page  -->
-    <ContentPage.BindingContext>
-        <viewModel:LoginVM />
-    </ContentPage.BindingContext>
 
     <ContentPage.Content>
         <Grid>
@@ -73,11 +68,8 @@
                             Text="Let's get to work"
                             TextColor="{DynamicResource Gray-White}" />
 
-                        <!--  Entry to get email ID from user  -->
-                        <local:EmailEntry Grid.Row="2" Padding="0,24" />
-
-                        <!--<StackLayout Grid.Row="3">
-                            --><!--  Entry to get password from user  --><!--
+                        <StackLayout Grid.Row="3">
+                            <!--  Entry to get password from user  -->
                             <border:SfBorder BorderColor="{Binding Source={x:Reference PasswordEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource LoginFormBorderlessEntryBorderStyle}">
                                 <Grid ColumnDefinitions="*, Auto">
 
@@ -96,7 +88,7 @@
                                         </Entry.Behaviors>
                                     </control:BorderlessEntry>
 
-                                    --><!--  Label to display error icon  --><!--
+                                    <!--  Label to display error icon  -->
                                     <Label
                                         Grid.Column="1"
                                         IsVisible="{Binding Path=IsVisible, Source={x:Reference PasswordValidationLabel}}"
@@ -105,7 +97,7 @@
                                 </Grid>
                             </border:SfBorder>
 
-                            --><!--  Label to display error message  --><!--
+                            <!--  Label to display error message  -->
                             <Label
                                 x:Name="PasswordValidationLabel"
                                 Margin="15,-3,0,0"
@@ -116,7 +108,7 @@
                                 VerticalOptions="FillAndExpand" />
                         </StackLayout>
 
-                        --><!--  Forgot password   --><!--
+                        <!--  Forgot password   -->
                         <buttons:SfButton
                             x:Name="ForgotPasswordLabel"
                             Grid.Row="4"
@@ -126,14 +118,14 @@
                             HorizontalOptions="End"
                             Style="{StaticResource TransparentButtonStyle}"
                             Text="FORGOT PASSWORD?"
-                            TextColor="{DynamicResource Gray-White}" />-->
+                            TextColor="{DynamicResource Gray-White}" />
 
 
                         <!--  Login button  -->
                         <buttons:SfButton
                             Grid.Row="5"
                             Margin="0,16"
-                            Command="{Binding LoginCommand}"
+                            Command="{Binding DriverLoginCommand}"
                             HorizontalOptions="Fill"
                             Style="{StaticResource GradientButtonStyle}"
                             Text="LOG IN" />
