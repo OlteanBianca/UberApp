@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
-using Xamarin.Forms.Shapes;
+﻿using System.Text.RegularExpressions;
 
 namespace UberApp.Validators.Rules
 {
@@ -14,7 +10,7 @@ namespace UberApp.Validators.Rules
 
         #endregion
 
-        #region Methods
+        #region Public Methods
 
         public bool Check(T value)
         {

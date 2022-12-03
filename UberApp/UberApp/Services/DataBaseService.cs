@@ -35,7 +35,14 @@ namespace UberApp.Services
         public Client AddClient(Client client)
         {
             _db.Database.Insert(client);
-            return _db.Database.Table<Client>().First(val => val.Email == client.Email && val.Name == client.Name);
+            return _db.Database.Table<Client>().First(val => val.Email == client.Email);
+        }
+
+        public Driver AddDriver(Driver driver)
+        {
+            _db.Database.Insert(driver);
+            return _db.Database.Table<Driver>().First(val => val.Email == driver.Email);
+
         }
 
         public Client CheckIfUserIsClient(string email)
@@ -51,6 +58,26 @@ namespace UberApp.Services
         public Driver CheckDriverCredentials(string email, string password)
         {
             return _db.Database.Table<Driver>().FirstOrDefault(val => val.Email == email && val.Password == password);
+        }
+
+        public bool CheckIfEmailIsAlreadyUsed(string email)
+        {
+            return CheckIfUserIsClient(email) != null || CheckIfUserIsDriver(email) != null;
+        }
+
+        public Driver ResetPassword(Driver driver)
+        {
+            var value = _db.Database.Table<Driver>().FirstOrDefault(val => val.Email == driver.Email && val.Name == driver.Name);
+
+            if (value != null)
+            {
+                value.Password = driver.Password;
+                if (_db.Database.Update(value) != 0)
+                {
+                    return _db.Database.Table<Driver>().First(val => val.DriverId == value.DriverId);
+                }
+            }
+            return null;
         }
 
         #endregion

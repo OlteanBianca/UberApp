@@ -52,9 +52,6 @@
     <Compile Update="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\ForgotPasswordPage.xaml.cs">
-      <DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\DriverLoginPage.xaml.cs">
       <DependentUpon>DriverLoginPage.xaml</DependentUpon>
     </Compile>
@@ -134,9 +131,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\EmailEntry.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\ForgotPasswordPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\DriverLoginPage.xaml">

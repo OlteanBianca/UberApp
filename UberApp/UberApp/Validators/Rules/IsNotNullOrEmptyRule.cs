@@ -5,13 +5,13 @@ namespace UberApp.Validators.Rules
     [Preserve(AllMembers = true)]
     public class IsNotNullOrEmptyRule<T> : IValidationRule<T>
     {
-        #region Properties
+        #region Public Properties
 
         public string ValidationMessage { get; set; }
 
         #endregion
 
-        #region Methods
+        #region Public Methods
 
         public bool Check(T value)
         {
