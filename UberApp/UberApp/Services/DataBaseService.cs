@@ -5,12 +5,22 @@ namespace UberApp.Services
 {
     public class DataBaseService
     {
+        #region Private Fields
+
         private readonly DatabaseSqLite _db;
+
+        #endregion
+
+        #region Constructors
 
         public DataBaseService()
         {
             _db = new();
         }
+
+        #endregion
+
+        #region Public Methods
 
         public int AddRequest(Request request)
         {
@@ -19,9 +29,7 @@ namespace UberApp.Services
 
         public List<Request> GetActiveRequests()
         {
-            return _db.Database.Table<Request>()
-                .Where(x => x.Finished == false)
-                .ToList();
+            return _db.Database.Table<Request>().Where(x => x.Finished == false).ToList();
         }
 
         public Client AddClient(Client client)
@@ -44,5 +52,7 @@ namespace UberApp.Services
         {
             return _db.Database.Table<Driver>().FirstOrDefault(val => val.Email == email && val.Password == password);
         }
+
+        #endregion
     }
 }

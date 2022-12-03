@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using UberApp.Models;
-using UberApp.ViewModels;
+﻿using UberApp.ViewModels;
 using UberApp.Views;
 using Xamarin.Forms;
 
@@ -8,14 +6,24 @@ namespace UberApp.Services
 {
     public class LoginService
     {
+        #region Private Fields
+
         private readonly BaseLoginVM _viewModel;
         private readonly DataBaseService _dataBaseService;
+
+        #endregion
+
+        #region Constructors
 
         public LoginService(BaseLoginVM viewModel)
         {
             _viewModel = viewModel;
             _dataBaseService = new();
         }
+
+        #endregion
+
+        #region Public Methods
 
         public void LoginClicked()
         {
@@ -42,7 +50,7 @@ namespace UberApp.Services
 
         public void DriverLoginClicked()
         {
-            if(_viewModel.AreFieldsValid())
+            if (_viewModel.AreFieldsValid())
             {
                 var driver = _dataBaseService.CheckDriverCredentials(_viewModel.Email.Value, _viewModel.Password.Value);
                 if (driver != null)
@@ -51,16 +59,18 @@ namespace UberApp.Services
                     Application.Current.MainPage = driverHomePage;
                     return;
                 }
+                _viewModel.Password.Errors.Clear();
                 _viewModel.Password.Errors.Add("Invalid Password!");
+                _viewModel.Password.IsValid = false;
             }
-            
+
             //DriverLoginPage driverLoginPage = new(_viewModel.Email);
             //Application.Current.MainPage = driverLoginPage;
         }
 
-        public void SignUpClicked(object obj)
+        public void SignUpClicked()
         {
-            if(_viewModel.AreFieldsValid())
+            if (_viewModel.AreFieldsValid())
             {
 
             }
@@ -74,7 +84,6 @@ namespace UberApp.Services
             }
         }
 
-
         public void CloseApplicationClicked()
         {
             System.Diagnostics.Process.GetCurrentProcess().Kill();
@@ -86,12 +95,12 @@ namespace UberApp.Services
             {
                 ResetPasswordPage resetPasswordPage = new();
                 Application.Current.MainPage = resetPasswordPage;
-            } 
+            }
         }
 
         public void OpenSignUpPageClicked()
         {
-            SignUpPage signUpPage = new ();
+            SignUpPage signUpPage = new();
             Application.Current.MainPage = signUpPage;
         }
 
@@ -106,5 +115,7 @@ namespace UberApp.Services
             ForgotPasswordPage forgotPasswordPage = new();
             Application.Current.MainPage = forgotPasswordPage;
         }
+
+        #endregion
     }
 }

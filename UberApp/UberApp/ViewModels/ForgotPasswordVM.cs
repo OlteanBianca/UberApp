@@ -1,6 +1,6 @@
 ﻿using UberApp.Services;
-using UberApp.Validators.Rules;
 using UberApp.Validators;
+using UberApp.Validators.Rules;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -9,7 +9,7 @@ namespace UberApp.ViewModels
     [Preserve(AllMembers = true)]
     public class ForgotPasswordVM : BaseLoginVM
     {
-        #region Constructor
+        #region Constructors
 
         public ForgotPasswordVM() : base()
         {
@@ -17,7 +17,7 @@ namespace UberApp.ViewModels
 
         #endregion
 
-        #region Methods
+        #region Public Methods
 
         public override bool AreFieldsValid()
         {

@@ -9,7 +9,7 @@ namespace UberApp.ViewModels
     [Preserve(AllMembers = true)]
     public class LoginVM : BaseLoginVM
     {
-        #region Constructor
+        #region Constructors
 
         public LoginVM() : base()
         {
@@ -42,7 +42,7 @@ namespace UberApp.ViewModels
 
         #endregion
 
-        #region methods
+        #region Public Methods
 
         public override bool AreFieldsValid()
         {

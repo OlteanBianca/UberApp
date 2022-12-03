@@ -1,6 +1,3 @@
-using System;
-using System.IO;
-using UberApp.Models;
 using Xamarin.Forms;
 
 [assembly: ExportFont("Montserrat-Bold.ttf", Alias = "Montserrat-Bold")]
@@ -11,7 +8,7 @@ using Xamarin.Forms;
 namespace UberApp
 {
     public partial class App : Application
-    { 
+    {
         public App()
         {
             InitializeComponent();

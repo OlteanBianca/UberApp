@@ -5,7 +5,13 @@ namespace UberApp.Services
 {
     public class NotifyPropertyChangedService : INotifyPropertyChanged
     {
+        #region Public Events
+
         public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
+
+        #region Protected Methods
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
@@ -15,5 +21,7 @@ namespace UberApp.Services
 
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        #endregion
     }
 }

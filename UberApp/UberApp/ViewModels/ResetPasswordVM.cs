@@ -8,13 +8,13 @@ namespace UberApp.ViewModels
     [Preserve(AllMembers = true)]
     public class ResetPasswordVM : BaseLoginVM
     {
-        #region Fields
+        #region Private Fields
 
         private ValidatablePair<string> _password;
 
         #endregion
 
-        #region Public property
+        #region Public Properties
 
         public new ValidatablePair<string> Password
         {
@@ -31,7 +31,7 @@ namespace UberApp.ViewModels
 
         #endregion
 
-        #region Constructor 
+        #region Constructors 
 
         public ResetPasswordVM()
         {
@@ -41,7 +41,7 @@ namespace UberApp.ViewModels
 
         #endregion
 
-        #region Command
+        #region Commands
 
         private Command _resetPasswordCommand;
         public Command ResetPasswordCommand
@@ -62,9 +62,10 @@ namespace UberApp.ViewModels
                 return _openSignUpPageCommand;
             }
         }
+
         #endregion
 
-        #region Methods
+        #region Public Methods
 
         public override bool AreFieldsValid()
         {

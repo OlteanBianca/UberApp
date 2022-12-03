@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using UberApp.Services;
 
@@ -8,6 +7,8 @@ namespace UberApp.ViewModels
 {
     public class BaseVM : NotifyPropertyChangedService
     {
+        #region Protected Methods
+
         protected bool SetProperty<T>(ref T backingStore, T value,
             [CallerMemberName] string propertyName = "", Action onChanged = null)
         {
@@ -19,5 +20,7 @@ namespace UberApp.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
+
+        #endregion
     }
 }

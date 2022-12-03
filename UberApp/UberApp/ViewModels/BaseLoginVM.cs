@@ -1,26 +1,24 @@
 ﻿using UberApp.Services;
 using UberApp.Validators;
-using UberApp.Validators.Rules;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace UberApp.ViewModels
 {
-
     [Preserve(AllMembers = true)]
     public abstract class BaseLoginVM : BaseVM
     {
-        #region Fields
+        #region Private Fields
 
         private ValidatableObject<string> _email;
         private ValidatableObject<string> _name;
         private ValidatableObject<string> _password;
 
-        private LoginService _loginService;
+        private readonly LoginService _loginService;
 
         #endregion
 
-        #region Property
+        #region Public Properties
 
         public ValidatableObject<string> Email
         {
@@ -65,7 +63,7 @@ namespace UberApp.ViewModels
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public BaseLoginVM()
         {
@@ -76,7 +74,7 @@ namespace UberApp.ViewModels
 
         #endregion
 
-        #region Methods
+        #region Public Methods
 
         public abstract bool AreFieldsValid();
 

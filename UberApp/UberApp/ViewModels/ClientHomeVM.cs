@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using UberApp.Models;
 using UberApp.Services;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
 namespace UberApp.ViewModels
 {
-    public class ClientHomeVM : NotifyPropertyChangedService
+    public class ClientHomeVM : BaseVM
     {
         #region Private Fields
 
+        private readonly ClientPageService _clientPageService;
+        private readonly Client _client;
         private Pin _pin;
+        private string _address;
 
-        private String _address;
         #endregion
 
-        #region Public Fields
+        #region Public Properties
 
         public ObservableCollection<Pin> Pins { get; set; }
 
@@ -28,7 +27,7 @@ namespace UberApp.ViewModels
 
         public Pin Pin
         {
-            get { return _pin; }
+            get => _pin;
             set
             {
                 _pin = value;
@@ -36,18 +35,14 @@ namespace UberApp.ViewModels
             }
         }
 
-        public String Address
+        public string Address
         {
-            get
-            {
-                return _address;
-            }
+            get => _address;
             set
             {
-                if(value == null)
+                if (value == null)
                 {
                     return;
-                    
                 }
                 _address = value;
                 OnPropertyChanged();
@@ -56,58 +51,36 @@ namespace UberApp.ViewModels
 
         #endregion
 
-        #region Methods
+        #region Constructors
 
         public ClientHomeVM(Client client)
         {
-            this.Pins = new ObservableCollection<Pin>();  
+            Pins = new();
+            _clientPageService = new(this);
+            _client = client;
         }
 
+        #endregion
+
+        #region Commands
+
+        private Command _callCabCommand;
         public Command CallCabCommand
         {
             get
             {
-                return new Command( async (e) =>
-                {
+                _callCabCommand ??= new(_clientPageService.CallCab);
+                return _callCabCommand;
+            }
+        }
 
-                    //if (Pins.Count != 0)
-                    //{
-                    //    Pins.RemoveAt(0);
-                    //}
-
-                    //var clientLocation = await Geolocation.GetLocationAsync();
-
-                    //var locations = await Geocoding.GetLocationsAsync(this.Address);
-
-                    //var location = locations?.FirstOrDefault();
-
-                    //if (location != null)
-                    //{
-                    //    Pin pin = new Pin
-                    //    {
-                    //        Label = this.Address,
-                    //        Address = this.Address,
-                    //        Type = PinType.Generic,
-                    //        Position = new Position(location.Latitude, location.Longitude)
-                    //    };
-
-                    //    Pins.Add(pin);
-                    //    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}");
-                    //    Console.WriteLine($"Address is: {Address}");
-
-                    //    Request request = new()
-                    //    {
-                    //        ClientId = 1,
-                    //        DriverId = -1,
-                    //        ClientLocationLatitudine = clientLocation.Latitude,
-                    //        ClientLocationLongitudine = clientLocation.Longitude,
-                    //        DestinationLocation = this.Address
-                    //    };
-
-                    //    App.Database.AddRequest(request);
-
-                    //}
-                });
+        private Command _openLoginPageCommand;
+        public Command OpenLoginPageCommand
+        {
+            get
+            {
+                _openLoginPageCommand ??= new(_clientPageService.OpenLoginPageClicked);
+                return _openLoginPageCommand;
             }
         }
 
