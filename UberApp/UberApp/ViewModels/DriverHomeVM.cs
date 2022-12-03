@@ -1,19 +1,32 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
+﻿using System.Collections.ObjectModel;
 using UberApp.Models;
 using UberApp.Services;
-using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Maps;
 
 namespace UberApp.ViewModels
 {
-    public class DriverHomeViewModel:NotifyPropertyChangedService
+    public class DriverHomeVM : NotifyPropertyChangedService
     {
-        public DriverHomeViewModel()
+        #region Private Fields
+
+        private DriverPageService _driverPageService;
+        private Driver _driver;
+
+        #endregion
+
+        #region Public Properties
+
+        public ObservableCollection<Request> Requests { get; set; }
+
+        #endregion
+     
+        #region Constructors
+        public DriverHomeVM(Driver driver)
         {
-            this.Requests = new ObservableCollection<Request>();
+            _driver = driver;
+            Requests = new ObservableCollection<Request>();
+            _driverPageService = new(this);
+
             //Request request = new()
             //{
             //    RequestId=1,
@@ -35,15 +48,16 @@ namespace UberApp.ViewModels
             //this.Requests.Add(request);
             //this.Requests.Add(request2);
         }
+        #endregion
 
-        public ObservableCollection<Request> Requests { get; set; }
+        #region Commands
 
         private Request _SelectedItemList;
         public Request SelectedItemList
         {
             get
             {
-                
+
                 return _SelectedItemList;
             }
             set
@@ -53,39 +67,8 @@ namespace UberApp.ViewModels
             }
         }
 
-        public Command PickOrder
-        {
-            get
-            {
-                /// se dechide pagina cu comanda
-                /// apasa buton de pick client si se dechide maps cu locatia clientului
-                /// revine in aplicatia default apasa client ridicat si dupa se dechide apliatia de maps pt destinatie
-                /// revine in aplicatia default si apasa finish order
-                return new Command(async (e) =>
-                {
-
-                    if (this.SelectedItemList != null)
-                    {
-                        if (Device.RuntimePlatform == Device.iOS)
-                        {
-                            // https://developer.apple.com/library/ios/featuredarticles/iPhoneURLScheme_Reference/MapLinks/MapLinks.html
-                            await Launcher.OpenAsync($"http://maps.apple.com/?q={this.SelectedItemList.DestinationLocation}");
-                        }
-                        else if (Device.RuntimePlatform == Device.Android)
-                        {
-                            // open the maps app directly
-                            await Launcher.OpenAsync($"geo:0,0?q={this.SelectedItemList.DestinationLocation}");
-                        }
-                        else if (Device.RuntimePlatform == Device.UWP)
-                        {
-                            await Launcher.OpenAsync($"bingmaps:?where={this.SelectedItemList.DestinationLocation}");
-                        }
-                    }
-                });
-            }
-        }
-
-        public Command RefreshOrders
+        private Command _pickOrderCommand;
+        public Command PickOrderCommand
         {
             get
             {
@@ -94,17 +77,27 @@ namespace UberApp.ViewModels
                 /// revine in aplicatia default apasa client ridicat si dupa se dechide apliatia de maps pt destinatie
                 /// revine in aplicatia default si apasa finish order
 
-                return new Command(async (e) =>
-                {
-                    var requests = await App.Database.GetRequests();
-                    this.Requests.Clear();
-                    foreach(var request in requests)
-                    {
-                        this.Requests.Add(request);
-                    }
-                });
+                _pickOrderCommand ??= new(_driverPageService.PickOrders);
+                return _pickOrderCommand;
             }
         }
+
+        public Command _refreshOrdersCommand;
+        public Command RefreshOrdersCommand
+        {
+            get
+            {
+                /// se dechide pagina cu comanda
+                /// apasa buton de pick client si se dechide maps cu locatia clientului
+                /// revine in aplicatia default apasa client ridicat si dupa se dechide apliatia de maps pt destinatie
+                /// revine in aplicatia default si apasa finish order
+
+                _refreshOrdersCommand ??= new(_driverPageService.RefreshOrders);
+                return _refreshOrdersCommand;
+            }
+        }
+
+        #endregion
     }
 }
 //geo: latitude,longitude? z = zoom

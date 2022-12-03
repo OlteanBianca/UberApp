@@ -7,12 +7,13 @@ using Xamarin.Forms.Internals;
 namespace UberApp.ViewModels
 {
     [Preserve(AllMembers = true)]
-    public class LoginVM : BaseLoginVM
+    public class DriverLoginVM : BaseLoginVM
     {
         #region Constructor
 
-        public LoginVM() : base()
+        public DriverLoginVM(ValidatableObject<string> email) : base()
         {
+            Email = email;
             AddValidationRules();
         }
 
@@ -20,13 +21,13 @@ namespace UberApp.ViewModels
 
         #region Commands
 
-        private Command _loginCommand;
-        public Command LoginCommand
+        private Command _driverLoginCommand;
+        public Command DriverLoginCommand
         {
             get
             {
-                _loginCommand ??= new(LoginService.LoginClicked);
-                return _loginCommand;
+                _driverLoginCommand ??= new(LoginService.DriverLoginClicked);
+                return _driverLoginCommand;
             }
         }
 
@@ -46,18 +47,18 @@ namespace UberApp.ViewModels
 
         public override bool AreFieldsValid()
         {
-            bool isEmailValid = Email.Validate();
-            return isEmailValid;
+            bool isPasswordValid = Password.Validate();
+            return isPasswordValid;
         }
 
         public override void InitializeProperties()
         {
-            Email = new ValidatableObject<string>();
+            Password = new ValidatableObject<string>();
         }
 
         public override void AddValidationRules()
         {
-            Email.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Email required!" });
+            Password.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Password required!" });
         }
 
         #endregion

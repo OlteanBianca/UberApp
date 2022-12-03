@@ -11,22 +11,7 @@ using Xamarin.Forms;
 namespace UberApp
 {
     public partial class App : Application
-    {
-        private static DatabaseSqLite _database;
-
-        public static DatabaseSqLite Database
-        {
-            get
-            {
-                if(_database==null)
-                {
-                    _database = new DatabaseSqLite(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"uber.db" ));
-                }
-
-                return _database;
-            }
-        }
-
+    { 
         public App()
         {
             InitializeComponent();

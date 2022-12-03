@@ -5,10 +5,6 @@
              xmlns:viewmodel="clr-namespace:UberApp.ViewModels" 
              xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps">
 
-    <ContentPage.BindingContext>
-        <viewmodel:DriverHomeViewModel/>
-    </ContentPage.BindingContext>
-
     <Grid BackgroundColor="White">
         <ListView x:Name="EmployeeView"
             ItemsSource="{Binding Requests}"
@@ -19,7 +15,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Text="PickOrder" x:Name="PickOrder" HorizontalOptions="Center" VerticalOptions="End" Command="{Binding PickOrder}"/>
-        <Button Text="RefreshOrders" x:Name="RefreshOrders" HorizontalOptions="Start" VerticalOptions="End" Command="{Binding RefreshOrders}"/>
+        <Button Text="PickOrder" x:Name="PickOrder" HorizontalOptions="Center" VerticalOptions="End" Command="{Binding PickOrderCommand}"/>
+        <Button Text="RefreshOrders" x:Name="RefreshOrders" HorizontalOptions="Start" VerticalOptions="End" Command="{Binding RefreshOrdersCommand}"/>
     </Grid>
 </ContentPage>
