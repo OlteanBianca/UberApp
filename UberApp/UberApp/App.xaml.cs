@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+using UberApp.Models;
 using Xamarin.Forms;
 
 [assembly: ExportFont("Montserrat-Bold.ttf", Alias = "Montserrat-Bold")]
@@ -9,6 +12,20 @@ namespace UberApp
 {
     public partial class App : Application
     {
+        private static DatabaseSqLite _database;
+
+        public static DatabaseSqLite Database
+        {
+            get
+            {
+                if(_database==null)
+                {
+                    _database = new DatabaseSqLite(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"uber.db" ));
+                }
+
+                return _database;
+            }
+        }
 
         public App()
         {

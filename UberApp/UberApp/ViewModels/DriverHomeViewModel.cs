@@ -11,38 +11,39 @@ namespace UberApp.ViewModels
 {
     public class DriverHomeViewModel:NotifyPropertyChangedService
     {
-        public ObservableCollection<Request> Requests { get; set; }
-
         public DriverHomeViewModel()
         {
             this.Requests = new ObservableCollection<Request>();
-            Request request = new()
-            {
-                RequestId=1,
-                UserId=1,
-                DriverId=1,
-                ClientLocationLatitudine=1,
-                ClientLocationLongitudine=1,
-                DestinationLocation = "Colegiul national andrei saguna"
-            };
-            Request request2 = new()
-            {
-                RequestId = 1,
-                UserId = 1,
-                DriverId = 1,
-                ClientLocationLatitudine = 1,
-                ClientLocationLongitudine = 1,
-                DestinationLocation = "Colegiul national doctor ioan mesota"
-            };
-            this.Requests.Add(request);
-            this.Requests.Add(request2);
+            //Request request = new()
+            //{
+            //    RequestId=1,
+            //    UserId=1,
+            //    DriverId=1,
+            //    ClientLocationLatitudine=1,
+            //    ClientLocationLongitudine=1,
+            //    DestinationLocation = "Colegiul national andrei saguna"
+            //};
+            //Request request2 = new()
+            //{
+            //    RequestId = 1,
+            //    UserId = 1,
+            //    DriverId = 1,
+            //    ClientLocationLatitudine = 1,
+            //    ClientLocationLongitudine = 1,
+            //    DestinationLocation = "Colegiul national doctor ioan mesota"
+            //};
+            //this.Requests.Add(request);
+            //this.Requests.Add(request2);
         }
+
+        public ObservableCollection<Request> Requests { get; set; }
 
         private Request _SelectedItemList;
         public Request SelectedItemList
         {
             get
             {
+                
                 return _SelectedItemList;
             }
             set
@@ -79,6 +80,27 @@ namespace UberApp.ViewModels
                         {
                             await Launcher.OpenAsync($"bingmaps:?where={this.SelectedItemList.DestinationLocation}");
                         }
+                    }
+                });
+            }
+        }
+
+        public Command RefreshOrders
+        {
+            get
+            {
+                /// se dechide pagina cu comanda
+                /// apasa buton de pick client si se dechide maps cu locatia clientului
+                /// revine in aplicatia default apasa client ridicat si dupa se dechide apliatia de maps pt destinatie
+                /// revine in aplicatia default si apasa finish order
+
+                return new Command(async (e) =>
+                {
+                    var requests = await App.Database.GetRequests();
+                    this.Requests.Clear();
+                    foreach(var request in requests)
+                    {
+                        this.Requests.Add(request);
                     }
                 });
             }

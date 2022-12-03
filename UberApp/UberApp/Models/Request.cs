@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SQLite;
+
 
 namespace UberApp.Models
 {
     public class Request
     {
+        [PrimaryKey,AutoIncrement]
         public int RequestId { get; set; }
 
         public int UserId { get; set; }

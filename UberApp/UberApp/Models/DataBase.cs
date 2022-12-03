@@ -8,12 +8,12 @@ using System.Text;
 
 namespace UberApp.Models
 {
-    public class DataBase
+    public class DataBaseSQlLite
     {
         SqlConnection _sqlConnection;
 
 
-        public DataBase()
+        public DataBaseSQlLite()
         {
             Stream resourceStream = GetType().GetTypeInfo().Assembly.GetManifestResourceStream("UberApp.appsettings.json");
 

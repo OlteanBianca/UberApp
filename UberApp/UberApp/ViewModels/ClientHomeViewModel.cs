@@ -95,7 +95,17 @@ namespace UberApp.ViewModels
                         Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}");
                         Console.WriteLine($"Address is: {Address}");
 
-                        //Should send to db locatio and destination
+                        Request request = new()
+                        {
+                            UserId = 1,
+                            DriverId = -1,
+                            ClientLocationLatitudine = clientLocation.Latitude,
+                            ClientLocationLongitudine = clientLocation.Longitude,
+                            DestinationLocation = this.Address
+                        };
+
+                        await App.Database.AddRequest(request);
+
                     }
                 });
             }

@@ -19,6 +19,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Text="PickOrder" x:Name="PickOrder" HorizontalOptions="CenterAndExpand" VerticalOptions="End" Command="{Binding PickOrder}"/>
+        <Button Text="PickOrder" x:Name="PickOrder" HorizontalOptions="Center" VerticalOptions="End" Command="{Binding PickOrder}"/>
+        <Button Text="RefreshOrders" x:Name="RefreshOrders" HorizontalOptions="Start" VerticalOptions="End" Command="{Binding RefreshOrders}"/>
     </Grid>
 </ContentPage>
