@@ -11,7 +11,11 @@ namespace UberApp.ViewModels
     {
         #region Private Fields
 
+        private bool _isPasswordVisible;
+        private bool _isDriver;
         private ValidatablePair<string> _password;
+        private ValidatableObject<string> _licensePlate;
+        private ValidatableObject<string> _carModel;
 
         #endregion
 
@@ -30,6 +34,62 @@ namespace UberApp.ViewModels
             }
         }
 
+        public ValidatableObject<string> LicensePlate
+        {
+            get => _licensePlate;
+            set
+            {
+                if (_licensePlate == value)
+                {
+                    return;
+                }
+                SetProperty(ref _licensePlate, value);
+            }
+        }
+
+        public ValidatableObject<string> CarModel
+        {
+            get => _carModel;
+            set
+            {
+                if (_carModel == value)
+                {
+                    return;
+                }
+                SetProperty(ref _carModel, value);
+            }
+        }
+
+        public bool IsPasswordVisible
+        {
+            get => _isPasswordVisible;
+            set
+            {
+                _isPasswordVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsDriver
+        {
+            get => _isDriver;
+            set
+            {
+                _isDriver = value;
+
+                if (_isDriver)
+                {
+                    IsPasswordVisible = true;
+                }
+                else
+                {
+                    IsPasswordVisible = false;
+                }
+
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region Constructors
@@ -38,6 +98,9 @@ namespace UberApp.ViewModels
         {
             InitializeProperties();
             AddValidationRules();
+
+            IsPasswordVisible = false;
+            IsDriver = false;
         }
 
         #endregion
@@ -67,14 +130,35 @@ namespace UberApp.ViewModels
 
         #endregion
 
+        #region Private Methods
+
+        private bool AreFieldsValidForClient()
+        {
+            bool isEmail = Email.Validate();
+            bool isNameValid = Name.Validate();
+
+            return isNameValid && isEmail;
+        }
+
+        private bool AreFieldsValidForDriver()
+        {
+            bool isPasswordValid = Password.Validate();
+            bool isLicensePlateValid = LicensePlate.Validate();
+            bool isCarModelValid = CarModel.Validate();
+            return isPasswordValid && isCarModelValid && isLicensePlateValid && AreFieldsValidForClient();
+        }
+
+        #endregion
+
         #region Public Methods
 
         public override bool AreFieldsValid()
         {
-            bool isEmail = Email.Validate();
-            bool isNameValid = Name.Validate();
-            bool isPasswordValid = Password.Validate();
-            return isPasswordValid && isNameValid && isEmail;
+            if (IsDriver)
+            {
+                return AreFieldsValidForDriver();
+            }
+            return AreFieldsValidForClient();
         }
 
         public override void InitializeProperties()
@@ -82,16 +166,23 @@ namespace UberApp.ViewModels
             Password = new ValidatablePair<string>();
             Name = new ValidatableObject<string>();
             Email = new ValidatableObject<string>();
+            LicensePlate = new ValidatableObject<string>();
+            CarModel = new ValidatableObject<string>();
         }
 
         public override void AddValidationRules()
         {
-            Password.Item1.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Password Required!" });
+            Password.Item1.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Password is Required!" });
             Password.Item2.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Re-enter Password!" });
-            Email.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Email required!" });
-            Name.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Name required!" });
-            Name.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Name is already used!" });
             Password.Validations.Add(new IsValidPasswordRule<string> { });
+
+            Name.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Name is required!" });
+
+            Email.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Email is required!" });
+            Email.Validations.Add(new IsValidEmailRule<string> { ValidationMessage = "Email is invalid!" });
+
+            CarModel.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Car model is required!" });
+            LicensePlate.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "License plate is required!" });
         }
 
         #endregion

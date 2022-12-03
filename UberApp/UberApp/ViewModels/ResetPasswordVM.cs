@@ -1,4 +1,5 @@
-﻿using UberApp.Validators;
+﻿using UberApp.Services;
+using UberApp.Validators;
 using UberApp.Validators.Rules;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -33,10 +34,11 @@ namespace UberApp.ViewModels
 
         #region Constructors 
 
-        public ResetPasswordVM()
+        public ResetPasswordVM(ValidatableObject<string> email)
         {
             InitializeProperties();
             AddValidationRules();
+            Email = email;
         }
 
         #endregion
@@ -63,6 +65,16 @@ namespace UberApp.ViewModels
             }
         }
 
+        private Command _openLoginPageCommand;
+        public Command OpenLoginPageCommand
+        {
+            get
+            {
+                _openLoginPageCommand ??= new(LoginService.OpenLoginPageClicked);
+                return _openLoginPageCommand;
+            }
+        }
+
         #endregion
 
         #region Public Methods
@@ -70,18 +82,23 @@ namespace UberApp.ViewModels
         public override bool AreFieldsValid()
         {
             bool isPassword = Password.Validate();
-            return isPassword;
+            bool isName = Name.Validate();
+            return isPassword && isName;
         }
 
         public override void InitializeProperties()
         {
             Password = new ValidatablePair<string>();
+            Name = new ValidatableObject<string>();
         }
 
         public override void AddValidationRules()
         {
             Password.Item1.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Password Required" });
             Password.Item2.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Re-enter Password" });
+            Password.Validations.Add(new IsValidPasswordRule<string> { });
+
+            Name.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Name is required" });
         }
 
         #endregion

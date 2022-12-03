@@ -41,6 +41,26 @@ namespace UberApp.ViewModels
             }
         }
 
+        private Command _openResetPasswordPageCommand;
+        public Command OpenResetPasswordPageCommand
+        {
+            get
+            {
+                _openResetPasswordPageCommand ??= new(LoginService.OpenResetPasswordPageClicked);
+                return _openResetPasswordPageCommand;
+            }
+        }
+
+        private Command _openLoginPageCommand;
+        public Command OpenLoginPageCommand
+        {
+            get
+            {
+                _openLoginPageCommand ??= new(LoginService.OpenLoginPageClicked);
+                return _openLoginPageCommand;
+            }
+        }
+
         #endregion
 
         #region Public Methods

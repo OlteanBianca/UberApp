@@ -2,20 +2,84 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UberApp.Views.DriverHomePage"
-             xmlns:viewmodel="clr-namespace:UberApp.ViewModels" 
-             xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps">
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms">
 
-    <Grid BackgroundColor="White">
-        <ListView x:Name="EmployeeView"
-            ItemsSource="{Binding Requests}"
-                  SelectedItem="{Binding SelectedItemList}">
+    <Grid BackgroundColor="White" Margin="0,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        
+        <buttons:SfButton Command="{Binding OpenLoginPageCommand}" HorizontalOptions="StartAndExpand"
+                 Style="{StaticResource ThemeBorderStyle}" VerticalOptions="Start" BackgroundColor="Plum"
+                 Text="Sign out" Margin="5,5" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
+
+        <ListView Grid.Row="1" VerticalOptions="Start" VerticalScrollBarVisibility="Always"  
+                  RowHeight="150" ItemsSource="{Binding Requests}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell TextColor="Black" Text="{Binding DestinationLocation}"/>
+                    <ViewCell>
+                        <Grid BackgroundColor="Lavender">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+
+                            <!--Destination-->
+                            <Label HorizontalOptions="Start" TextColor="Black" Margin="2,2" 
+                                   Style="{StaticResource TitleLabelStyle}" HorizontalTextAlignment="Start"
+                                   Text="DESTINATION: " FontAttributes="Bold"/>
+
+                            <Label HorizontalOptions="Start" TextColor="Black" Margin="2,2" Grid.Column="1"
+                                   Style="{StaticResource TitleLabelStyle}" HorizontalTextAlignment="Start"
+                                   Text="{Binding Path=DestinationLocation}"/>
+                            
+                            <!--Latitudine-->
+                            <Label HorizontalOptions="Start" TextColor="Black" Margin="2,2"
+                                   Style="{StaticResource TitleLabelStyle}" Grid.Row="1"
+                                   Text="LATITUDINE: "/>
+
+                            <Label HorizontalOptions="Start" TextColor="Black" Margin="2,2"
+                                   Style="{StaticResource TitleLabelStyle}" Grid.Row="1" Grid.Column="1"
+                                   Text="{Binding ClientLocationLatitudine}"/>
+                            
+                            <!--longitudine-->
+                            <Label HorizontalOptions="Start" TextColor="Black" Margin="2,2"
+                                   Style="{StaticResource TitleLabelStyle}" Grid.Row="2" 
+                                   Text="LONGITUDINE: "/>
+
+                            <Label HorizontalOptions="Start" TextColor="Black" Margin="2,2"
+                                   Style="{StaticResource TitleLabelStyle}" Grid.Row="2" Grid.Column="1"
+                                   Text="{Binding ClientLocationLongitudine}"/>
+
+                            <!--button-->
+                            <buttons:SfButton Text="Choose" Style="{StaticResource DataFormBorderlessEntryBorderStyle}"
+                                   FontAttributes="Bold" Margin="10,5" HorizontalOptions="End" VerticalOptions="End" 
+                                   Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"/>
+                        </Grid>
+                    
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Text="PickOrder" x:Name="PickOrder" HorizontalOptions="Center" VerticalOptions="End" Command="{Binding PickOrderCommand}"/>
-        <Button Text="RefreshOrders" x:Name="RefreshOrders" HorizontalOptions="Start" VerticalOptions="End" Command="{Binding RefreshOrdersCommand}"/>
+
+
+        <StackLayout Orientation="Horizontal" Grid.Row="2" HorizontalOptions="CenterAndExpand">
+
+            <buttons:SfButton Text="Pick Order" HorizontalOptions="Center" VerticalOptions="End" 
+                    Command="{Binding PickOrderCommand}" FontSize="20" TextColor="Black" BackgroundColor="Plum"
+                    Style="{StaticResource ThemeBorderStyle}" FontAttributes="Bold" Margin="0,5"/>
+            <buttons:SfButton Text="Refresh Orders" HorizontalOptions="Start" VerticalOptions="End" 
+                    Command="{Binding RefreshOrdersCommand}" FontSize="20" TextColor="Black" BackgroundColor="Plum"
+                    Style="{StaticResource ThemeBorderStyle}" FontAttributes="Bold" Margin="0,5"/>
+
+        </StackLayout>
     </Grid>
 </ContentPage>

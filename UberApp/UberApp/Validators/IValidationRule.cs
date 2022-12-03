@@ -1,14 +1,15 @@
-﻿namespace UberApp.Validators
+﻿
+namespace UberApp.Validators
 {
     public interface IValidationRule<T>
     {
-        #region Property
+        #region Properties
 
         string ValidationMessage { get; set; }
 
         #endregion
 
-        #region Method
+        #region Methods
 
         bool Check(T value);
 

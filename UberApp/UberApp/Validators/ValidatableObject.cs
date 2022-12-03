@@ -11,11 +11,8 @@ namespace UberApp.Validators
         #region Private Fields
 
         private bool isValid = true;
-
         private List<string> errors = new();
-
         private bool cleanOnChange = true;
-
         private T value;
 
         #endregion
@@ -27,7 +24,7 @@ namespace UberApp.Validators
         public List<string> Errors
         {
             get => errors;
-            private set
+            set
             {
                 errors = value;
                 OnPropertyChanged();
@@ -70,7 +67,7 @@ namespace UberApp.Validators
 
         #endregion
 
-        #region Methods
+        #region Public Methods
 
         public virtual bool Validate()
         {

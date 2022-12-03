@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using UberApp.Services;
 using Xamarin.Forms.Internals;
 
@@ -13,12 +11,11 @@ namespace UberApp.Validators
         #region Private Fields
 
         private bool isValid = true;
-
         private List<string> _errors = new();
 
         #endregion
 
-        #region Property
+        #region Public Properties
 
         public List<IValidationRule<T>> Validations { get; } = new List<IValidationRule<T>>();
 
@@ -32,7 +29,7 @@ namespace UberApp.Validators
             }
         }
 
-        public List<string> Errors 
+        public List<string> Errors
         {
             get => _errors;
             private set
@@ -48,7 +45,7 @@ namespace UberApp.Validators
 
         #endregion
 
-        #region Methods
+        #region Public Methods
 
         public bool Validate()
         {

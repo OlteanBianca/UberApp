@@ -21,33 +21,15 @@ namespace UberApp.ViewModels
         #endregion
 
         #region Constructors
+
         public DriverHomeVM(Driver driver)
         {
             _driver = driver;
             Requests = new ObservableCollection<Request>();
             _driverPageService = new(this);
-
-            //Request request = new()
-            //{
-            //    RequestId=1,
-            //    UserId=1,
-            //    DriverId=1,
-            //    ClientLocationLatitudine=1,
-            //    ClientLocationLongitudine=1,
-            //    DestinationLocation = "Colegiul national andrei saguna"
-            //};
-            //Request request2 = new()
-            //{
-            //    RequestId = 1,
-            //    UserId = 1,
-            //    DriverId = 1,
-            //    ClientLocationLatitudine = 1,
-            //    ClientLocationLongitudine = 1,
-            //    DestinationLocation = "Colegiul national doctor ioan mesota"
-            //};
-            //this.Requests.Add(request);
-            //this.Requests.Add(request2);
+            _driverPageService.RefreshOrders();
         }
+
         #endregion
 
         #region Commands

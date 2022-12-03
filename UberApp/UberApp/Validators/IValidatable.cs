@@ -4,7 +4,7 @@ namespace UberApp.Validators
 {
     public interface IValidatable<T>
     {
-        #region Property
+        #region Properties
 
         List<IValidationRule<T>> Validations { get; }
 
@@ -14,7 +14,7 @@ namespace UberApp.Validators
 
         #endregion
 
-        #region Method
+        #region Methods
 
         bool Validate();
 

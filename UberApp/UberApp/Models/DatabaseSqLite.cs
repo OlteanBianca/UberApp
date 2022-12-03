@@ -62,6 +62,32 @@ namespace UberApp.Models
             }
         }
 
+        private void AddRequests()
+        {
+            if (_database.Table<Request>().Count() == 0)
+            {
+                Request request = new()
+                {
+                    RequestId = 1,
+                    ClientId = 1,
+                    DriverId = 1,
+                    ClientLocationLatitudine = 1,
+                    ClientLocationLongitudine = 1,
+                    DestinationLocation = "Colegiul national andrei saguna"
+                };
+                Request request2 = new()
+                {
+                    RequestId = 2,
+                    ClientId = 2,
+                    DriverId = 2,
+                    ClientLocationLatitudine = 100,
+                    ClientLocationLongitudine = 100,
+                    DestinationLocation = "Colegiul national doctor ioan mesota"
+                };
+                Database.Insert(request);
+                Database.Insert(request2);
+            }
+        }
 
         #endregion
 
@@ -75,6 +101,7 @@ namespace UberApp.Models
             CreateTables();
             AddClients();
             AddDrivers();
+            AddRequests();
         }
 
         #endregion
