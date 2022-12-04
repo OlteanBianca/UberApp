@@ -212,4 +212,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\background.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\map.png" />
+  </ItemGroup>
 </Project>

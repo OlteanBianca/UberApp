@@ -2,84 +2,139 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UberApp.Views.DriverHomePage"
-             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms">
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" 
+             xmlns:behaviors="clr-namespace:UberApp.Behaviors" 
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
+             xmlns:controls="clr-namespace:UberApp.Controls"
+             xmlns:triggers="clr-namespace:UberApp.Triggers"
+             xmlns:syncEffectsView="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
+             BackgroundColor="{DynamicResource Gray-Bg}"
+             NavigationPage.HasNavigationBar="False" x:Name="driverHomePage">
 
-    <Grid BackgroundColor="White" Margin="0,5">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="70"/>
-        </Grid.RowDefinitions>
-        
-        <buttons:SfButton Command="{Binding OpenLoginPageCommand}" HorizontalOptions="StartAndExpand"
-                 Style="{StaticResource ThemeBorderStyle}" VerticalOptions="Start" BackgroundColor="Plum"
-                 Text="Sign out" Margin="5,5" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto, *, Auto" RowSpacing="0">
 
-        <ListView Grid.Row="1" VerticalOptions="Start" VerticalScrollBarVisibility="Always"  
-                  RowHeight="150" ItemsSource="{Binding Requests}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid BackgroundColor="Lavender">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+            <!--top bar-->
+            <StackLayout x:Name="TitleView" Grid.Row="0" Padding="8" BackgroundColor="{DynamicResource Gray-Bg}"
+                         HorizontalOptions="FillAndExpand" Orientation="Horizontal" Spacing="0">
+            
+                <StackLayout x:Name="TitleLayout" HorizontalOptions="FillAndExpand" IsVisible="True" Orientation="Horizontal"
+                             Spacing="0" VerticalOptions="FillAndExpand">
 
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="60"/>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="30"/>
-                            </Grid.RowDefinitions>
+                    <!--sign out button-->
+                    <buttons:SfButton Command="{Binding OpenLoginPageCommand}" HorizontalOptions="StartAndExpand" BorderColor="Black"
+                                      Style="{StaticResource ThemeBorderStyle}" VerticalOptions="Start" 
+                                      BackgroundColor="Lavender" BorderWidth="1" TextColor="Black" FontSize="18"
+                                      Text="Sign out" Margin="0,5" FontAttributes="Bold"/>
 
-                            <!--Destination-->
-                            <Label HorizontalOptions="Start" TextColor="Black" Margin="2,2" 
-                                   Style="{StaticResource TitleLabelStyle}" HorizontalTextAlignment="Start"
-                                   Text="DESTINATION: " FontAttributes="Bold"/>
+                    <Label Margin="0, 0, 36, 0" FontAttributes="Bold" FontSize="Medium"
+                           HorizontalOptions="StartAndExpand"  Style="{StaticResource TitleLabelStyle}"
+                           Text="REQUESTS" VerticalOptions="Center" VerticalTextAlignment="Center" />
+                </StackLayout>
 
-                            <Label HorizontalOptions="Start" TextColor="Black" Margin="2,2" Grid.Column="1"
-                                   Style="{StaticResource TitleLabelStyle}" HorizontalTextAlignment="Start"
-                                   Text="{Binding Path=DestinationLocation}"/>
-                            
-                            <!--Latitudine-->
-                            <Label HorizontalOptions="Start" TextColor="Black" Margin="2,2"
-                                   Style="{StaticResource TitleLabelStyle}" Grid.Row="1"
-                                   Text="LATITUDINE: "/>
+                <!--search layout-hidden-->
+                <StackLayout x:Name="Search" HorizontalOptions="EndAndExpand" IsVisible="False" Orientation="Horizontal" Spacing="0">
 
-                            <Label HorizontalOptions="Start" TextColor="Black" Margin="2,2"
-                                   Style="{StaticResource TitleLabelStyle}" Grid.Row="1" Grid.Column="1"
-                                   Text="{Binding ClientLocationLatitudine}"/>
-                            
-                            <!--longitudine-->
-                            <Label HorizontalOptions="Start" TextColor="Black" Margin="2,2"
-                                   Style="{StaticResource TitleLabelStyle}" Grid.Row="2" 
-                                   Text="LONGITUDINE: "/>
+                    <!--Back to title layout-->
+                    <buttons:SfButton x:Name="BackToTitle" Style="{StaticResource IconButtonStyle}" Text="{StaticResource Back}">
+                        <buttons:SfButton.Behaviors>
+                            <behaviors:SearchBarAnimationBehavior AnimationType="shrink" />
+                        </buttons:SfButton.Behaviors>
+                    </buttons:SfButton>
 
-                            <Label HorizontalOptions="Start" TextColor="Black" Margin="2,2"
-                                   Style="{StaticResource TitleLabelStyle}" Grid.Row="2" Grid.Column="1"
-                                   Text="{Binding ClientLocationLongitudine}"/>
+                    <!--Rounded Search Entry-->
+                    <border:SfBorder Style="{DynamicResource ThemeBorderStyle}">
+                        <controls:BorderlessEntry x:Name="SearchEntry" BindingContext="{x:Reference requests}"
+                            HorizontalOptions="FillAndExpand" Placeholder="Search here" Style="{StaticResource BorderlessEntryStyle}"
+                            Text="{Binding SearchText, Mode=TwoWay}" />
+                    </border:SfBorder>
 
-                            <!--button-->
-                            <buttons:SfButton Text="Choose" Style="{StaticResource DataFormBorderlessEntryBorderStyle}"
-                                   FontAttributes="Bold" Margin="10,5" HorizontalOptions="End" VerticalOptions="End" 
-                                   Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"/>
-                        </Grid>
-                    
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                </StackLayout>
 
+                <!--Search Button-->
+                <buttons:SfButton
+                    x:Name="SearchButton" WidthRequest="50" HeightRequest="50"
+                    IsVisible="True"
+                    Style="{StaticResource IconButtonStyle}"
+                    Text="{StaticResource Search}">
+                    <buttons:SfButton.Behaviors>
+                        <behaviors:SearchBarAnimationBehavior AnimationType="expand" />
+                    </buttons:SfButton.Behaviors>
+                </buttons:SfButton>
 
-        <StackLayout Orientation="Horizontal" Grid.Row="2" HorizontalOptions="CenterAndExpand">
+            </StackLayout>
 
-            <buttons:SfButton Text="Pick Order" HorizontalOptions="Center" VerticalOptions="End" 
-                    Command="{Binding PickOrderCommand}" FontSize="20" TextColor="Black" BackgroundColor="Plum"
-                    Style="{StaticResource ThemeBorderStyle}" FontAttributes="Bold" Margin="0,5"/>
-            <buttons:SfButton Text="Refresh Orders" HorizontalOptions="Start" VerticalOptions="End" 
-                    Command="{Binding RefreshOrdersCommand}" FontSize="20" TextColor="Black" BackgroundColor="Plum"
-                    Style="{StaticResource ThemeBorderStyle}" FontAttributes="Bold" Margin="0,5"/>
+            <!--requests list-->
+            <StackLayout Grid.Row="1" Spacing="0">
 
-        </StackLayout>
-    </Grid>
+                <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+
+                <controls:SearchableSuggestionList
+                    x:Name="requests"
+                    AutoFitMode="Height"
+                    BackgroundColor="{DynamicResource Gray-Bg}"
+                    IsScrollBarVisible="False"
+                    ItemsSource="{Binding Requests}"
+                    SelectionBackgroundColor="Transparent"
+                    VerticalOptions="FillAndExpand">
+
+                    <controls:SearchableSuggestionList.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <syncEffectsView:SfEffectsView RippleColor="{DynamicResource Gray-300}" TouchDownEffects="Ripple"
+                                    TouchUpCommand="{Binding Path=PickOrderCommand, Source={x:Reference driverHomePage}}">
+
+                                    <StackLayout BackgroundColor="{DynamicResource Gray-300}" Spacing="0">
+                                        <Grid Margin="0, 15, 15, 15" ColumnDefinitions="Auto, *, Auto" ColumnSpacing="0">
+
+                                            <!--  Map icon  -->
+                                            <border:SfBorder Margin="5,5" BackgroundColor="{DynamicResource Gray-300}" CornerRadius="26" 
+                                                    BorderColor="{DynamicResource Gray-Bg}" BorderWidth="1" HeightRequest="70"
+                                                    Style="{StaticResource ProfileBorderStyle}" WidthRequest="70">
+                                                <Image Source="map.png"/>
+                                            </border:SfBorder>
+
+                                            <!--Destination-->
+                                            <StackLayout Grid.Column="1" Margin="15,2,0,0" Spacing="2" BackgroundColor="{DynamicResource Gray-300}" >
+                                            
+                                                <Label FontFamily="Montserrat-Medium" HorizontalOptions="Start" FontSize="Medium"
+                                                       Style="{StaticResource TitleLabelStyle}" Text="Destination" FontAttributes="Bold" 
+                                                       TextDecorations="Underline"/>
+
+                                                <Label HorizontalOptions="Start" HorizontalTextAlignment="Start"
+                                                       Style="{StaticResource DescriptionLabelStyle}" Text="{Binding Path=DestinationLocation}" />
+
+                                            </StackLayout>
+
+                                            <!--Choose button-->
+                                            <buttons:SfButton TextColor="Black" BackgroundColor="Lavender" FontAttributes="Bold"
+                                                Grid.Column="2" Margin="0,20" BorderColor="Black" BorderWidth="1" FontSize="15" HeightRequest="32"
+                                                Command="{Binding Path=BindingContext.PickOrderCommand, Source={x:Reference driverHomePage}}"          
+                                                Style="{StaticResource ThemeBorderStyle}" Text="CHOOSE" WidthRequest="100" CommandParameter="{Binding}">
+                                                
+                                                <buttons:SfButton.Triggers>
+                                                    <EventTrigger Event="Clicked">
+                                                        <triggers:ButtonTextTriggerAction />
+                                                    </EventTrigger>
+                                                </buttons:SfButton.Triggers>
+                                            </buttons:SfButton>
+
+                                        </Grid>
+                                        <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+                                    </StackLayout>
+                                    
+                                </syncEffectsView:SfEffectsView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </controls:SearchableSuggestionList.ItemTemplate>
+                </controls:SearchableSuggestionList>
+            </StackLayout>
+
+            <!--refresh orders button-->
+            <buttons:SfButton Text="Refresh Orders" HorizontalOptions="CenterAndExpand"  Grid.Row="2" BorderColor="Black"
+                    Command="{Binding RefreshOrdersCommand}" FontSize="20" TextColor="Black" BackgroundColor="Lavender"
+                    Style="{StaticResource ThemeBorderStyle}" FontAttributes="Bold" Margin="0,5" BorderWidth="1"/>
+            
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>

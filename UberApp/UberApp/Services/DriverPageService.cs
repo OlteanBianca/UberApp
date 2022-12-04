@@ -1,10 +1,13 @@
-﻿using UberApp.ViewModels;
+﻿using UberApp.Models;
+using UberApp.ViewModels;
 using UberApp.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace UberApp.Services
 {
+    [Preserve(AllMembers = true)]
     public class DriverPageService
     {
         #region Private Fields
@@ -36,23 +39,25 @@ namespace UberApp.Services
             }
         }
 
-        public async void PickOrders()
+        public async void PickOrders(object obj)
         {
-            if (_driverHomeVM.SelectedItemList != null)
+            if (obj is not Request request) return;
+
+            if (request != null)
             {
                 if (Device.RuntimePlatform == Device.iOS)
                 {
                     // https://developer.apple.com/library/ios/featuredarticles/iPhoneURLScheme_Reference/MapLinks/MapLinks.html
-                    await Launcher.OpenAsync($"http://maps.apple.com/?q={_driverHomeVM.SelectedItemList.DestinationLocation}");
+                    await Launcher.OpenAsync($"http://maps.apple.com/?q={request.DestinationLocation}");
                 }
                 else if (Device.RuntimePlatform == Device.Android)
                 {
                     // open the maps app directly
-                    await Launcher.OpenAsync($"geo:0,0?q={_driverHomeVM.SelectedItemList.DestinationLocation}");
+                    await Launcher.OpenAsync($"geo:0,0?q={request.DestinationLocation}");
                 }
                 else if (Device.RuntimePlatform == Device.UWP)
                 {
-                    await Launcher.OpenAsync($"bingmaps:?where={_driverHomeVM.SelectedItemList.DestinationLocation}");
+                    await Launcher.OpenAsync($"bingmaps:?where={request.DestinationLocation}");
                 }
             }
         }

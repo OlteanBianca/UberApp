@@ -2,10 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" 
-             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" 
+             xmlns:control="clr-namespace:UberApp.Controls" 
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
              x:Class="UberApp.Views.ClientHomePage">
-
     <Grid>
+        
+        <!--map-->
         <map:Map x:Name="ClientMap" 
                  IsShowingUser="true" 
                  MapType="Street" 
@@ -23,18 +26,28 @@
             </map:Map.ItemTemplate>
 
         </map:Map>
-        <buttons:SfButton Command="{Binding OpenLoginPageCommand}"
-                          Style="{StaticResource TransparentButtonStyle}"
-                          Text="Sign Out"
-                          TextColor="{DynamicResource PrimaryColor}" />
 
-        <StackLayout Orientation="Vertical" VerticalOptions="End" HorizontalOptions="Start">
-            <Entry
-               BackgroundColor="White" WidthRequest="300"
-               TextColor="Black" 
-               x:Name="Address" Text="{Binding Address}" Placeholder="Where do you want to go..."></Entry>
-            <Button Text="Call Cab" x:Name="CallCab" FontSize="Subtitle"  
-                    Command="{Binding CallCabCommand}"/>
+        <!--sign out button-->
+        <buttons:SfButton Command="{Binding OpenLoginPageCommand}" HorizontalOptions="StartAndExpand" 
+                 BorderColor="Black" BorderWidth="2"
+                 Style="{StaticResource ThemeBorderStyle}" VerticalOptions="Start" BackgroundColor="Lavender"
+                 Text="  Sign out  " Margin="5,5" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
+
+        <!--call cab-->
+        <StackLayout Orientation="Vertical" VerticalOptions="End" HorizontalOptions="Start" Margin="5,0">
+
+            <border:SfBorder BorderColor="Black" Style="{StaticResource LoginFormBorderlessEntryBorderStyle}"
+                             CornerRadius="10" BackgroundColor="White" BorderWidth="2" >
+                <control:BorderlessEditor x:Name="searchEntry" HeightRequest="45" PlaceholderColor="Gray"                    
+                            Placeholder="Where do you want to go...  " FontSize="Medium" TextColor="Black"
+                            Text="{Binding Address}" Style="{StaticResource BorderlessEntryStyle}"/>
+            </border:SfBorder>
+
+            <buttons:SfButton Command="{Binding CallCabCommand}" HorizontalOptions="StartAndExpand" 
+                 BorderColor="Black" BorderWidth="2"
+                 Style="{StaticResource ThemeBorderStyle}" VerticalOptions="FillAndExpand" BackgroundColor="Lavender"
+                 Text="  Call Cab  " Margin="0, 0, 5, 5" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
         </StackLayout>
+        
     </Grid>
 </ContentPage>

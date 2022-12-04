@@ -6,46 +6,7 @@ namespace UberApp.Controls
     [Preserve(AllMembers = true)]
     public class TitleView : Grid
     {
-        #region Bindable Properties
-
-        /// <summary>
-        /// Gets or sets the LeadingViewProperty, and it is a bindable property.
-        /// </summary>
-        public static readonly BindableProperty LeadingViewProperty = BindableProperty.Create(nameof(LeadingView), typeof(View), typeof(TitleView), new ContentView(), BindingMode.Default, null, OnLeadingViewPropertyChanged);
-
-        /// <summary>
-        /// Gets or sets the TrailingViewProperty, and it is a bindable property.
-        /// </summary>
-        public static readonly BindableProperty TrailingViewProperty = BindableProperty.Create(nameof(TrailingView), typeof(View), typeof(TitleView), new ContentView(), BindingMode.Default, null, OnTrailingViewPropertyChanged);
-
-        /// <summary>
-        /// Gets or sets the ContentProperty, and it is a bindable property.
-        /// </summary>
-        public static readonly BindableProperty ContentProperty = BindableProperty.Create(nameof(Content), typeof(View), typeof(TitleView), new ContentView(), BindingMode.Default, null, OnContentPropertyChanged);
-
-        /// <summary>
-        /// Gets or sets the TitleProperty, and it is a bindable property.
-        /// </summary>
-        public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(TitleView), string.Empty, BindingMode.Default, null, OnTitlePropertyChanged);
-
-        /// <summary>
-        /// Gets or sets the FontFamilyProperty, and it is a bindable property.
-        /// </summary>
-        public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create(nameof(FontFamily), typeof(string), typeof(TitleView), string.Empty, BindingMode.Default, null, OnFontFamilyPropertyChanged);
-
-        /// <summary>
-        /// Gets or sets the FontAttributesProperty, and it is a bindable property.
-        /// </summary>
-        public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create(nameof(FontAttributes), typeof(FontAttributes), typeof(TitleView), FontAttributes.None, BindingMode.Default, null, OnFontAttributesPropertyChanged);
-
-        /// <summary>
-        /// Gets or sets the FontSizeProperty, and it is a bindable property.
-        /// </summary>
-        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(double), typeof(TitleView), 16d, BindingMode.Default, null, OnFontSizePropertyChanged);
-
-        #endregion
-
-        #region variables
+        #region Private Fields
 
         /// <summary>
         /// Gets or sets the title label.
@@ -54,16 +15,62 @@ namespace UberApp.Controls
 
         #endregion
 
-        #region Constructor
+        #region Public Fields
+
+        /// <summary>
+        /// Gets or sets the LeadingViewProperty, and it is a bindable property.
+        /// </summary>
+        public static readonly BindableProperty LeadingViewProperty = BindableProperty.Create(nameof(LeadingView)
+            , typeof(View), typeof(TitleView), new ContentView(), BindingMode.Default, null, OnLeadingViewPropertyChanged);
+
+        /// <summary>
+        /// Gets or sets the TrailingViewProperty, and it is a bindable property.
+        /// </summary>
+        public static readonly BindableProperty TrailingViewProperty = BindableProperty.Create(nameof(TrailingView), 
+            typeof(View), typeof(TitleView), new ContentView(), BindingMode.Default, null, OnTrailingViewPropertyChanged);
+
+        /// <summary>
+        /// Gets or sets the ContentProperty, and it is a bindable property.
+        /// </summary>
+        public static readonly BindableProperty ContentProperty = BindableProperty.Create(nameof(Content), 
+            typeof(View), typeof(TitleView), new ContentView(), BindingMode.Default, null, OnContentPropertyChanged);
+
+        /// <summary>
+        /// Gets or sets the TitleProperty, and it is a bindable property.
+        /// </summary>
+        public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), 
+            typeof(string), typeof(TitleView), string.Empty, BindingMode.Default, null, OnTitlePropertyChanged);
+
+        /// <summary>
+        /// Gets or sets the FontFamilyProperty, and it is a bindable property.
+        /// </summary>
+        public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create(nameof(FontFamily), 
+            typeof(string), typeof(TitleView), string.Empty, BindingMode.Default, null, OnFontFamilyPropertyChanged);
+
+        /// <summary>
+        /// Gets or sets the FontAttributesProperty, and it is a bindable property.
+        /// </summary>
+        public static readonly BindableProperty FontAttributesProperty = BindableProperty.Create(nameof(FontAttributes), 
+            typeof(FontAttributes), typeof(TitleView), FontAttributes.None, BindingMode.Default, null, OnFontAttributesPropertyChanged);
+
+        /// <summary>
+        /// Gets or sets the FontSizeProperty, and it is a bindable property.
+        /// </summary>
+        public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), 
+            typeof(double), typeof(TitleView), 16d, BindingMode.Default, null, OnFontSizePropertyChanged);
+
+        #endregion
+  
+        #region Constructors
 
         public TitleView()
         {
-            this.ColumnSpacing = 2;
-            this.RowSpacing = 8;
-            this.Padding = new Thickness(0, 8, 0, 0);
-            this.BackgroundColor = (Color)Application.Current.Resources["Gray-Bg"];
+            ColumnSpacing = 2;
+            RowSpacing = 8;
+            Padding = new Thickness(0, 8, 0, 0);
+            BackgroundColor = (Color)Application.Current.Resources["Gray-Bg"];
 
-            this.ColumnDefinitions = new ColumnDefinitionCollection
+            ColumnDefinitions = new ColumnDefinitionCollection
             {
                 new ColumnDefinition { Width = 4 },
                 new ColumnDefinition(),
@@ -72,7 +79,7 @@ namespace UberApp.Controls
                 new ColumnDefinition { Width = 4 },
             };
 
-            this.RowDefinitions = new RowDefinitionCollection
+            RowDefinitions = new RowDefinitionCollection
             {
                 new RowDefinition { Height = GridLength.Auto },
                 new RowDefinition { Height = 1 },
@@ -80,10 +87,10 @@ namespace UberApp.Controls
 
             var boxView = new BoxView { Color = (Color)Application.Current.Resources["Gray-200"] };
 
-            this.Children.Add(this.LeadingView, 1, 0);
-            this.Children.Add(this.Content, 2, 0);
-            this.Children.Add(this.TrailingView, 3, 0);
-            this.Children.Add(boxView, 0, 1);
+            Children.Add(LeadingView, 1, 0);
+            Children.Add(Content, 2, 0);
+            Children.Add(TrailingView, 3, 0);
+            Children.Add(boxView, 0, 1);
             SetColumnSpan(boxView, 5);
         }
 
@@ -96,8 +103,8 @@ namespace UberApp.Controls
         /// </summary>
         public View LeadingView
         {
-            get { return (View)this.GetValue(LeadingViewProperty); }
-            set { this.SetValue(LeadingViewProperty, value); }
+            get => (View)GetValue(LeadingViewProperty); 
+            set { SetValue(LeadingViewProperty, value); }
         }
 
         /// <summary>
@@ -105,8 +112,8 @@ namespace UberApp.Controls
         /// </summary>
         public View TrailingView
         {
-            get { return (View)this.GetValue(TrailingViewProperty); }
-            set { this.SetValue(TrailingViewProperty, value); }
+            get => (View)GetValue(TrailingViewProperty); 
+            set { SetValue(TrailingViewProperty, value); }
         }
 
         /// <summary>
@@ -114,8 +121,8 @@ namespace UberApp.Controls
         /// </summary>
         public View Content
         {
-            get { return (View)this.GetValue(ContentProperty); }
-            set { this.SetValue(ContentProperty, value); }
+            get => (View)GetValue(ContentProperty); 
+            set { SetValue(ContentProperty, value); }
         }
 
         /// <summary>
@@ -123,8 +130,8 @@ namespace UberApp.Controls
         /// </summary>
         public string Title
         {
-            get { return (string)this.GetValue(TitleProperty); }
-            set { this.SetValue(TitleProperty, value); }
+            get => (string)GetValue(TitleProperty); 
+            set { SetValue(TitleProperty, value); }
         }
 
         /// <summary>
@@ -132,8 +139,8 @@ namespace UberApp.Controls
         /// </summary>
         public string FontFamily
         {
-            get { return (string)this.GetValue(FontFamilyProperty); }
-            set { this.SetValue(FontFamilyProperty, value); }
+            get => (string)GetValue(FontFamilyProperty); 
+            set { SetValue(FontFamilyProperty, value); }
         }
 
         /// <summary>
@@ -141,8 +148,8 @@ namespace UberApp.Controls
         /// </summary>
         public FontAttributes FontAttributes
         {
-            get { return (FontAttributes)this.GetValue(FontAttributesProperty); }
-            set { this.SetValue(FontAttributesProperty, value); }
+            get => (FontAttributes)GetValue(FontAttributesProperty);
+            set { SetValue(FontAttributesProperty, value); }
         }
 
         /// <summary>
@@ -150,13 +157,13 @@ namespace UberApp.Controls
         /// </summary>
         public double FontSize
         {
-            get { return (double)this.GetValue(FontSizeProperty); }
-            set { this.SetValue(FontSizeProperty, value); }
+            get => (double)GetValue(FontSizeProperty); 
+            set { SetValue(FontSizeProperty, value); }
         }
 
         #endregion
 
-        #region Methods
+        #region Private Methods
 
         /// <summary>
         /// Invoked when the leading view is changed.
@@ -201,7 +208,6 @@ namespace UberApp.Controls
             {
                 titleView.Children.Remove(titleView.titleLabel);
             }
-
             titleView.Children.Add(newView, 2, 0);
         }
 
@@ -235,7 +241,6 @@ namespace UberApp.Controls
                 {
                     titleView.titleLabel.LineHeight = 1.5;
                 }
-
                 titleView.Children.Remove(titleView.Content);
                 titleView.Children.Add(titleView.titleLabel, 2, 0);
             }

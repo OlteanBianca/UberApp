@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Xamarin.Forms.Internals;
+using System.Collections.ObjectModel;
 using UberApp.Models;
 using UberApp.Services;
 using Xamarin.Forms;
@@ -6,6 +7,7 @@ using Xamarin.Forms.Maps;
 
 namespace UberApp.ViewModels
 {
+    [Preserve(AllMembers = true)]
     public class ClientHomeVM : BaseVM
     {
         #region Private Fields

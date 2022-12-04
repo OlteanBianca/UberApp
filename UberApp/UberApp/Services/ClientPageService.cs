@@ -5,10 +5,12 @@ using UberApp.ViewModels;
 using UberApp.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Maps;
 
 namespace UberApp.Services
 {
+    [Preserve(AllMembers = true)]
     public class ClientPageService
     {
         #region Private Fields
