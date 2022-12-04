@@ -3,20 +3,15 @@
     x:Class="UberApp.Views.LoginPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:behaviour="clr-namespace:UberApp.Behaviors"
-    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
     xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
-    xmlns:control="clr-namespace:UberApp.Controls"
     xmlns:converter="clr-namespace:UberApp.Converters"
     xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
     xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
-    xmlns:local="clr-namespace:UberApp.Views"
+    xmlns:local="clr-namespace:UberApp.Views" NavigationPage.HasNavigationBar="False"
     xmlns:viewModel="clr-namespace:UberApp.ViewModels"
     BackgroundImageSource="{core:OnPlatformOrientationStringValue Default=background.jpg,
                                                                   iOSPhoneLandscape=LoginBackground-Landscape.png,
-                                                                  iOSTabletLandscape=LoginBackground-Landscape.png}"
-    NavigationPage.HasNavigationBar="False">
-
+                                                                  iOSTabletLandscape=LoginBackground-Landscape.png}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:BooleanToColorConverter x:Key="ColorConverter" />
@@ -48,10 +43,7 @@
                                                                  TabletPortrait='200,50',
                                                                  TabletLandscape='300,50',
                                                                  Desktop='30'}"
-                    Spacing="0"
-                    VerticalOptions="FillAndExpand"
-                    WidthRequest="{OnPlatform Default='-1',
-                                              UWP='350'}">
+                    Spacing="0" VerticalOptions="FillAndExpand" WidthRequest="{OnPlatform Default='-1', UWP='350'}">
 
                     <Grid
                         RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"
@@ -59,19 +51,7 @@
                         VerticalOptions="CenterAndExpand">
 
                         <!--  Label to display the title of this page  -->
-                        <Label
-                            FontSize="20"
-                            Style="{StaticResource TitleLabelStyle}"
-                            Text="Log In"
-                            TextColor="{DynamicResource Gray-White}" />
-
-                        <!--  Label to display the description of this page  -->
-                        <Label
-                            Grid.Row="1"
-                            Margin="0,8"
-                            Style="{StaticResource DescriptionLabelStyle}"
-                            Text="Let's get to work"
-                            TextColor="{DynamicResource Gray-White}" />
+                        <Label FontSize="20" Style="{StaticResource TitleLabelStyle}" Text="Log In" TextColor="{DynamicResource Gray-White}" />
 
                         <!--  Entry to get email ID from user  -->
                         <local:EmailEntry Grid.Row="2" Padding="0,24" />
@@ -120,7 +100,6 @@
                 Text="{StaticResource Close}"
                 TextColor="{DynamicResource Gray-White}"
                 VerticalOptions="Start" />
-
         </Grid>
     </ContentPage.Content>
 

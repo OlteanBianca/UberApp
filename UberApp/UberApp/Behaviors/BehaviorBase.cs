@@ -4,21 +4,25 @@ using Xamarin.Forms.Internals;
 
 namespace UberApp.Behaviors
 {
-    /// <summary>
-    /// Base generic class for generalized user-defined behaviors that can respond to  arbitrary conditions and events.
-    /// </summary>
     [Preserve(AllMembers = true)]
     public class BehaviorBase<T> : Behavior<T> where T : BindableObject
     {
-        #region Properties
-        public T AssociatedObject
-        {
-            get;
-            private set;
-        }
+        #region Public Properties
+
+        public T AssociatedObject { get; private set; }
+
         #endregion
 
-        #region Methods
+        #region Private Methods
+
+        private void OnBindingContextChanged(object sender, EventArgs e)
+        {
+            OnBindingContextChanged();
+        }
+
+        #endregion
+
+        #region Protected Methods
 
         /// <summary>
         /// Invoked when adding Entry to the view.
@@ -26,17 +30,17 @@ namespace UberApp.Behaviors
         protected override void OnAttachedTo(T bindable)
         {
             base.OnAttachedTo(bindable);
-            this.AssociatedObject = bindable;
+            AssociatedObject = bindable;
             if (bindable?.BindingContext != null)
             {
-                this.BindingContext = bindable.BindingContext;
+                BindingContext = bindable.BindingContext;
             }
 
-            bindable.BindingContextChanged += this.OnBindingContextChanged;
+            bindable.BindingContextChanged += OnBindingContextChanged;
         }
 
         /// <summary>
-        /// Invoked when exit from the view.
+        /// Invoked when exiting from the view.
         /// </summary>
         protected override void OnDetachingFrom(T bindable)
         {
@@ -44,8 +48,8 @@ namespace UberApp.Behaviors
 
             if (bindable != null)
             {
-                bindable.BindingContextChanged -= this.OnBindingContextChanged;
-                this.AssociatedObject = null;
+                bindable.BindingContextChanged -= OnBindingContextChanged;
+                AssociatedObject = null;
             }
         }
 
@@ -55,18 +59,12 @@ namespace UberApp.Behaviors
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
-            this.BindingContext = this.AssociatedObject.BindingContext;
+            BindingContext = AssociatedObject.BindingContext;
         }
 
         /// <summary>
         /// Invoked when BindingContext is changed
         /// </summary>
-        /// <param name="sender">The Sender</param>
-        /// <param name="e">Event Args</param>
-        private void OnBindingContextChanged(object sender, EventArgs e)
-        {
-            this.OnBindingContextChanged();
-        }
 
         #endregion
     }

@@ -1,3 +1,5 @@
+using Syncfusion.XForms.iOS.EffectsView;
+using Syncfusion.XForms.iOS.Graphics;
 using Syncfusion.SfRating.XForms.iOS;
 using Syncfusion.ListView.XForms.iOS;
 using Syncfusion.XForms.iOS.ComboBox;
@@ -32,6 +34,7 @@ namespace UberApp.iOS
         {
             Xamarin.FormsMaps.Init();
             global::Xamarin.Forms.Forms.Init();
+            SfEffectsViewRenderer.Init();
             SfRatingRenderer.Init();
             SfListViewRenderer.Init();
             SfComboBoxRenderer.Init();

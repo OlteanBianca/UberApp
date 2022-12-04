@@ -57,18 +57,7 @@
                         VerticalOptions="CenterAndExpand">
 
                         <!--  Label to display the title of this page  -->
-                        <Label
-                            FontSize="20"
-                            Style="{StaticResource TitleLabelStyle}"
-                            Text="Sign Up"
-                            TextColor="{DynamicResource Gray-White}" />
-
-                        <!--  Label to display the description of this page  -->
-                        <Label
-                            Margin="0,-16,0,8"
-                            Style="{StaticResource DescriptionLabelStyle}"
-                            Text="Create an account to start doing more"
-                            TextColor="{DynamicResource Gray-White}" />
+                        <Label FontSize="20" Style="{StaticResource TitleLabelStyle}" Text="Sign Up" TextColor="{DynamicResource Gray-White}" />
 
                         <!--  Entry to get username from user  -->
                         <StackLayout>
@@ -204,6 +193,7 @@
                                 Text="{Binding Password.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
                                 TextColor="{DynamicResource Red}"
                                 VerticalOptions="FillAndExpand" />
+                            
                         </StackLayout>
 
                         <!--  Entry to get car model from user  -->

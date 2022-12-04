@@ -9,6 +9,8 @@ namespace UberApp.Controls
     [Preserve(AllMembers = true)]
     public class CustomShadowFrame : Frame
     {
+        #region Public Fields
+
         public static readonly BindableProperty RadiusProperty =
            BindableProperty.Create(nameof(Radius), typeof(float), typeof(CustomShadowFrame), 0f, BindingMode.Default);
 
@@ -26,6 +28,10 @@ namespace UberApp.Controls
 
         public static readonly BindableProperty ShadowOffSetHeightProperty =
             BindableProperty.Create(nameof(ShadowOffSetHeight), typeof(float), typeof(CustomShadowFrame), 4f, BindingMode.Default);
+
+        #endregion
+
+        #region Public Properties
 
         // Gets or sets the radius of the Frame corners.
         public float Radius
@@ -68,5 +74,7 @@ namespace UberApp.Controls
             get { return (float)GetValue(ShadowOffSetHeightProperty); }
             set { SetValue(ShadowOffSetHeightProperty, value); }
         }
+
+        #endregion
     }
 }

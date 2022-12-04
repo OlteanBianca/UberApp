@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UberApp.Services;
+using Xamarin.Forms.Internals;
 
 namespace UberApp.ViewModels
 {
+    [Preserve(AllMembers = true)]
     public class BaseVM : NotifyPropertyChangedService
     {
         #region Protected Methods

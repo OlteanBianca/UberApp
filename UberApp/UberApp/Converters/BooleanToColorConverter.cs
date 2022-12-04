@@ -7,7 +7,7 @@ namespace UberApp.Converters
 {
     /// <summary>
     /// This class has methods to convert the Boolean values to color objects. 
-    /// This is needed to validate in the Entry controls. 
+    /// This is needed to validate the Entry controls. 
     /// If the validation is failed, it will return the color code of error, otherwise it will be transparent.
     /// </summary>
     [Preserve(AllMembers = true)]

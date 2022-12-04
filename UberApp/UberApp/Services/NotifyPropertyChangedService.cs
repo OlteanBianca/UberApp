@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Xamarin.Forms.Internals;
 
 namespace UberApp.Services
 {
+    [Preserve(AllMembers = true)]
     public class NotifyPropertyChangedService : INotifyPropertyChanged
     {
         #region Public Events

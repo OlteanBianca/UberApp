@@ -2,9 +2,11 @@
 using UberApp.ViewModels;
 using UberApp.Views;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace UberApp.Services
 {
+    [Preserve(AllMembers = true)]
     public class LoginService
     {
         #region Private Fields

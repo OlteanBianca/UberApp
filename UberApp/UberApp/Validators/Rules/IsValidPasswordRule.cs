@@ -1,7 +1,9 @@
 ﻿using System.Text.RegularExpressions;
+using Xamarin.Forms.Internals;
 
 namespace UberApp.Validators.Rules
 {
+    [Preserve(AllMembers = true)]
     public class IsValidPasswordRule<T> : IValidationRule<T>
     {
         #region Private Fields

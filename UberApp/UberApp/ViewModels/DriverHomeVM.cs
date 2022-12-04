@@ -1,10 +1,16 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using UberApp.Models;
 using UberApp.Services;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace UberApp.ViewModels
 {
+    [Preserve(AllMembers = true)]
+    [DataContract]
     public class DriverHomeVM : NotifyPropertyChangedService
     {
         #region Private Fields
@@ -34,64 +40,54 @@ namespace UberApp.ViewModels
 
         #region Commands
 
-        private Request _SelectedItemList;
-        public Request SelectedItemList
-        {
-            get
-            {
-
-                return _SelectedItemList;
-            }
-            set
-            {
-                _SelectedItemList = value;
-                OnPropertyChanged();
-            }
-        }
-
         private Command _pickOrderCommand;
         public Command PickOrderCommand
         {
-            get
-            {
-                /// se dechide pagina cu comanda
-                /// apasa buton de pick client si se dechide maps cu locatia clientului
-                /// revine in aplicatia default apasa client ridicat si dupa se dechide apliatia de maps pt destinatie
-                /// revine in aplicatia default si apasa finish order
+            /// se dechide pagina cu comanda
+            /// apasa buton de pick client si se dechide maps cu locatia clientului
+            /// revine in aplicatia default apasa client ridicat si dupa se dechide apliatia de maps pt destinatie
+            /// revine in aplicatia default si apasa finish order
 
-                _pickOrderCommand ??= new(_driverPageService.PickOrders);
-                return _pickOrderCommand;
-            }
+            get => _pickOrderCommand ??= new(_driverPageService.PickOrders);
         }
 
         public Command _refreshOrdersCommand;
         public Command RefreshOrdersCommand
         {
-            get
-            {
-                /// se dechide pagina cu comanda
-                /// apasa buton de pick client si se dechide maps cu locatia clientului
-                /// revine in aplicatia default apasa client ridicat si dupa se dechide apliatia de maps pt destinatie
-                /// revine in aplicatia default si apasa finish order
+            /// se dechide pagina cu comanda
+            /// apasa buton de pick client si se dechide maps cu locatia clientului
+            /// revine in aplicatia default apasa client ridicat si dupa se dechide apliatia de maps pt destinatie
+            /// revine in aplicatia default si apasa finish order
 
-                _refreshOrdersCommand ??= new(_driverPageService.RefreshOrders);
-                return _refreshOrdersCommand;
-            }
+            get => _refreshOrdersCommand ??= new(_driverPageService.RefreshOrders);
         }
 
         private Command _openLoginPageCommand;
         public Command OpenLoginPageCommand
         {
-            get
+            get => _openLoginPageCommand ??= new(_driverPageService.OpenLoginPageClicked);
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(storage, value))
             {
-                _openLoginPageCommand ??= new(_driverPageService.OpenLoginPageClicked);
-                return _openLoginPageCommand;
+                return false;
             }
+            storage = value;
+            OnPropertyChanged(propertyName);
+
+            return true;
         }
 
         #endregion
     }
 }
+
 //geo: latitude,longitude? z = zoom
 
 

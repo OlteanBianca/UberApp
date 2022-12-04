@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using UberApp.Models;
+using Xamarin.Forms.Internals;
 
 namespace UberApp.Services
 {
+    [Preserve(AllMembers = true)]
     public class DataBaseService
     {
         #region Private Fields
