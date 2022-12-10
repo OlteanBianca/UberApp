@@ -22,6 +22,12 @@ namespace UberApp.ViewModels
 
         #region Public Properties
 
+        public Driver Driver
+        {
+            get { return _driver; }
+        }
+
+
         public ObservableCollection<Request> Requests { get; set; }
 
         #endregion
@@ -48,7 +54,7 @@ namespace UberApp.ViewModels
             /// revine in aplicatia default apasa client ridicat si dupa se dechide apliatia de maps pt destinatie
             /// revine in aplicatia default si apasa finish order
 
-            get => _pickOrderCommand ??= new(_driverPageService.PickOrders);
+            get => _pickOrderCommand ??= new(_driverPageService.GoToOrderFlowPage);
         }
 
         public Command _refreshOrdersCommand;

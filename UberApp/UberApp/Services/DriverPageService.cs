@@ -39,6 +39,20 @@ namespace UberApp.Services
             }
         }
 
+        public void GoToOrderFlowPage(object obj)
+        {
+            if (obj is not Request request) return;
+            request.Driver = _driverHomeVM.Driver;
+            request.DriverId = _driverHomeVM.Driver.DriverId;
+
+            OrderFlowVM orderFlowVM = new(_driverHomeVM.Driver, request);
+            OrderFlowPage orderFlowPage = new();
+            orderFlowPage.BindingContext = orderFlowVM;
+            Application.Current.MainPage = orderFlowPage;
+
+            _dataBaseService.UpdateRequest(request);
+        }
+
         public async void PickOrders(object obj)
         {
             if (obj is not Request request) return;

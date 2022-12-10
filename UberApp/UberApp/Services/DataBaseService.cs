@@ -24,6 +24,11 @@ namespace UberApp.Services
 
         #region Public Methods
 
+        public int UpdateRequest(Request request)
+        {
+            return _db.Database.Update(request);
+        }
+
         public int AddRequest(Request request)
         {
             return _db.Database.Insert(request);
