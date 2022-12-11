@@ -64,7 +64,8 @@ namespace UberApp.Models
 
         private void AddRequests()
         {
-            _database.Table<Request>().Delete(val => val.ClientId == 3 || val.ClientId == 1 || val.ClientId == 2);
+            //_database.Table<Request>().Delete(var => var.ClientId == 1 || var.ClientId == 2 || var.ClientId == 3);
+
             if (_database.Table<Request>().Count() == 0)
             {
                 Request request = new()
@@ -72,9 +73,11 @@ namespace UberApp.Models
                     RequestId = 1,
                     ClientId = 1,
                     DriverId = 1,
-                    ClientLocationLatitudine = 14,
-                    ClientLocationLongitudine = 31,
-                    DestinationLocation = "Colegiul National Andrei Saguna"
+                    ClientLocationLongitude = 25.5f,
+                    ClientLocationLatitude = 45.6f,
+                    DestinationLongitude = 25.5840f,
+                    DestinationLatitude = 45.6384f,
+                    DestinationName = "Colegiul National Andrei Saguna"
                 };
                 Database.Insert(request);
 
@@ -83,9 +86,11 @@ namespace UberApp.Models
                     RequestId = 2,
                     ClientId = 2,
                     DriverId = 2,
-                    ClientLocationLatitudine = 1200,
-                    ClientLocationLongitudine = 1040,
-                    DestinationLocation = "Colegiul National Dr. Ioan Mesota"
+                    ClientLocationLongitude = 25.62f,
+                    ClientLocationLatitude = 45.6f,
+                    DestinationLongitude = 25.609160f,
+                    DestinationLatitude = 45.654096f,
+                    DestinationName = "Colegiul National Dr. Ioan Mesota"
                 }; 
                 Database.Insert(request);
 
@@ -94,9 +99,11 @@ namespace UberApp.Models
                     RequestId = 3,
                     ClientId = 1,
                     DriverId = 2,
-                    ClientLocationLatitudine = 5100,
-                    ClientLocationLongitudine = 4100,
-                    DestinationLocation = "Afi"
+                    ClientLocationLongitude = 25.64f,
+                    ClientLocationLatitude = 45.5f,
+                    DestinationLongitude = 25.610608f,
+                    DestinationLatitude = 45.650185f,
+                    DestinationName = "Afi"
                 };
                 Database.Insert(request);
 
@@ -105,9 +112,11 @@ namespace UberApp.Models
                     RequestId = 4,
                     ClientId = 2,
                     DriverId = 1,
-                    ClientLocationLatitudine = 1050,
-                    ClientLocationLongitudine = 1090,
-                    DestinationLocation = "Coresi"
+                    ClientLocationLongitude = 25.9f,
+                    ClientLocationLatitude = 45.15f,
+                    DestinationLongitude = 25.616820f,
+                    DestinationLatitude = 45.672854f,
+                    DestinationName = "Coresi"
                 };
                 Database.Insert(request);
 
@@ -116,9 +125,11 @@ namespace UberApp.Models
                     RequestId = 5,
                     ClientId = 3,
                     DriverId = 3,
-                    ClientLocationLatitudine = 10,
-                    ClientLocationLongitudine = 150,
-                    DestinationLocation = "Piata Unirii"
+                    ClientLocationLongitude = 25.48f,
+                    ClientLocationLatitude = 45.4f,
+                    DestinationLongitude= 25.580211f,
+                    DestinationLatitude = 45.635816f,
+                    DestinationName = "Piata Unirii"
                 };
                 Database.Insert(request);
 
@@ -127,9 +138,11 @@ namespace UberApp.Models
                     RequestId = 6,
                     ClientId = 3,
                     DriverId = 2,
-                    ClientLocationLatitudine = 150,
-                    ClientLocationLongitudine = 120,
-                    DestinationLocation = "Piata Sfatului"
+                    ClientLocationLongitude = 25.27f,
+                    ClientLocationLatitude = 45.43f,
+                    DestinationLongitude = 25.589346f,
+                    DestinationLatitude = 45.642212f,
+                    DestinationName = "Piata Sfatului"
                 };
                 Database.Insert(request);
 
@@ -138,9 +151,11 @@ namespace UberApp.Models
                     RequestId = 7,
                     ClientId = 1,
                     DriverId = 2,
-                    ClientLocationLatitudine = 150,
-                    ClientLocationLongitudine = 120,
-                    DestinationLocation = "Gara Brasov"
+                    ClientLocationLongitude = 25.33f,
+                    ClientLocationLatitude = 45.6f,
+                    DestinationLongitude = 25.613573f,
+                    DestinationLatitude = 45.661057f,
+                    DestinationName = "Gara Brasov"
                 };
                 Database.Insert(request);
             }

@@ -15,11 +15,11 @@ namespace UberApp.Controls
         {
             if (base.FilterContacts(obj))
             {
-                if (obj is not Request taskInfo || string.IsNullOrEmpty(taskInfo.DestinationLocation))
+                if (obj is not Request taskInfo || string.IsNullOrEmpty(taskInfo.DestinationName))
                 {
                     return false;
                 }
-                return taskInfo.DestinationLocation.ToUpperInvariant().Contains(SearchText.ToUpperInvariant());
+                return taskInfo.DestinationName.ToUpperInvariant().Contains(SearchText.ToUpperInvariant());
             }
             return false;
         }

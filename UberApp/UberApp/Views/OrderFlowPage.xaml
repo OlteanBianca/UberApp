@@ -1,12 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="UberApp.Views.OrderFlowPage">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             x:Class="UberApp.Views.OrderFlowPage"
+             xmlns:converter="clr-namespace:UberApp.Converters" 
+             xmlns:viewmodels="clr-namespace:UberApp.ViewModels" 
+             x:DataType="viewmodels:OrderFlowVM">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <Grid BackgroundColor="White">
-        <!--  4 butoane de facut  -->
-        <!--  go to client  -->
-        <!--  pick client   -->
-        <!--  go to destination  -->
-        <!--  finish request  -->
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+            
+            <buttons:SfButton Command="{Binding GoToClientCommand}" HorizontalOptions="StartAndExpand" BorderWidth="2"
+                 BorderColor="Black" IsEnabled="{Binding ClientPicked, Converter={StaticResource InverseBoolConverter}}"
+                 Style="{StaticResource ThemeBorderStyle}" VerticalOptions="FillAndExpand" BackgroundColor="Lavender"
+                 Text=" Go to client " Margin="0, 0, 5, 5" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
+
+            <buttons:SfButton Command="{Binding ClientPickedCommand}" HorizontalOptions="StartAndExpand" BorderWidth="2"
+                 BorderColor="Black" IsEnabled="{Binding ClientPicked, Converter={StaticResource InverseBoolConverter}}"
+                 Style="{StaticResource ThemeBorderStyle}" VerticalOptions="FillAndExpand" BackgroundColor="Lavender"
+                 Text=" Client picked " Margin="0, 0, 5, 5" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
+
+            <buttons:SfButton Command="{Binding GoToDestinationCommand}" HorizontalOptions="StartAndExpand" 
+                 BorderColor="Black" BorderWidth="2"
+                 Style="{StaticResource ThemeBorderStyle}" VerticalOptions="FillAndExpand" BackgroundColor="Lavender"
+                 Text=" Go to destination " Margin="0, 0, 5, 5" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
+            
+            <buttons:SfButton Command="{Binding RequestFinishedCommand}" HorizontalOptions="StartAndExpand" 
+                 BorderColor="Black" BorderWidth="2"
+                 Style="{StaticResource ThemeBorderStyle}" VerticalOptions="FillAndExpand" BackgroundColor="Lavender"
+                 Text=" Request finished " Margin="0, 0, 5, 5" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
+        </StackLayout>
     </Grid>
 </ContentPage>

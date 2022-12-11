@@ -1,47 +1,56 @@
-﻿using System.Runtime.CompilerServices;
-using UberApp.Models;
+﻿using UberApp.Models;
 using UberApp.Services;
+using Xamarin.Forms;
 
 namespace UberApp.ViewModels
 {
-    public class OrderFlowVM:NotifyPropertyChangedService
+    public class OrderFlowVM : NotifyPropertyChangedService
     {
+        #region Private Fields
+
         private readonly OrderFlowPageService _orderFlowPageService;
         private Driver _driver;
+        private Request _request;
+        private bool _requestFinished = false;
+        private bool _clientPicked = false;
+
+        #endregion
+
+        #region Public Properties
 
         public Driver Driver
         {
-            get { return _driver; }
-            set { _driver = value;
+            get => _driver;
+            set
+            {
+                _driver = value;
                 OnPropertyChanged();
-
             }
         }
 
-        private Request _request;
         public Request Request
         {
-            get { return _request; }
-            set { _request = value;
+            get => _request;
+            set
+            {
+                _request = value;
                 OnPropertyChanged();
             }
         }
-
-        private bool _clientPicked = false;
 
         public bool ClientPicked
         {
-            get { return _clientPicked; }
-            set { _clientPicked = value;
+            get => _clientPicked;
+            set
+            {
+                _clientPicked = value;
                 OnPropertyChanged();
             }
         }
 
-        private bool _requestFinished = false;
-
         public bool RequestFinished
         {
-            get { return _requestFinished; }
+            get => _requestFinished;
             set
             {
                 _requestFinished = value;
@@ -49,13 +58,45 @@ namespace UberApp.ViewModels
             }
         }
 
-        public OrderFlowVM(Driver driver, Request request)
+        #endregion
+
+        #region Constructors
+
+        public OrderFlowVM(Request request)
         {
-            Driver = driver;
+            Driver = request.Driver;
             Request = request;
-            _orderFlowPageService = new(this); 
+            _orderFlowPageService = new(this);
         }
 
+        #endregion
 
+        #region Commands
+
+        private Command _goToClientCommand;
+        public Command GoToClientCommand
+        {
+            get => _goToClientCommand ??= new(_orderFlowPageService.GoToClientClicked);
+        }
+
+        private Command _clientPickedCommand;
+        public Command ClientPickedCommand
+        {
+            get => _clientPickedCommand ??= new(_orderFlowPageService.ClientPickedClicked);
+        }
+
+        private Command _goToDestinationCommand;
+        public Command GoToDestinationCommand
+        {
+            get => _goToDestinationCommand ??= new(_orderFlowPageService.GoToDestinationClicked);
+        }
+
+        private Command _requestFinishedCommand;
+        public Command RequestFinishedCommand
+        {
+            get => _requestFinishedCommand ??= new(_orderFlowPageService.RequestFinishedClicked);
+        }
+
+        #endregion
     }
 }

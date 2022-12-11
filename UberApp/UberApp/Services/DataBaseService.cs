@@ -49,7 +49,6 @@ namespace UberApp.Services
         {
             _db.Database.Insert(driver);
             return _db.Database.Table<Driver>().First(val => val.Email == driver.Email);
-
         }
 
         public Client CheckIfUserIsClient(string email)

@@ -4,7 +4,6 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
-    xmlns:converter="clr-namespace:UberApp.Converters"
     xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
     xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
     xmlns:local="clr-namespace:UberApp.Views" NavigationPage.HasNavigationBar="False"
@@ -12,13 +11,6 @@
     BackgroundImageSource="{core:OnPlatformOrientationStringValue Default=background.jpg,
                                                                   iOSPhoneLandscape=LoginBackground-Landscape.png,
                                                                   iOSTabletLandscape=LoginBackground-Landscape.png}">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converter:BooleanToColorConverter x:Key="ColorConverter" />
-            <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
-            <converter:NameValidationConverter x:Key="FirstValidationErrorConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
 
     <!--  Binding context for login page  -->
     <ContentPage.BindingContext>

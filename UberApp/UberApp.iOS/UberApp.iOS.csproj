@@ -215,4 +215,13 @@
   <ItemGroup>
     <AndroidResource Include="Resources\map.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\hybrid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\satellite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\traffic.png" />
+  </ItemGroup>
 </Project>
