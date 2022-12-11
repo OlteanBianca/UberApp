@@ -1,8 +1,8 @@
-﻿using Xamarin.Forms.Internals;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using UberApp.Models;
 using UberApp.Services;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Maps;
 
 namespace UberApp.ViewModels
@@ -60,6 +60,8 @@ namespace UberApp.ViewModels
             Pins = new();
             _clientPageService = new(this);
             _client = client;
+
+
         }
 
         #endregion
@@ -69,21 +71,19 @@ namespace UberApp.ViewModels
         private Command _callCabCommand;
         public Command CallCabCommand
         {
-            get
-            {
-                _callCabCommand ??= new(_clientPageService.CallCab);
-                return _callCabCommand;
-            }
+            get => _callCabCommand ??= new(_clientPageService.CallCab);
+        }
+
+        private Command _goToLocationCommand;
+        public Command GoToLocationCommand
+        {
+            get => _goToLocationCommand ??= new(_clientPageService.GoToLocationCommand);
         }
 
         private Command _openLoginPageCommand;
         public Command OpenLoginPageCommand
         {
-            get
-            {
-                _openLoginPageCommand ??= new(_clientPageService.OpenLoginPageClicked);
-                return _openLoginPageCommand;
-            }
+            get => _openLoginPageCommand ??= new(_clientPageService.OpenLoginPageClicked);
         }
 
         #endregion

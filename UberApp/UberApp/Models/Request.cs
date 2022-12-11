@@ -17,11 +17,15 @@ namespace UberApp.Models
         [ForeignKey(typeof(Driver))]
         public int DriverId { get; set; }
 
-        public double ClientLocationLatitudine { get; set; }
+        public double ClientLocationLatitude { get; set; }
 
-        public double ClientLocationLongitudine { get; set; }
+        public double ClientLocationLongitude { get; set; }
 
-        public string DestinationLocation { get; set; }
+        public double DestinationLatitude { get; set; }
+
+        public double DestinationLongitude { get; set; }
+
+        public string DestinationName { get; set; }
 
         public bool Finished { get; set; } = false;
 
@@ -37,13 +41,13 @@ namespace UberApp.Models
 
         public Request() { }
 
-        public Request(int clientId, int driverId, double clientLocationLatitudine, double clientLocationLongitudine, string destinationLocation, bool finished)
+        public Request(int clientId, int driverId, double clientLocationlatitude, double clientLocationlongitude, string destinationLocation, bool finished)
         {
             ClientId = clientId;
             DriverId = driverId;
-            ClientLocationLatitudine = clientLocationLatitudine;
-            ClientLocationLongitudine = clientLocationLongitudine;
-            DestinationLocation = destinationLocation;
+            ClientLocationLatitude = clientLocationlatitude;
+            ClientLocationLongitude = clientLocationlongitude;
+            DestinationName = destinationLocation;
             Finished = finished;
         }
 

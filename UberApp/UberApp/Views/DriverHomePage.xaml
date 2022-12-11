@@ -102,7 +102,7 @@
                                                        TextDecorations="Underline"/>
 
                                                 <Label HorizontalOptions="Start" HorizontalTextAlignment="Start"
-                                                       Style="{StaticResource DescriptionLabelStyle}" Text="{Binding Path=DestinationLocation}" />
+                                                       Style="{StaticResource DescriptionLabelStyle}" Text="{Binding Path=DestinationName}" />
 
                                             </StackLayout>
 

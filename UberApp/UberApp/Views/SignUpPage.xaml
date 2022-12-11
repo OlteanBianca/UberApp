@@ -61,7 +61,9 @@
 
                         <!--  Entry to get username from user  -->
                         <StackLayout>
-                            <border:SfBorder BorderColor="{Binding Source={x:Reference NameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource LoginFormBorderlessEntryBorderStyle}">
+                            <border:SfBorder BorderColor="{Binding Source={x:Reference NameEntry}, Path=IsFocused, 
+                                             Converter={StaticResource ColorConverter}, ConverterParameter=0}" 
+                                             Style="{StaticResource LoginFormBorderlessEntryBorderStyle}">
                                 <Grid ColumnDefinitions="*, Auto">
 
                                     <control:BorderlessEntry
