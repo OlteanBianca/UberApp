@@ -71,9 +71,14 @@ namespace UberApp.Services
             return _db.Database.Table<Driver>().Where(val => val.Email == email).FirstOrDefault();
         }
 
-        public Driver CheckDriverCredentials(string email, string password)
+        public Driver CheckCredentialsForDriver(string email, string password)
         {
             return _db.Database.Table<Driver>().FirstOrDefault(val => val.Email == email && val.Password == password);
+        }
+
+        public Client CheckCredentialsForClient(string email, string password)
+        {
+            return _db.Database.Table<Client>().FirstOrDefault(val => val.Email == email && val.Password == password);
         }
 
         public bool CheckIfEmailIsAlreadyUsed(string email)

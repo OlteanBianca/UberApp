@@ -23,21 +23,19 @@ namespace UberApp.ViewModels
         private Command _loginCommand;
         public Command LoginCommand
         {
-            get
-            {
-                _loginCommand ??= new(LoginService.LoginClicked);
-                return _loginCommand;
-            }
+            get => _loginCommand ??= new(LoginService.LoginClicked);
         }
 
         private Command _openSignUpPageCommand;
         public Command OpenSignUpPageCommand
         {
-            get
-            {
-                _openSignUpPageCommand ??= new(LoginService.OpenSignUpPageClicked);
-                return _openSignUpPageCommand;
-            }
+            get => _openSignUpPageCommand ??= new(LoginService.OpenSignUpPageClicked);
+        }
+
+        private Command _openResetPasswordPageCommand;
+        public Command OpenResetPasswordPageCommand
+        {
+            get => _openResetPasswordPageCommand ??= new(LoginService.OpenResetPasswordPageClicked);
         }
 
         #endregion
@@ -47,17 +45,20 @@ namespace UberApp.ViewModels
         public override bool AreFieldsValid()
         {
             bool isEmailValid = Email.Validate();
-            return isEmailValid;
+            bool isPasswordValid = Password.Validate();
+            return isEmailValid && isPasswordValid;
         }
 
         public override void InitializeProperties()
         {
             Email = new ValidatableObject<string>();
+            Password = new ValidatableObject<string>();
         }
 
         public override void AddValidationRules()
         {
             Email.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Email required!" });
+            Password.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Password required!" });
         }
 
         #endregion
