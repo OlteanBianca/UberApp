@@ -77,37 +77,24 @@ namespace UberApp.Services
         {
             if (_viewModel.AreFieldsValid())
             {
-                var client = _dataBaseService.CheckIfUserIsClient(_viewModel.Email.Value);
+                var client = _dataBaseService.CheckCredentialsForClient(_viewModel.Email.Value, _viewModel.Password.Value);
                 if (client != null)
                 {
                     ClientHomePage clientHomePage = new(client);
                     Application.Current.MainPage = clientHomePage;
                     return;
                 }
-                if (_dataBaseService.CheckIfUserIsDriver(_viewModel.Email.Value) != null)
+
+                var driver = _dataBaseService.CheckCredentialsForDriver(_viewModel.Email.Value, _viewModel.Password.Value);
+                if (driver != null)
                 {
-                    DriverLoginPage driverLoginPage = new(_viewModel.Email);
-                    Application.Current.MainPage = driverLoginPage;
+                    DriverHomePage driverHomePage = new(driver);
+                    Application.Current.MainPage = driverHomePage;
                     return;
                 }
 
                 _viewModel.Email.Errors = new() { "There is no account with this email address!" };
                 _viewModel.Email.IsValid = false;
-            }
-        }
-
-        public void DriverLoginClicked()
-        {
-            if (_viewModel.AreFieldsValid())
-            {
-                var driver = _dataBaseService.CheckDriverCredentials(_viewModel.Email.Value, _viewModel.Password.Value);
-                if (driver != null)
-                {
-                    OpenDriverHomePage(driver);
-                    return;
-                }
-                _viewModel.Password.Errors = new() { "Invalid Password!" };
-                _viewModel.Password.IsValid = false;
             }
         }
 
@@ -153,7 +140,6 @@ namespace UberApp.Services
         {
             System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
-
 
         public void OpenResetPasswordPageClicked()
         {

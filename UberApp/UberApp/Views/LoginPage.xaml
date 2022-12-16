@@ -7,40 +7,40 @@
     xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
     xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
     xmlns:local="clr-namespace:UberApp.Views" NavigationPage.HasNavigationBar="False"
-    xmlns:viewModel="clr-namespace:UberApp.ViewModels"
+    xmlns:viewModel="clr-namespace:UberApp.ViewModels" 
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
+    xmlns:control="clr-namespace:UberApp.Controls" xmlns:behaviour="clr-namespace:UberApp.Behaviors" 
+    xmlns:converter="clr-namespace:UberApp.Converters"
     BackgroundImageSource="{core:OnPlatformOrientationStringValue Default=background.jpg,
                                                                   iOSPhoneLandscape=LoginBackground-Landscape.png,
                                                                   iOSTabletLandscape=LoginBackground-Landscape.png}">
 
-    <!--  Binding context for login page  -->
     <ContentPage.BindingContext>
         <viewModel:LoginVM />
     </ContentPage.BindingContext>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converter:NameValidationConverter x:Key="FirstValidationErrorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
         <Grid>
             <gradient:SfGradientView Style="{StaticResource BlueGradientStyle}" />
 
             <ScrollView HorizontalOptions="Center">
                 <ScrollView.VerticalOptions>
-                    <OnIdiom
-                        x:TypeArguments="LayoutOptions"
-                        Default="CenterAndExpand"
-                        Phone="FillAndExpand" />
+                    <OnIdiom x:TypeArguments="LayoutOptions" Default="CenterAndExpand" Phone="FillAndExpand" />
                 </ScrollView.VerticalOptions>
 
-                <StackLayout
-                    Margin="{core:OnPlatformOrientationThickness PhonePortrait='20,32',
-                                                                 PhoneLandscape='150,32',
-                                                                 TabletPortrait='200,50',
-                                                                 TabletLandscape='300,50',
-                                                                 Desktop='30'}"
-                    Spacing="0" VerticalOptions="FillAndExpand" WidthRequest="{OnPlatform Default='-1', UWP='350'}">
+                <StackLayout Margin="{core:OnPlatformOrientationThickness PhonePortrait='20,32', PhoneLandscape='150,32',
+                             TabletPortrait='200,50', TabletLandscape='300,50', Desktop='30'}" Spacing="0" 
+                             VerticalOptions="FillAndExpand" WidthRequest="{OnPlatform Default='-1', UWP='350'}">
 
-                    <Grid
-                        RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"
-                        RowSpacing="0"
-                        VerticalOptions="CenterAndExpand">
+                    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto" RowSpacing="0" VerticalOptions="CenterAndExpand">
 
                         <!--  Label to display the title of this page  -->
                         <Label FontSize="20" Style="{StaticResource TitleLabelStyle}" Text="Log In" TextColor="{DynamicResource Gray-White}" />
@@ -48,34 +48,54 @@
                         <!--  Entry to get email ID from user  -->
                         <local:EmailEntry Grid.Row="2" Padding="0,24" />
 
+                        <!--  Entry to get password from user  -->
+                        <StackLayout Grid.Row="3">
+                            <border:SfBorder BorderColor="{Binding Source={x:Reference PasswordEntry}, Path=IsFocused, 
+                                Converter={StaticResource ColorConverter}, ConverterParameter=0}" Style="{StaticResource LoginFormBorderlessEntryBorderStyle}">
+                                <Grid ColumnDefinitions="*, Auto">
+
+                                    <control:BorderlessEntry x:Name="PasswordEntry" Margin="15,0" HeightRequest="40" IsPassword="True" 
+                                             Placeholder="Password" PlaceholderColor="{StaticResource EntryPlaceholderColor}"
+                                             Style="{StaticResource BorderlessEntryStyle}" Text="{Binding Password.Value}"
+                                             TextColor="{StaticResource Gray-White}">
+                                        <Entry.Behaviors>
+                                            <behaviour:EntryLineValidationBehaviour IsValid="{Binding Password.IsValid}" />
+                                        </Entry.Behaviors>
+                                    </control:BorderlessEntry>
+
+                                    <!--  Label to display error icon  -->
+                                    <Label Grid.Column="1" Style="{StaticResource ErrorIconLabelStyle}" Text="{StaticResource Error}"
+                                           IsVisible="{Binding Path=IsVisible, Source={x:Reference PasswordValidationLabel}}" />
+                                </Grid>
+                            </border:SfBorder>
+
+                            <!--  Label to display error message  -->
+                            <Label x:Name="PasswordValidationLabel" Margin="15,-3,0,0" Style="{StaticResource SimpleLabelStyle}"
+                                IsVisible="{Binding Password.IsValid, Converter={StaticResource InverseBoolConverter}}"                               
+                                Text="{Binding Password.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                                TextColor="{DynamicResource Red}" VerticalOptions="FillAndExpand" />
+                            
+                        </StackLayout>
+
+                        <!--  Forgot password   -->
+                        <buttons:SfButton x:Name="ForgotPasswordLabel" Grid.Row="4" Margin="0,16" HorizontalOptions="End"
+                                Command="{Binding OpenResetPasswordPageCommand}" Text="FORGOT PASSWORD?" FontSize="12" 
+                                Style="{StaticResource TransparentButtonStyle}" TextColor="{DynamicResource Gray-White}"/>
+
                         <!--  Login button  -->
-                        <buttons:SfButton
-                            Grid.Row="5"
-                            Margin="0,16"
-                            Command="{Binding LoginCommand}"
-                            HorizontalOptions="Fill"
-                            Style="{StaticResource GradientButtonStyle}"
-                            Text="LOG IN" />
+                        <buttons:SfButton Grid.Row="5" Margin="0,16" Command="{Binding LoginCommand}"
+                                HorizontalOptions="Fill" Style="{StaticResource GradientButtonStyle}" Text="LOG IN" />
+
                     </Grid>
+                    
+                    <!--  Go back to Sign Up page  -->
+                    <StackLayout HorizontalOptions="Center" Orientation="Horizontal" Spacing="1" VerticalOptions="End">
 
-                    <StackLayout
-                        HorizontalOptions="Center"
-                        Orientation="Horizontal"
-                        Spacing="1"
-                        VerticalOptions="End">
+                        <Label Style="{StaticResource DescriptionLabelStyle}" Text="Don't have an account?!"
+                            TextColor="{DynamicResource Gray-White}" VerticalTextAlignment="Center" />
 
-                        <Label
-                            Style="{StaticResource DescriptionLabelStyle}"
-                            Text="Don't have an account?!"
-                            TextColor="{DynamicResource Gray-White}"
-                            VerticalTextAlignment="Center" />
-
-                        <!--  Go back to Sign Up page  -->
-                        <buttons:SfButton
-                            Command="{Binding OpenSignUpPageCommand}"
-                            Style="{StaticResource TransparentButtonStyle}"
-                            Text="Sign Up."
-                            TextColor="{DynamicResource PrimaryColor}" />
+                        <buttons:SfButton Command="{Binding OpenSignUpPageCommand}" TextColor="{DynamicResource PrimaryColor}"
+                            Style="{StaticResource TransparentButtonStyle}" Text="Sign Up." />
 
                     </StackLayout>
 
@@ -83,15 +103,9 @@
             </ScrollView>
 
             <!--  Close button  -->
-            <buttons:SfButton
-                Margin="8"
-                Command="{Binding CloseApplicationCommand}"
-                FontSize="20"
-                HorizontalOptions="End"
-                Style="{StaticResource IconButtonStyle}"
-                Text="{StaticResource Close}"
-                TextColor="{DynamicResource Gray-White}"
-                VerticalOptions="Start" />
+            <buttons:SfButton Margin="8" Command="{Binding CloseApplicationCommand}" FontSize="20"
+                    HorizontalOptions="End" Style="{StaticResource IconButtonStyle}" Text="{StaticResource Close}"
+                    TextColor="{DynamicResource Gray-White}" VerticalOptions="Start" />
         </Grid>
     </ContentPage.Content>
 

@@ -34,15 +34,17 @@ namespace UberApp.Models
 
         private void AddClients()
         {
+            _database.Table<Client>().Delete(val => true);
+
             if (_database.Table<Client>().Count() == 0)
             {
-                Client newClient = new("client1", "mail1@gmail.com");
+                Client newClient = new("client1", "mail1@gmail.com", "pass1");
                 _database.Insert(newClient);
 
-                newClient = new("client2", "mail2@gmail.com");
+                newClient = new("client2", "mail2@gmail.com", "pass2");
                 _database.Insert(newClient);
 
-                newClient = new("client3", "mail3@gmail.com");
+                newClient = new("client3", "mail3@gmail.com", "pass3");
                 _database.Insert(newClient);
             }
         }
@@ -69,8 +71,7 @@ namespace UberApp.Models
 
         private void AddRequests()
         {
-            //_database.Table<Request>().Delete(var => var.ClientId == 1 || var.ClientId == 2 || var.ClientId == 3);
-            //_database.Table<Request>().
+            //_database.Table<Request>().Delete(var => true);
 
             if (_database.Table<Request>().Count() == 0)
             {
