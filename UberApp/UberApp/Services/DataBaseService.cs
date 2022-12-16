@@ -45,6 +45,16 @@ namespace UberApp.Services
             return _db.Database.Table<Client>().First(val => val.Email == client.Email);
         }
 
+        public Client GetClient(int id)
+        {
+            return _db.Database.Table<Client>().FirstOrDefault(val => val.ClientId == id);
+        }
+
+        public Driver GetDriver(int id)
+        {
+            return _db.Database.Table<Driver>().FirstOrDefault(val => val.DriverId == id);
+        }
+
         public Driver AddDriver(Driver driver)
         {
             _db.Database.Insert(driver);

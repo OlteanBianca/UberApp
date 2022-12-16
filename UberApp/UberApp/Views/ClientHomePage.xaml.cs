@@ -13,10 +13,16 @@ namespace UberApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ClientHomePage : ContentPage
     {
+        #region Constructors
+
         public ClientHomePage(Client client)
         {
             Initialization(client);
         }
+
+        #endregion
+
+        #region Private Members
 
         private async void Initialization(Client client)
         {
@@ -33,23 +39,6 @@ namespace UberApp.Views
                 var latlongdegrees = 360 / (Math.Pow(2, zoomLevel));
                 ClientMap.MoveToRegion(new MapSpan(new Position(clientLocation.Latitude, clientLocation.Longitude), latlongdegrees, latlongdegrees));
             }
-        }
-
-        private void ClientMapClicked(object sender, MapClickedEventArgs e)
-        {
-            ClientHomeVM vm = (ClientHomeVM)BindingContext;
-            vm.Pins.Clear();
-
-            Pin pin = new()
-            {
-                Label = $"{e.Position.Latitude},{e.Position.Longitude}",
-                Address = $"{e.Position.Latitude},{e.Position.Longitude}",
-                Type = PinType.Generic,
-                Position = new Position(e.Position.Latitude, e.Position.Longitude)
-            };
-
-            vm.Address = $"{e.Position.Latitude},{e.Position.Longitude}";
-            vm.Pins.Add(pin);
         }
 
         private void ChangeToSatellite(object sender, EventArgs e)
@@ -90,5 +79,7 @@ namespace UberApp.Views
             button.BorderColor = Color.Gray;
             button.BorderWidth = 1;
         }
+
+        #endregion
     }
 }

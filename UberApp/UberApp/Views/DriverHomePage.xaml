@@ -7,7 +7,7 @@
              xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
              xmlns:controls="clr-namespace:UberApp.Controls"
              xmlns:triggers="clr-namespace:UberApp.Triggers"
-             xmlns:syncEffectsView="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
+             xmlns:syncEffectsView="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms" 
              BackgroundColor="{DynamicResource Gray-Bg}"
              NavigationPage.HasNavigationBar="False" x:Name="driverHomePage">
 
@@ -17,7 +17,7 @@
             <!--top bar-->
             <StackLayout x:Name="TitleView" Grid.Row="0" Padding="8" BackgroundColor="{DynamicResource Gray-Bg}"
                          HorizontalOptions="FillAndExpand" Orientation="Horizontal" Spacing="0">
-            
+
                 <StackLayout x:Name="TitleLayout" HorizontalOptions="FillAndExpand" IsVisible="True" Orientation="Horizontal"
                              Spacing="0" VerticalOptions="FillAndExpand">
 
@@ -27,9 +27,10 @@
                                       BackgroundColor="Lavender" BorderWidth="1" TextColor="Black" FontSize="18"
                                       Text="Sign out" Margin="0,5" FontAttributes="Bold"/>
 
-                    <Label Margin="0, 0, 36, 0" FontAttributes="Bold" FontSize="Medium"
-                           HorizontalOptions="StartAndExpand"  Style="{StaticResource TitleLabelStyle}"
-                           Text="REQUESTS" VerticalOptions="Center" VerticalTextAlignment="Center" />
+                    <!--REQUEST TITLE-->
+                    <Label FontAttributes="Bold" FontSize="Medium" HorizontalOptions="StartAndExpand" Text="REQUESTS"
+                           VerticalOptions="Center" VerticalTextAlignment="Center" Style="{StaticResource TitleLabelStyle}"/>
+
                 </StackLayout>
 
                 <!--search layout-hidden-->
@@ -45,21 +46,24 @@
                     <!--Rounded Search Entry-->
                     <border:SfBorder Style="{DynamicResource ThemeBorderStyle}">
                         <controls:BorderlessEntry x:Name="SearchEntry" BindingContext="{x:Reference requests}"
-                            HorizontalOptions="FillAndExpand" Placeholder="Search here" Style="{StaticResource BorderlessEntryStyle}"
-                            Text="{Binding SearchText, Mode=TwoWay}" />
+                                HorizontalOptions="FillAndExpand" Placeholder="Search here" 
+                                Text="{Binding SearchText, Mode=TwoWay}" Style="{StaticResource BorderlessEntryStyle}"/>
                     </border:SfBorder>
 
                 </StackLayout>
 
                 <!--Search Button-->
-                <buttons:SfButton
-                    x:Name="SearchButton" WidthRequest="50" HeightRequest="50"
-                    IsVisible="True"
-                    Style="{StaticResource IconButtonStyle}"
-                    Text="{StaticResource Search}">
+                <buttons:SfButton x:Name="SearchButton" WidthRequest="60" HeightRequest="60" IsVisible="True"
+                                  Style="{StaticResource IconButtonStyle}" Text="{StaticResource Search}">
                     <buttons:SfButton.Behaviors>
                         <behaviors:SearchBarAnimationBehavior AnimationType="expand" />
                     </buttons:SfButton.Behaviors>
+                </buttons:SfButton>
+
+                <!--info button-->
+                <buttons:SfButton HorizontalOptions="End" BackgroundColor="White" WidthRequest="40"
+                                  Command="{Binding ProfilePageCommand}" HeightRequest="40">
+                    <Image Source="icon_about.png"/>
                 </buttons:SfButton>
 
             </StackLayout>
@@ -69,14 +73,9 @@
 
                 <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
 
-                <controls:SearchableSuggestionList
-                    x:Name="requests"
-                    AutoFitMode="Height"
-                    BackgroundColor="{DynamicResource Gray-Bg}"
-                    IsScrollBarVisible="False"
-                    ItemsSource="{Binding Requests}"
-                    SelectionBackgroundColor="Transparent"
-                    VerticalOptions="FillAndExpand">
+                <controls:SearchableSuggestionList x:Name="requests" AutoFitMode="Height" ItemsSource="{Binding Requests}"
+                        BackgroundColor="{DynamicResource Gray-Bg}" SelectionBackgroundColor="Transparent"
+                        VerticalOptions="FillAndExpand">
 
                     <controls:SearchableSuggestionList.ItemTemplate>
                         <DataTemplate>
@@ -96,7 +95,7 @@
 
                                             <!--Destination-->
                                             <StackLayout Grid.Column="1" Margin="15,2,0,0" Spacing="2" BackgroundColor="{DynamicResource Gray-300}" >
-                                            
+
                                                 <Label FontFamily="Montserrat-Medium" HorizontalOptions="Start" FontSize="Medium"
                                                        Style="{StaticResource TitleLabelStyle}" Text="Destination" FontAttributes="Bold" 
                                                        TextDecorations="Underline"/>
@@ -107,22 +106,26 @@
                                             </StackLayout>
 
                                             <!--Choose button-->
-                                            <buttons:SfButton TextColor="Black" BackgroundColor="Lavender" FontAttributes="Bold"
-                                                Grid.Column="2" Margin="0,20" BorderColor="Black" BorderWidth="1" FontSize="15" HeightRequest="32"
-                                                Command="{Binding Path=BindingContext.PickOrderCommand, Source={x:Reference driverHomePage}}"          
-                                                Style="{StaticResource ThemeBorderStyle}" Text="CHOOSE" WidthRequest="100" CommandParameter="{Binding}">
-                                                
-                                                <buttons:SfButton.Triggers>
-                                                    <EventTrigger Event="Clicked">
-                                                        <triggers:ButtonTextTriggerAction />
-                                                    </EventTrigger>
-                                                </buttons:SfButton.Triggers>
-                                            </buttons:SfButton>
+                                            <StackLayout Orientation="Vertical" HorizontalOptions="End" VerticalOptions="End" Grid.Column="2" Margin="0, -7, 0, 15">
+
+                                                <buttons:SfButton TextColor="Black" BackgroundColor="Lavender" FontAttributes="Bold"
+                                                        BorderColor="Black" BorderWidth="1" FontSize="15" HeightRequest="38"
+                                                        Command="{Binding Path=BindingContext.PickOrderCommand, Source={x:Reference driverHomePage}}"          
+                                                        Style="{StaticResource ThemeBorderStyle}" Text="CHOOSE" WidthRequest="100" CommandParameter="{Binding}">
+
+                                                    <buttons:SfButton.Triggers>
+                                                        <EventTrigger Event="Clicked">
+                                                            <triggers:ButtonTextTriggerAction />
+                                                        </EventTrigger>
+                                                    </buttons:SfButton.Triggers>
+                                                </buttons:SfButton>
+
+                                            </StackLayout>
 
                                         </Grid>
                                         <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
                                     </StackLayout>
-                                    
+
                                 </syncEffectsView:SfEffectsView>
                             </ViewCell>
                         </DataTemplate>
@@ -134,7 +137,7 @@
             <buttons:SfButton Text="Refresh Orders" HorizontalOptions="CenterAndExpand"  Grid.Row="2" BorderColor="Black"
                     Command="{Binding RefreshOrdersCommand}" FontSize="20" TextColor="Black" BackgroundColor="Lavender"
                     Style="{StaticResource ThemeBorderStyle}" FontAttributes="Bold" Margin="0,5" BorderWidth="1"/>
-            
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>

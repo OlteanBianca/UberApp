@@ -23,10 +23,6 @@ namespace UberApp.ViewModels
 
         public ObservableCollection<Pin> Pins { get; set; }
 
-        #endregion
-
-        #region Properties
-
         public Pin Pin
         {
             get => _pin;
@@ -50,6 +46,8 @@ namespace UberApp.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        public Client Client { get => _client; }
 
         #endregion
 
@@ -84,6 +82,12 @@ namespace UberApp.ViewModels
         public Command OpenLoginPageCommand
         {
             get => _openLoginPageCommand ??= new(_clientPageService.OpenLoginPageClicked);
+        }
+
+        private Command _profilePageCommand;
+        public Command ProfilePageCommand
+        {
+            get => _profilePageCommand ??= new(_clientPageService.ProfilePageClicked);
         }
 
         #endregion

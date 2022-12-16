@@ -26323,7 +26323,10 @@ namespace UberApp.Droid
 			public const int traffic = 2131165401;
 			
 			// aapt resource value: 0x7F0700DA
-			public const int xamarin_logo = 2131165402;
+			public const int user = 2131165402;
+			
+			// aapt resource value: 0x7F0700DB
+			public const int xamarin_logo = 2131165403;
 			
 			static Drawable()
 			{
