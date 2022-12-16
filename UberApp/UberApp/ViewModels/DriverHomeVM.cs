@@ -27,7 +27,6 @@ namespace UberApp.ViewModels
             get { return _driver; }
         }
 
-
         public ObservableCollection<Request> Requests { get; set; }
 
         #endregion
@@ -72,6 +71,12 @@ namespace UberApp.ViewModels
         public Command OpenLoginPageCommand
         {
             get => _openLoginPageCommand ??= new(_driverPageService.OpenLoginPageClicked);
+        }
+
+        private Command _profilePageCommand;
+        public Command ProfilePageCommand
+        {
+            get => _profilePageCommand ??= new(_driverPageService.ProfilePageClicked);
         }
 
         #endregion

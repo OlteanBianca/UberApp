@@ -62,13 +62,14 @@ namespace UberApp.Services
 
                 Request request = new()
                 {
-                    ClientId = 1,
-                    DriverId = 1,
+                    ClientId = _clientHomeVM.Client.ClientId,
+                    DriverId = 0,
                     ClientLocationLatitude = clientLocation.Latitude,
                     ClientLocationLongitude = clientLocation.Longitude,
                     DestinationName = _clientHomeVM.Address,
                     DestinationLatitude = location.Latitude,
                     DestinationLongitude = location.Longitude,
+                    Client = _clientHomeVM.Client
                 };
 
                 _dataBaseService.AddRequest(request);
@@ -114,6 +115,14 @@ namespace UberApp.Services
         {
             LoginPage loginPage = new();
             Application.Current.MainPage = loginPage;
+        }
+
+        public void ProfilePageClicked()
+        {
+            if (_clientHomeVM.Client is null) return;
+
+            ProfilePage profilePage = new(_clientHomeVM.Client);
+            Application.Current.MainPage = profilePage;
         }
 
         #endregion

@@ -28,6 +28,7 @@
             <gradient:SfGradientView Style="{StaticResource BlueGradientStyle}" />
 
             <ScrollView HorizontalOptions="Center">
+                
                 <ScrollView.VerticalOptions>
                     <OnIdiom
                         x:TypeArguments="LayoutOptions"
@@ -36,11 +37,8 @@
                 </ScrollView.VerticalOptions>
 
                 <StackLayout
-                    Margin="{core:OnPlatformOrientationThickness PhonePortrait='20,32',
-                                                                 PhoneLandscape='150,32',
-                                                                 TabletPortrait='200,50',
-                                                                 TabletLandscape='300,50',
-                                                                 Desktop='30'}"
+                    Margin="{core:OnPlatformOrientationThickness PhonePortrait='20,32', PhoneLandscape='150,32',
+                             TabletPortrait='200,50', TabletLandscape='300,50', Desktop='30'}"
                     Spacing="0" VerticalOptions="FillAndExpand" WidthRequest="{OnPlatform Default='-1', UWP='350'}">
 
                     <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"
@@ -120,24 +118,14 @@
                             Text="Back to home page" />
                     </Grid>
 
-                    <StackLayout
-                        HorizontalOptions="Center"
-                        Orientation="Horizontal"
-                        Spacing="1"
-                        VerticalOptions="End">
+                    <!--  Go back to Sign Up page  -->
+                    <StackLayout HorizontalOptions="Center" Orientation="Horizontal" Spacing="1" VerticalOptions="End">
 
-                        <Label
-                            Style="{StaticResource DescriptionLabelStyle}"
-                            Text="Don't have an account?"
-                            TextColor="{DynamicResource Gray-White}"
-                            VerticalTextAlignment="Center" />
-
-                        <!--  Go back to Sign Up page  -->
-                        <buttons:SfButton
-                            Command="{Binding OpenSignUpPageCommand}"
-                            Style="{StaticResource TransparentButtonStyle}"
-                            Text="Sign Up"
-                            TextColor="{DynamicResource PrimaryColor}" />
+                        <Label Style="{StaticResource DescriptionLabelStyle}" Text="Don't have an account?"
+                            TextColor="{DynamicResource Gray-White}" VerticalTextAlignment="Center" />
+              
+                        <buttons:SfButton Command="{Binding OpenSignUpPageCommand}" Text="Sign Up"
+                               Style="{StaticResource TransparentButtonStyle}" TextColor="{DynamicResource PrimaryColor}" />
 
                     </StackLayout>
 
@@ -145,15 +133,9 @@
             </ScrollView>
 
             <!--  Close button  -->
-            <buttons:SfButton
-                Margin="8"
-                Command="{Binding CloseApplicationCommand}"
-                FontSize="20"
-                HorizontalOptions="End"
-                Style="{StaticResource IconButtonStyle}"
-                Text="{StaticResource Close}"
-                TextColor="{DynamicResource Gray-White}"
-                VerticalOptions="Start" />
+            <buttons:SfButton Margin="8" Command="{Binding CloseApplicationCommand}" FontSize="20"
+                HorizontalOptions="End" Style="{StaticResource IconButtonStyle}" VerticalOptions="Start"
+                Text="{StaticResource Close}" TextColor="{DynamicResource Gray-White}"/>
 
         </Grid>
     </ContentPage.Content>

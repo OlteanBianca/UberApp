@@ -4,30 +4,22 @@
              xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" 
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" 
              xmlns:control="clr-namespace:UberApp.Controls" 
-             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
              x:Class="UberApp.Views.ClientHomePage">
     <Grid>
-
         <!--map-->
-        <map:Map x:Name="ClientMap" MapClicked="ClientMapClicked"
-                 IsShowingUser="True" 
-                 MapType="Street" 
-                 MoveToLastRegionOnLayoutChange="False"
-                 HasZoomEnabled="True"
-                 ItemsSource="{Binding Pins}">
-
+        <map:Map x:Name="ClientMap" IsShowingUser="True" MapType="Street" 
+                 MoveToLastRegionOnLayoutChange="False" HasZoomEnabled="True" ItemsSource="{Binding Pins}">
             <map:Map.ItemTemplate>
                 <DataTemplate>
-                    <map:Pin Label="{Binding Label}" 
-                             Position="{Binding Position}"
-                             Address="{Binding Address}"/>
+                    <map:Pin Label="{Binding Label}" Position="{Binding Position}" Address="{Binding Address}"/>
                 </DataTemplate>
             </map:Map.ItemTemplate>
-
         </map:Map>
 
         <!--map menu-->
         <StackLayout Orientation="Vertical" HorizontalOptions="Start" VerticalOptions="Start">
+
             <!--sign out button-->
             <buttons:SfButton Command="{Binding OpenLoginPageCommand}" HorizontalOptions="StartAndExpand" 
                  BorderColor="Black" BorderWidth="2"
@@ -35,41 +27,56 @@
                  Text="Sign out" Margin="5,5" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
 
             <StackLayout Orientation="Vertical" HorizontalOptions="Start" VerticalOptions="Start">
+
+                <!--info buttton-->
+                <buttons:SfButton Command="{Binding ProfilePageCommand}" HorizontalOptions="StartAndExpand" x:Name="info"
+                         HeightRequest="50" WidthRequest="50" Margin="4,0" BorderThickness="1" BackgroundColor="White"
+                         Style="{StaticResource IconButtonStyle}" VerticalOptions="Start" CornerRadius="29">
+                    <Image Source="icon_about.png" Aspect="AspectFill"/>
+                </buttons:SfButton>
+
+                <!--hybrid button-->
                 <buttons:SfButton Clicked="ChangeToDefault" HorizontalOptions="StartAndExpand" x:Name="streets"
                          HeightRequest="58" WidthRequest="48" Margin="5,5" BorderThickness="1" BorderColor="Gray"
                         Style="{StaticResource ThemeBorderStyle}" VerticalOptions="Start" CornerRadius="6">
                     <Image Source="hybrid.png" Aspect="Fill"/>
                 </buttons:SfButton>
-                
+
+                <!--satellite button-->
                 <buttons:SfButton Clicked="ChangeToSatellite" HorizontalOptions="StartAndExpand" x:Name="satellite"
                          HeightRequest="60" WidthRequest="48" Margin="5,5" BorderThickness="1" BorderColor="Gray"
                         Style="{StaticResource ThemeBorderStyle}" VerticalOptions="Start" CornerRadius="6" >
                     <Image Source="satellite.png" Aspect="Fill"/>
                 </buttons:SfButton>
 
+                <!--show traffic-->
                 <buttons:SfButton Clicked="ShowTraffic" HorizontalOptions="StartAndExpand" x:Name="traffic"
                          HeightRequest="60" WidthRequest="48" Margin="5,5" BorderThickness="1" BorderColor="Gray"
                         Style="{StaticResource ThemeBorderStyle}" VerticalOptions="Start" CornerRadius="6" >
                     <Image Source="traffic.png" Aspect="Fill"/>
                 </buttons:SfButton>
+                
             </StackLayout>
         </StackLayout>
 
         <!--call cab-->
         <StackLayout Orientation="Vertical" VerticalOptions="End" HorizontalOptions="Start" Margin="5,0">
 
+            <!--entry destination-->
             <border:SfBorder BorderColor="Black" Style="{StaticResource LoginFormBorderlessEntryBorderStyle}"
                              CornerRadius="10" BackgroundColor="White" BorderWidth="2" >
                 <control:BorderlessEntry x:Name="searchEntry" ReturnCommandParameter="{Binding Source={x:Reference ClientMap}}"   
                              ReturnCommand="{Binding GoToLocationCommand}" HeightRequest="45" PlaceholderColor="Gray"           
-                             Placeholder="Where do you want to go...  " FontSize="Medium" TextColor="Black"
+                             Placeholder=" Where do you want to go...        " FontSize="Subtitle" TextColor="Black"
                              Text="{Binding Address}" Style="{StaticResource BorderlessEntryStyle}" ReturnType="Go"/>
             </border:SfBorder>
 
+            <!--call cab-->
             <buttons:SfButton Command="{Binding CallCabCommand}" HorizontalOptions="StartAndExpand" 
                  BorderColor="Black" BorderWidth="2"
                  Style="{StaticResource ThemeBorderStyle}" VerticalOptions="FillAndExpand" BackgroundColor="Lavender"
-                 Text="  Call Cab  " Margin="0, 0, 5, 5" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
+                 Text="  Call Cab  " Margin="0,0,5,5" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
+            
         </StackLayout>
 
     </Grid>

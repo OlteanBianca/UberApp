@@ -56,6 +56,14 @@ namespace UberApp.Services
             Application.Current.MainPage = loginPage;
         }
 
+        public void ProfilePageClicked()
+        {
+            if(_driverHomeVM.Driver is null) return;
+
+            ProfilePage profilePage = new(_driverHomeVM.Driver);
+            Application.Current.MainPage = profilePage;
+        }
+
         #endregion
     }
 }

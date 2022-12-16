@@ -224,4 +224,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\traffic.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\user.png" />
+  </ItemGroup>
 </Project>
