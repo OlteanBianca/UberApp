@@ -7,7 +7,7 @@
     xmlns:controls="clr-namespace:UberApp.Controls"
     xmlns:viewModel="clr-namespace:UberApp.ViewModels" 
     xmlns:converter="clr-namespace:UberApp.Converters"
-    x:DataType="viewModel:ProfilePageVM"
+    x:DataType="viewModel:ProfileVM"
     x:Name="profilePage" Title="Profile Page"
     BackgroundColor="{DynamicResource Gray-Bg}">
 
@@ -47,11 +47,11 @@
                     <!--  Client Profile Name  -->
                     <Label IsEnabled="{Binding IsDriver, Converter={x:StaticResource InverseBoolConverter}}"
                            FontFamily="Montserrat-Bold" Style="{StaticResource TitleLabelStyle}"
-                           Text="{Binding Client.Name}" VerticalOptions="Center" />
+                           Text="{Binding Client.Name}" VerticalOptions="Center" Margin="0,0,0,15"/>
 
                     <!--Driver Profile Name-->
-                    <Label IsVisible="{Binding IsDriver}" Margin="0,10,0,10" FontFamily="Montserrat-Bold"
-                           Style="{StaticResource TitleLabelStyle}" Text="{Binding Driver.Name}" VerticalOptions="Center" />
+                    <Label IsVisible="{Binding IsDriver}" Margin="0,0,0,15" FontFamily="Montserrat-Bold"
+                           Style="{StaticResource TitleLabelStyle}" Text="{Binding Driver.Name}" VerticalOptions="Center"/>
 
                     <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
 
@@ -161,7 +161,8 @@
                         <Label Grid.Column="1" FontFamily="Montserrat-Medium" HorizontalOptions="Start"
                                Style="{StaticResource TitleLabelStyle}" Text="Notifications" VerticalOptions="Center" />
 
-                        <Label Grid.Column="2" HorizontalOptions="End" Style="{StaticResource IconLabelStyle}" Text="{StaticResource Next}" />
+                        <Label Grid.Column="2" HorizontalOptions="End" Style="{StaticResource IconLabelStyle}" 
+                               Text="{StaticResource Next}" HeightRequest="20" WidthRequest="50"/>
 
                     </Grid>
 
@@ -175,6 +176,25 @@
                         <Label Grid.Column="1" FontFamily="Montserrat-Medium" HorizontalOptions="Start"
                                Style="{StaticResource TitleLabelStyle}" Text="Help" VerticalOptions="Center" />
 
+                    </Grid>
+
+                    <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+
+                    <!--  Grid for requests  -->
+                    <Grid x:Name="Requests" Padding="16" ColumnDefinitions="Auto, *, Auto" ColumnSpacing="16">
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer  />
+                        </Grid.GestureRecognizers>
+
+                        <Label Grid.Column="0" Style="{StaticResource IconLabelStyle}" Text="{StaticResource  Group}" />
+
+                        <Label Grid.Column="1" FontFamily="Montserrat-Medium" HorizontalOptions="Start"
+                               Style="{StaticResource TitleLabelStyle}" Text="Requests" VerticalOptions="Center" />
+
+                        <buttons:SfButton x:Name="goToRequestsButton" Command="{Binding GoToRequestsCommand}"
+                            Style="{StaticResource IconButtonStyle}" Text="{StaticResource Next}"
+                            WidthRequest="60" HeightRequest="40" Grid.Column="2" HorizontalOptions="End"/>
                     </Grid>
 
                     <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />

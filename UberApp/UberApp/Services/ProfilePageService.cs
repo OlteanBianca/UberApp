@@ -1,9 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Text;
-using UberApp.Models;
-using UberApp.ViewModels;
+﻿using UberApp.ViewModels;
 using UberApp.Views;
 using Xamarin.Forms;
 
@@ -14,13 +9,13 @@ namespace UberApp.Services
         #region Private Fields
 
         private readonly DataBaseService _dataBaseService;
-        private readonly ProfilePageVM _profilePageVM;
+        private readonly ProfileVM _profilePageVM;
 
         #endregion
 
         #region Constructors
 
-        public ProfilePageService(ProfilePageVM vm)
+        public ProfilePageService(ProfileVM vm)
         {
             _profilePageVM = vm;
             _dataBaseService = new();
@@ -32,7 +27,7 @@ namespace UberApp.Services
 
         public void BackButtonClicked()
         {
-            if(_profilePageVM.Driver != null)
+            if (_profilePageVM.Driver != null)
             {
                 DriverHomePage driverHomePage = new(_profilePageVM.Driver);
                 Application.Current.MainPage = driverHomePage;
@@ -45,9 +40,18 @@ namespace UberApp.Services
             }
         }
 
-        public void EditClicked()
+        public void GoToRequestsClicked()
         {
-
+            if (_profilePageVM.Client != null)
+            {
+                RequestsListPage requestsListPage = new(_profilePageVM.Client);
+                Application.Current.MainPage = requestsListPage;
+            }
+            if (_profilePageVM.Driver != null)
+            {
+                RequestsListPage requestsListPage = new(_profilePageVM.Driver);
+                Application.Current.MainPage = requestsListPage;
+            }
         }
 
         #endregion

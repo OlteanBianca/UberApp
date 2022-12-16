@@ -97,6 +97,12 @@ namespace UberApp.ViewModels
             get => _requestFinishedCommand ??= new(_orderFlowPageService.RequestFinishedClicked);
         }
 
+        private Command _goBackToDriverHomePageCommand;
+        public Command GoBackToDriverHomePageCommand
+        {
+            get => _goBackToDriverHomePageCommand ??= new(_orderFlowPageService.GoBackToDriverHomePageClicked);
+        }
+
         #endregion
     }
 }

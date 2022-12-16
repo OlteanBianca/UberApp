@@ -46,7 +46,7 @@
                         <Label FontSize="20" Style="{StaticResource TitleLabelStyle}" Text="Log In" TextColor="{DynamicResource Gray-White}" />
 
                         <!--  Entry to get email ID from user  -->
-                        <local:EmailEntry Grid.Row="2" Padding="0,24" />
+                        <local:EmailEntryPage Grid.Row="2" Padding="0,24" />
 
                         <!--  Entry to get password from user  -->
                         <StackLayout Grid.Row="3">

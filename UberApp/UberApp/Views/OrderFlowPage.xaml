@@ -13,28 +13,40 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid BackgroundColor="White">
-        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
-            
+    <Grid BackgroundColor="White" RowDefinitions="Auto, *">
+        
+        <!--go back button-->
+        <buttons:SfButton Command="{Binding GoBackToDriverHomePageCommand}" HorizontalOptions="StartAndExpand" 
+                 BorderColor="Black" HeightRequest="50" WidthRequest="50" Style="{StaticResource IconButtonStyle}" 
+                 VerticalOptions="FillAndExpand" BackgroundColor="Lavender" TextColor="Black" BorderWidth="2"
+                 Text="{StaticResource Back}" Margin="10" FontAttributes="Bold" FontSize="18"/>
+
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Grid.Row="1">
+
+            <!--go to client-->
             <buttons:SfButton Command="{Binding GoToClientCommand}" HorizontalOptions="StartAndExpand" BorderWidth="2"
                  BorderColor="Black" IsEnabled="{Binding ClientPicked, Converter={StaticResource InverseBoolConverter}}"
                  Style="{StaticResource ThemeBorderStyle}" VerticalOptions="FillAndExpand" BackgroundColor="Lavender"
                  Text=" Go to client " Margin="0, 0, 5, 5" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
 
+            <!--client was picked-->
             <buttons:SfButton Command="{Binding ClientPickedCommand}" HorizontalOptions="StartAndExpand" BorderWidth="2"
                  BorderColor="Black" IsEnabled="{Binding ClientPicked, Converter={StaticResource InverseBoolConverter}}"
                  Style="{StaticResource ThemeBorderStyle}" VerticalOptions="FillAndExpand" BackgroundColor="Lavender"
                  Text=" Client picked " Margin="0, 0, 5, 5" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
 
+            <!--go to destination-->
             <buttons:SfButton Command="{Binding GoToDestinationCommand}" HorizontalOptions="StartAndExpand" 
                  BorderColor="Black" BorderWidth="2"
                  Style="{StaticResource ThemeBorderStyle}" VerticalOptions="FillAndExpand" BackgroundColor="Lavender"
                  Text=" Go to destination " Margin="0, 0, 5, 5" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
-            
+
+            <!--request finished-->
             <buttons:SfButton Command="{Binding RequestFinishedCommand}" HorizontalOptions="StartAndExpand" 
                  BorderColor="Black" BorderWidth="2"
                  Style="{StaticResource ThemeBorderStyle}" VerticalOptions="FillAndExpand" BackgroundColor="Lavender"
                  Text=" Request finished " Margin="0, 0, 5, 5" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
+            
         </StackLayout>
     </Grid>
 </ContentPage>

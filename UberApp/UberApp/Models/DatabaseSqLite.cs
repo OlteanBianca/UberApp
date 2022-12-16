@@ -34,7 +34,7 @@ namespace UberApp.Models
 
         private void AddClients()
         {
-            _database.Table<Client>().Delete(val => true);
+           // _database.Table<Client>().Delete(val => true);
 
             if (_database.Table<Client>().Count() == 0)
             {
@@ -71,15 +71,15 @@ namespace UberApp.Models
 
         private void AddRequests()
         {
-            //_database.Table<Request>().Delete(var => true);
+            _database.Table<Request>().Delete(var => true);
 
             if (_database.Table<Request>().Count() == 0)
             {
                 Request request = new()
                 {
                     RequestId = 1,
-                    ClientId = 1,
-                    DriverId = 1,
+                    ClientId = _database.Table<Client>().First(var => var.Name == "client1").ClientId,
+                    DriverId = _database.Table<Driver>().First(var => var.Name == "driver1").DriverId,
                     ClientLocationLongitude = 25.5f,
                     ClientLocationLatitude = 45.6f,
                     DestinationLongitude = 25.5840f,
@@ -91,8 +91,8 @@ namespace UberApp.Models
                 request = new()
                 {
                     RequestId = 2,
-                    ClientId = 2,
-                    DriverId = 2,
+                    ClientId = _database.Table<Client>().First(var => var.Name == "client2").ClientId,
+                    DriverId = _database.Table<Driver>().First(var => var.Name == "driver2").DriverId,
                     ClientLocationLongitude = 25.62f,
                     ClientLocationLatitude = 45.6f,
                     DestinationLongitude = 25.609160f,
@@ -104,8 +104,8 @@ namespace UberApp.Models
                 request = new()
                 {
                     RequestId = 3,
-                    ClientId = 1,
-                    DriverId = 2,
+                    ClientId = _database.Table<Client>().First(var => var.Name == "client3").ClientId,
+                    DriverId = _database.Table<Driver>().First(var => var.Name == "driver3").DriverId,
                     ClientLocationLongitude = 25.64f,
                     ClientLocationLatitude = 45.5f,
                     DestinationLongitude = 25.610608f,
@@ -117,21 +117,22 @@ namespace UberApp.Models
                 request = new()
                 {
                     RequestId = 4,
-                    ClientId = 2,
-                    DriverId = 1,
+                    ClientId = _database.Table<Client>().First(var => var.Name == "client1").ClientId,
+                    DriverId = _database.Table<Driver>().First(var => var.Name == "driver1").DriverId,
                     ClientLocationLongitude = 25.9f,
                     ClientLocationLatitude = 45.15f,
                     DestinationLongitude = 25.616820f,
                     DestinationLatitude = 45.672854f,
                     DestinationName = "Coresi",
+                    Finished = true
                 };
                 Database.Insert(request);
 
                 request = new()
                 {
                     RequestId = 5,
-                    ClientId = 3,
-                    DriverId = 3,
+                    ClientId = _database.Table<Client>().First(var => var.Name == "client2").ClientId,
+                    DriverId = _database.Table<Driver>().First(var => var.Name == "driver2").DriverId,
                     ClientLocationLongitude = 25.48f,
                     ClientLocationLatitude = 45.4f,
                     DestinationLongitude = 25.580211f,
@@ -143,8 +144,8 @@ namespace UberApp.Models
                 request = new()
                 {
                     RequestId = 6,
-                    ClientId = 3,
-                    DriverId = 2,
+                    ClientId = _database.Table<Client>().First(var => var.Name == "client3").ClientId,
+                    DriverId = _database.Table<Driver>().First(var => var.Name == "default").DriverId,
                     ClientLocationLongitude = 25.27f,
                     ClientLocationLatitude = 45.43f,
                     DestinationLongitude = 25.589346f,
@@ -156,8 +157,8 @@ namespace UberApp.Models
                 request = new()
                 {
                     RequestId = 7,
-                    ClientId = 1,
-                    DriverId = 2,
+                    ClientId = _database.Table<Client>().First(var => var.Name == "client1").ClientId,
+                    DriverId = _database.Table<Driver>().First(var => var.Name == "default").DriverId,
                     ClientLocationLongitude = 25.33f,
                     ClientLocationLatitude = 45.6f,
                     DestinationLongitude = 25.613573f,

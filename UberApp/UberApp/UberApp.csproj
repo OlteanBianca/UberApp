@@ -57,6 +57,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\EmailEntryPage.xaml.cs">
+      <DependentUpon>EmailEntryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\RequestsListPage.xaml.cs">
+      <DependentUpon>RequestsListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
@@ -141,7 +147,7 @@
     <EmbeddedResource Update="Views\DriverHomePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\EmailEntry.xaml">
+    <EmbeddedResource Update="Views\EmailEntryPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\OrderFlowPage.xaml">

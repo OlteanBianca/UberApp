@@ -20,6 +20,30 @@ namespace UberApp.Views
             Initialization(client);
         }
 
+        public ClientHomePage(Client client, Request request)
+        {
+            InitializeComponent();
+            BindingContext = new ClientHomeVM(client);
+
+            if (((ClientHomeVM)BindingContext).Pins.Count != 0)
+            {
+                ((ClientHomeVM)BindingContext).Pins.RemoveAt(0);
+            }
+
+            ((ClientHomeVM)BindingContext).Pins.Add(
+             new Pin()
+             {
+                 Label = request.DestinationName,
+                 Address = request.DestinationName,
+                 Type = PinType.Generic,
+                 Position = new Position(request.DestinationLatitude, request.DestinationLongitude)
+             });
+
+            var zoomLevel = 13;
+            var latlongdegrees = 360 / (Math.Pow(2, zoomLevel));
+            ClientMap.MoveToRegion(new MapSpan(new Position(request.DestinationLatitude, request.DestinationLongitude), latlongdegrees, latlongdegrees));
+        }
+
         #endregion
 
         #region Private Members

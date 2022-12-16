@@ -102,8 +102,6 @@ namespace UberApp.Services
                 };
 
                 _clientHomeVM.Pins.Add(pin);
-                Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}");
-                Console.WriteLine($"Address is: {_clientHomeVM.Address}");
 
                 var zoomLevel = 13;
                 var latlongdegrees = 360 / (Math.Pow(2, zoomLevel));
