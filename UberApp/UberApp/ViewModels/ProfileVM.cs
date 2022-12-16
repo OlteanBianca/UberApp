@@ -6,7 +6,7 @@ using Xamarin.Forms.Internals;
 namespace UberApp.ViewModels
 {
     [Preserve(AllMembers = true)]
-    public class ProfilePageVM : NotifyPropertyChangedService
+    public class ProfileVM : NotifyPropertyChangedService
     {
         #region Private Fields
 
@@ -60,7 +60,7 @@ namespace UberApp.ViewModels
 
         #region Constructors
 
-        public ProfilePageVM(object value)
+        public ProfileVM(object value)
         {
             Initialization(value);
             _profilePageService = new(this);
@@ -75,6 +75,12 @@ namespace UberApp.ViewModels
         {
             get => _backButtonCommand ??= new(_profilePageService.BackButtonClicked);
         }
+
+        private Command _goToRequestsCommand;
+        public Command GoToRequestsCommand
+        {
+            get => _goToRequestsCommand ??= new(_profilePageService.GoToRequestsClicked);
+        }       
 
         #endregion
     }

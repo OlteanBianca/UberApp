@@ -39,6 +39,16 @@ namespace UberApp.Services
             return _db.Database.Table<Request>().Where(x => x.Finished == false).ToList();
         }
 
+        public List<Request> GetClientRequests(int id)
+        {
+            return _db.Database.Table<Request>().Where(var => var.ClientId == id).ToList();
+        }
+
+        public List<Request> GetDriverRequests(int id)
+        {
+            return _db.Database.Table<Request>().Where(var => var.DriverId == id).ToList();
+        }
+
         public Client AddClient(Client client)
         {
             _db.Database.Insert(client);

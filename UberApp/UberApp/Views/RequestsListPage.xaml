@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UberApp.Views.RequestsListPage"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" 
+             xmlns:behaviors="clr-namespace:UberApp.Behaviors" 
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
+             xmlns:controls="clr-namespace:UberApp.Controls"
+             xmlns:syncEffectsView="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms" 
+             xmlns:converter="clr-namespace:UberApp.Converters"
+             BackgroundColor="{DynamicResource Gray-Bg}"
+             NavigationPage.HasNavigationBar="False" x:Name="requestsPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto, *, Auto" RowSpacing="0">
+
+            <!--top bar-->
+            <StackLayout x:Name="TitleView" Grid.Row="0" Padding="8" BackgroundColor="{DynamicResource Gray-Bg}"
+                         HorizontalOptions="FillAndExpand" Orientation="Horizontal" Spacing="0">
+
+                <StackLayout x:Name="TitleLayout" HorizontalOptions="FillAndExpand" IsVisible="True" Orientation="Horizontal"
+                             Spacing="0" VerticalOptions="FillAndExpand">
+
+                    <!--sign out button-->
+                    <buttons:SfButton Command="{Binding GoBackToProfilePageCommand}" HorizontalOptions="StartAndExpand" BorderColor="Black"
+                                      Style="{StaticResource IconButtonStyle}" VerticalOptions="Start" 
+                                      BackgroundColor="Lavender" BorderWidth="1" TextColor="Black" FontSize="18"
+                                      Text="{StaticResource Back}" Margin="0,5" FontAttributes="Bold"/>
+
+                    <!--REQUEST TITLE-->
+                    <Label FontAttributes="Bold" FontSize="Medium" HorizontalOptions="StartAndExpand" Text="REQUESTS"
+                           VerticalOptions="Center" VerticalTextAlignment="Center" Style="{StaticResource TitleLabelStyle}"/>
+
+                </StackLayout>
+
+                <!--search layout-hidden-->
+                <StackLayout x:Name="Search" HorizontalOptions="EndAndExpand" IsVisible="False" Orientation="Horizontal" Spacing="0">
+
+                    <!--Back to title layout-->
+                    <buttons:SfButton x:Name="BackToTitle" Style="{StaticResource IconButtonStyle}" Text="{StaticResource Back}">
+                        <buttons:SfButton.Behaviors>
+                            <behaviors:SearchBarAnimationBehavior AnimationType="shrink" />
+                        </buttons:SfButton.Behaviors>
+                    </buttons:SfButton>
+
+                    <!--Rounded Search Entry-->
+                    <border:SfBorder Style="{DynamicResource ThemeBorderStyle}">
+                        <controls:BorderlessEntry x:Name="SearchEntry" BindingContext="{x:Reference requests}"
+                                HorizontalOptions="FillAndExpand" Placeholder="Search here" 
+                                Text="{Binding SearchText, Mode=TwoWay}" Style="{StaticResource BorderlessEntryStyle}"/>
+                    </border:SfBorder>
+
+                </StackLayout>
+
+                <!--Search Button-->
+                <buttons:SfButton x:Name="SearchButton" WidthRequest="60" HeightRequest="60" IsVisible="True"
+                                  Style="{StaticResource IconButtonStyle}" Text="{StaticResource Search}">
+                    <buttons:SfButton.Behaviors>
+                        <behaviors:SearchBarAnimationBehavior AnimationType="expand" />
+                    </buttons:SfButton.Behaviors>
+                </buttons:SfButton>
+
+            </StackLayout>
+
+            <!--requests list-->
+            <StackLayout Grid.Row="1" Spacing="0">
+
+                <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+
+                <controls:SearchableSuggestionList x:Name="requests" AutoFitMode="Height" ItemsSource="{Binding Requests}"
+                        BackgroundColor="{DynamicResource Gray-Bg}" SelectionBackgroundColor="Transparent"
+                        VerticalOptions="FillAndExpand">
+
+                    <controls:SearchableSuggestionList.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <syncEffectsView:SfEffectsView RippleColor="{DynamicResource Gray-300}" TouchDownEffects="Ripple"
+                                    TouchUpCommand="{Binding Path=PickOrderCommand, Source={x:Reference requestsPage}}">
+
+                                    <StackLayout BackgroundColor="{DynamicResource Gray-300}" Spacing="0">
+                                        <Grid Margin="0, 15, 15, 15" ColumnDefinitions="Auto, *, Auto" ColumnSpacing="0">
+
+                                            <!--  Map icon  -->
+                                            <border:SfBorder Margin="5,5" BackgroundColor="{DynamicResource Gray-300}" CornerRadius="26" 
+                                                    BorderColor="{DynamicResource Gray-Bg}" BorderWidth="1" HeightRequest="70"
+                                                    Style="{StaticResource ProfileBorderStyle}" WidthRequest="70">
+                                                <Image Source="map.png"/>
+                                            </border:SfBorder>
+
+                                            <!--Destination-->
+                                            <StackLayout Grid.Column="1" Margin="15,2,0,0" Spacing="2" BackgroundColor="{DynamicResource Gray-300}" >
+
+                                                <Label FontFamily="Montserrat-Medium" HorizontalOptions="Start" FontSize="Medium"
+                                                       Style="{StaticResource TitleLabelStyle}" Text="Destination" FontAttributes="Bold" 
+                                                       TextDecorations="Underline"/>
+
+                                                <Label HorizontalOptions="Start" HorizontalTextAlignment="Start"
+                                                       Style="{StaticResource DescriptionLabelStyle}" Text="{Binding Path=DestinationName}" />
+                                            </StackLayout>
+                         
+                                            <StackLayout Orientation="Vertical" HorizontalOptions="End" VerticalOptions="End" Grid.Column="2" Margin="0, -7, 0, 15">
+                                                
+                                                <!--Continue button(if request is active)-->
+                                                <buttons:SfButton TextColor="Black" BackgroundColor="Lavender" FontAttributes="Bold"
+                                                        BorderColor="Black" BorderWidth="1" FontSize="15" HeightRequest="38"
+                                                        IsVisible="{Binding Path=Finished, Converter={StaticResource InverseBoolConverter}}"
+                                                        Command="{Binding Path=BindingContext.ContinueRequestCommand, Source={x:Reference requestsPage}}"          
+                                                        Style="{StaticResource ThemeBorderStyle}" Text="Continue" WidthRequest="100" CommandParameter="{Binding}"/>
+
+                                                <!--request status-->
+                                                <border:SfBorder Margin="15, 8, 15, 5" BackgroundColor="{DynamicResource Gray-300}" CornerRadius="15" 
+                                                    BorderColor="Black" BorderWidth="1" HeightRequest="50"
+                                                    Style="{StaticResource ProfileBorderStyle}" WidthRequest="50" IsVisible="{Binding Path=Finished}">
+                                                    <Image Source="finished.png" />
+                                                </border:SfBorder>
+
+                                            </StackLayout>
+
+                                        </Grid>
+                                        <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+                                    </StackLayout>
+
+                                </syncEffectsView:SfEffectsView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </controls:SearchableSuggestionList.ItemTemplate>
+                </controls:SearchableSuggestionList>
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -22,7 +22,7 @@
 
             <!--sign out button-->
             <buttons:SfButton Command="{Binding OpenLoginPageCommand}" HorizontalOptions="StartAndExpand" 
-                 BorderColor="Black" BorderWidth="2"
+                 BorderColor="Black" BorderWidth="1"
                  Style="{StaticResource ThemeBorderStyle}" VerticalOptions="Start" BackgroundColor="Lavender"
                  Text="Sign out" Margin="5,5" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
 
@@ -64,7 +64,7 @@
 
             <!--entry destination-->
             <border:SfBorder BorderColor="Black" Style="{StaticResource LoginFormBorderlessEntryBorderStyle}"
-                             CornerRadius="10" BackgroundColor="White" BorderWidth="2" >
+                             CornerRadius="10" BackgroundColor="White" BorderWidth="1" >
                 <control:BorderlessEntry x:Name="searchEntry" ReturnCommandParameter="{Binding Source={x:Reference ClientMap}}"   
                              ReturnCommand="{Binding GoToLocationCommand}" HeightRequest="45" PlaceholderColor="Gray"           
                              Placeholder=" Where do you want to go...        " FontSize="Subtitle" TextColor="Black"
@@ -73,7 +73,7 @@
 
             <!--call cab-->
             <buttons:SfButton Command="{Binding CallCabCommand}" HorizontalOptions="StartAndExpand" 
-                 BorderColor="Black" BorderWidth="2"
+                 BorderColor="Black" BorderWidth="1"
                  Style="{StaticResource ThemeBorderStyle}" VerticalOptions="FillAndExpand" BackgroundColor="Lavender"
                  Text="  Call Cab  " Margin="0,0,5,5" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
             

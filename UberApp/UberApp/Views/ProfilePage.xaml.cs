@@ -11,7 +11,7 @@ namespace UberApp.Views
         public ProfilePage(object request)
         {
             InitializeComponent();
-            BindingContext = new ProfilePageVM(request);
+            BindingContext = new ProfileVM(request);
         }
     }
 }

@@ -105,6 +105,12 @@ namespace UberApp.Services
             Application.Current.MainPage = driverHomePage;
         }
 
+        public void GoBackToDriverHomePageClicked()
+        {
+            DriverHomePage driverHomePage = new(_orderFlowVM.Driver);
+            Application.Current.MainPage = driverHomePage;
+        }
+
         #endregion
     }
 }
