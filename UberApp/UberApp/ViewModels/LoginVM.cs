@@ -11,10 +11,7 @@ namespace UberApp.ViewModels
     {
         #region Constructors
 
-        public LoginVM() : base()
-        {
-            AddValidationRules();
-        }
+        public LoginVM() : base() { }
 
         #endregion
 

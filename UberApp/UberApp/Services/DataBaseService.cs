@@ -24,14 +24,65 @@ namespace UberApp.Services
 
         #region Public Methods
 
+        public int AddRequest(Request request)
+        {
+            return _db.Database.Insert(request);
+        }
+
+        public Client AddClient(Client client)
+        {
+            _db.Database.Insert(client);
+            return _db.Database.Table<Client>().First(val => val.Email == client.Email);
+        }
+
+        public Driver AddDriver(Driver driver)
+        {
+            _db.Database.Insert(driver);
+            return _db.Database.Table<Driver>().First(val => val.Email == driver.Email);
+        }
+
+
         public int UpdateRequest(Request request)
         {
             return _db.Database.Update(request);
         }
 
-        public int AddRequest(Request request)
+        public Client UpdateClient(Client client)
         {
-            return _db.Database.Insert(request);
+            _db.Database.Update(client);
+            return GetClient(client.ClientId);
+        }
+
+        public Driver UpdateDriver(Driver driver)
+        {
+            _db.Database.Update(driver);
+            return GetDriver(driver.DriverId);
+        }
+
+        public Driver ResetPassword(Driver driver)
+        {
+            var value = _db.Database.Table<Driver>().FirstOrDefault(val => val.Email == driver.Email && val.Name == driver.Name);
+
+            if (value != null)
+            {
+                value.Password = driver.Password;
+                if (_db.Database.Update(value) != 0)
+                {
+                    return _db.Database.Table<Driver>().First(val => val.DriverId == value.DriverId);
+                }
+            }
+            return null;
+        }
+
+
+        public Client GetClient(int id)
+        {
+            return _db.Database.Table<Client>().FirstOrDefault(val => val.ClientId == id);
+        }
+
+        public Driver GetDriver(int id)
+        {
+            return _db.Database.Table<Driver>().FirstOrDefault(val => val.DriverId == id);
         }
 
         public List<Request> GetActiveRequests()
@@ -49,26 +100,10 @@ namespace UberApp.Services
             return _db.Database.Table<Request>().Where(var => var.DriverId == id).ToList();
         }
 
-        public Client AddClient(Client client)
-        {
-            _db.Database.Insert(client);
-            return _db.Database.Table<Client>().First(val => val.Email == client.Email);
-        }
 
-        public Client GetClient(int id)
+        public bool CheckIfEmailIsAlreadyUsed(string email)
         {
-            return _db.Database.Table<Client>().FirstOrDefault(val => val.ClientId == id);
-        }
-
-        public Driver GetDriver(int id)
-        {
-            return _db.Database.Table<Driver>().FirstOrDefault(val => val.DriverId == id);
-        }
-
-        public Driver AddDriver(Driver driver)
-        {
-            _db.Database.Insert(driver);
-            return _db.Database.Table<Driver>().First(val => val.Email == driver.Email);
+            return CheckIfUserIsClient(email) != null || CheckIfUserIsDriver(email) != null;
         }
 
         public Client CheckIfUserIsClient(string email)
@@ -89,26 +124,6 @@ namespace UberApp.Services
         public Client CheckCredentialsForClient(string email, string password)
         {
             return _db.Database.Table<Client>().FirstOrDefault(val => val.Email == email && val.Password == password);
-        }
-
-        public bool CheckIfEmailIsAlreadyUsed(string email)
-        {
-            return CheckIfUserIsClient(email) != null || CheckIfUserIsDriver(email) != null;
-        }
-
-        public Driver ResetPassword(Driver driver)
-        {
-            var value = _db.Database.Table<Driver>().FirstOrDefault(val => val.Email == driver.Email && val.Name == driver.Name);
-
-            if (value != null)
-            {
-                value.Password = driver.Password;
-                if (_db.Database.Update(value) != 0)
-                {
-                    return _db.Database.Table<Driver>().First(val => val.DriverId == value.DriverId);
-                }
-            }
-            return null;
         }
 
         #endregion

@@ -34,10 +34,8 @@ namespace UberApp.ViewModels
 
         #region Constructors 
 
-        public ResetPasswordVM(ValidatableObject<string> email)
+        public ResetPasswordVM(ValidatableObject<string> email) : base()
         {
-            InitializeProperties();
-            AddValidationRules();
             Email = email;
         }
 
@@ -48,31 +46,19 @@ namespace UberApp.ViewModels
         private Command _resetPasswordCommand;
         public Command ResetPasswordCommand
         {
-            get
-            {
-                _resetPasswordCommand ??= new(LoginService.ResetPasswordClicked);
-                return _resetPasswordCommand;
-            }
+            get => _resetPasswordCommand ??= new(LoginService.ResetPasswordClicked);
         }
 
         private Command _openSignUpPageCommand;
         public Command OpenSignUpPageCommand
         {
-            get
-            {
-                _openSignUpPageCommand ??= new(LoginService.OpenSignUpPageClicked);
-                return _openSignUpPageCommand;
-            }
+            get => _openSignUpPageCommand ??= new(LoginService.OpenSignUpPageClicked);
         }
 
         private Command _openLoginPageCommand;
         public Command OpenLoginPageCommand
         {
-            get
-            {
-                _openLoginPageCommand ??= new(LoginService.OpenLoginPageClicked);
-                return _openLoginPageCommand;
-            }
+            get => _openLoginPageCommand ??= new(LoginService.OpenLoginPageClicked);
         }
 
         #endregion

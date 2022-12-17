@@ -89,11 +89,7 @@ namespace UberApp.ViewModels
         private Command _closeApplicationCommand;
         public Command CloseApplicationCommand
         {
-            get
-            {
-                _closeApplicationCommand ??= new(LoginService.CloseApplicationClicked);
-                return _closeApplicationCommand;
-            }
+            get => _closeApplicationCommand ??= new(LoginService.CloseApplicationClicked); 
         }
 
         #endregion

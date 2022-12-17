@@ -57,6 +57,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\EditAccountPage.xaml.cs">
+      <DependentUpon>EditAccountPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\EmailEntryPage.xaml.cs">
       <DependentUpon>EmailEntryPage.xaml</DependentUpon>
     </Compile>
@@ -133,6 +136,9 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Themes\LightTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\EditAccountPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ProfilePage.xaml">

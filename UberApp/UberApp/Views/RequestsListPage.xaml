@@ -28,10 +28,9 @@
                              Spacing="0" VerticalOptions="FillAndExpand">
 
                     <!--sign out button-->
-                    <buttons:SfButton Command="{Binding GoBackToProfilePageCommand}" HorizontalOptions="StartAndExpand" BorderColor="Black"
+                    <buttons:SfButton Command="{Binding GoBackToProfilePageCommand}" HorizontalOptions="StartAndExpand"
                                       Style="{StaticResource IconButtonStyle}" VerticalOptions="Start" 
-                                      BackgroundColor="Lavender" BorderWidth="1" TextColor="Black" FontSize="18"
-                                      Text="{StaticResource Back}" Margin="0,5" FontAttributes="Bold"/>
+                                      TextColor="Black" FontSize="24" Text="{StaticResource Back}" FontAttributes="Bold"/>
 
                     <!--REQUEST TITLE-->
                     <Label FontAttributes="Bold" FontSize="Medium" HorizontalOptions="StartAndExpand" Text="REQUESTS"
@@ -59,8 +58,8 @@
                 </StackLayout>
 
                 <!--Search Button-->
-                <buttons:SfButton x:Name="SearchButton" WidthRequest="60" HeightRequest="60" IsVisible="True"
-                                  Style="{StaticResource IconButtonStyle}" Text="{StaticResource Search}">
+                <buttons:SfButton x:Name="SearchButton" WidthRequest="60" HeightRequest="40" IsVisible="True"
+                                  Style="{StaticResource IconButtonStyle}" Text="{StaticResource Search}" FontSize="24">
                     <buttons:SfButton.Behaviors>
                         <behaviors:SearchBarAnimationBehavior AnimationType="expand" />
                     </buttons:SfButton.Behaviors>

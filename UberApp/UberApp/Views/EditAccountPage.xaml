@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="UberApp.Views.EditAccountPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:controls="clr-namespace:UberApp.Controls"
+    xmlns:converter="clr-namespace:UberApp.Converters" 
+    xmlns:behaviour="clr-namespace:UberApp.Behaviors"
+    Title="Business Registration Form"
+    BackgroundColor="{DynamicResource Gray-100}"
+    NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converter:NameValidationConverter x:Key="FirstValidationErrorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto, Auto, *" RowSpacing="0">
+            
+            <!--title view-->
+            <StackLayout x:Name="TitleLayout" HorizontalOptions="FillAndExpand" IsVisible="True" Orientation="Horizontal"
+                         Spacing="0" VerticalOptions="FillAndExpand">
+
+                <buttons:SfButton Command="{Binding BackButtonCommand}" HorizontalOptions="StartAndExpand" BorderColor="Black"
+                         Style="{StaticResource IconButtonStyle}" VerticalOptions="Start" TextColor="Black" 
+                         FontSize="18" Text="{StaticResource Back}" Margin="0,5" FontAttributes="Bold"/>
+                
+                <Label FontAttributes="Bold" FontSize="Small" HorizontalOptions="StartAndExpand" Text="Account settings"
+                       VerticalOptions="Center" VerticalTextAlignment="Center" Style="{StaticResource TitleLabelStyle}"
+                       Margin="0,2,40,0"/>
+
+            </StackLayout>
+            
+            <BoxView Style="{StaticResource HorizontalSeparatorStyle}" Grid.Row="1"/>
+            
+            <ScrollView Grid.Row="2">
+                <StackLayout Padding="16,24" BackgroundColor="{DynamicResource Gray-100}" Spacing="0">
+
+                    <Label Margin="0,0,0,4" FontFamily="Montserrat-Medium" FontSize="12" HeightRequest="18" Text="Email"
+                       TextColor="{DynamicResource Gray-800}" FontAttributes="Bold"/>
+
+                    <!-- Email  -->
+                    <controls:BorderlessEntry x:Name="email" HeightRequest="40" Text="{Binding Email.Value}"
+                            Style="{StaticResource BorderlessEntryStyle}" IsReadOnly="True"/>
+
+                    <Label Margin="0,24,0,4" FontFamily="Montserrat-Medium" FontSize="12" HeightRequest="18" Text="Username"
+                       TextColor="{DynamicResource Gray-800}" FontAttributes="Bold"/>
+
+                    <!-- Username  -->
+                    <StackLayout>
+                        <border:SfBorder BorderColor="{Binding Source={x:Reference username}, Path=IsFocused, Converter={StaticResource 
+                                 ColorConverter}, ConverterParameter=3}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                            <Grid ColumnDefinitions="*, Auto">
+
+                                <controls:BorderlessEntry x:Name="username" Margin="12,0" Text="{Binding Name.Value}"
+                                      Placeholder="Username" Style="{StaticResource BorderlessEntryStyle}" HeightRequest="40" >
+                                    <Entry.Behaviors>
+                                        <behaviour:EntryLineValidationBehaviour IsValid="{Binding Name.IsValid}" />
+                                    </Entry.Behaviors>
+                                </controls:BorderlessEntry>
+
+                                <!--  Label to display error icon  -->
+                                <Label Grid.Column="1" IsVisible="{Binding Path=IsVisible, Source={x:Reference NameValidationLabel}}"
+                                   Style="{StaticResource ErrorIconLabelStyle}" Text="{StaticResource Error}" />
+                            </Grid>
+                        </border:SfBorder>
+
+                        <!--  Label to display error message  -->
+                        <Label x:Name="NameValidationLabel" Margin="15,-3,0,0" Style="{StaticResource SimpleLabelStyle}"
+                           IsVisible="{Binding Name.IsValid, Converter={StaticResource InverseBoolConverter}}"  
+                           Text="{Binding Name.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                           TextColor="{DynamicResource Red}" VerticalOptions="FillAndExpand" />
+                    </StackLayout>
+
+                    <Label Margin="0,16,0,4" FontFamily="Montserrat-Medium" FontSize="12" HeightRequest="18" Text="Password"
+                    TextColor="{DynamicResource Gray-800}" FontAttributes="Bold"/>
+
+                    <!-- Password  -->
+                    <StackLayout>
+                        <border:SfBorder BorderColor="{Binding Source={x:Reference password}, Path=IsFocused, Converter={StaticResource 
+                        ColorConverter}, ConverterParameter=3}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                            <Grid ColumnDefinitions="*, Auto">
+
+                                <controls:BorderlessEntry x:Name="password" HeightRequest="40" Placeholder="Password" IsPassword="True"
+                                      Style="{StaticResource BorderlessEntryStyle}" Text="{Binding Password.Item1.Value}" Margin="12,0">
+                                    <Entry.Behaviors>
+                                        <behaviour:EntryLineValidationBehaviour IsValid="{Binding Password.Item1.IsValid}" />
+                                    </Entry.Behaviors>
+                                </controls:BorderlessEntry>
+
+                                <!--  Label to display error icon  -->
+                                <Label Grid.Column="1" IsVisible="{Binding Path=IsVisible, Source={x:Reference PasswordsValidationLabel}}"
+                                   Style="{StaticResource ErrorIconLabelStyle}" Text="{StaticResource Error}" />
+                            </Grid>
+                        </border:SfBorder>
+
+                        <!--  Label to display error message  -->
+                        <Label x:Name="PasswordValidationLabel" Margin="15,-3,0,0" Style="{StaticResource SimpleLabelStyle}"
+                           IsVisible="{Binding Password.Item1.IsValid, Converter={StaticResource InverseBoolConverter}}"  
+                           Text="{Binding Password.Item1.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                           TextColor="{DynamicResource Red}" VerticalOptions="FillAndExpand" />
+
+                    </StackLayout>
+
+                    <Label Margin="0,24,0,4" FontFamily="Montserrat-Medium" FontSize="12" HeightRequest="18"
+                    Text="Confirm Password" TextColor="{DynamicResource Gray-800}" FontAttributes="Bold"/>
+
+                    <!-- Confirm Password  -->
+                    <StackLayout>
+                        <border:SfBorder BorderColor="{Binding Source={x:Reference ConfirmPassword}, Path=IsFocused, Converter={StaticResource 
+                        ColorConverter}, ConverterParameter=3}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                            <Grid ColumnDefinitions="*, Auto">
+
+                                <controls:BorderlessEntry x:Name="ConfirmPassword" Margin="12,0" HeightRequest="40" Placeholder="Confirm Password"
+                                      Style="{StaticResource BorderlessEntryStyle}" Text="{Binding Password.Item2.Value}" IsPassword="True">
+                                    <Entry.Behaviors>
+                                        <behaviour:EntryLineValidationBehaviour IsValid="{Binding Password.Item2.IsValid}" />
+                                    </Entry.Behaviors>
+                                </controls:BorderlessEntry>
+
+                                <!--  Label to display error icon  -->
+                                <Label Grid.Column="1" IsVisible="{Binding Path=IsVisible, Source={x:Reference ConfirmPasswordValidationLabel}}"
+                                   Style="{StaticResource ErrorIconLabelStyle}" Text="{StaticResource Error}" />
+
+                            </Grid>
+                        </border:SfBorder>
+
+                        <!--  Label to display error message  -->
+                        <Label x:Name="ConfirmPasswordValidationLabel" Margin="15,-3,0,0" Style="{StaticResource SimpleLabelStyle}"
+                           IsVisible="{Binding Password.Item2.IsValid, Converter={StaticResource InverseBoolConverter}}"  
+                           Text="{Binding Password.Item2.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                           TextColor="{DynamicResource Red}" VerticalOptions="FillAndExpand" />
+
+                        <Label x:Name="PasswordsValidationLabel" Margin="15,-3,0,0" Style="{StaticResource SimpleLabelStyle}"
+                           IsVisible="{Binding Password.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                           Text="{Binding Password.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                           TextColor="{DynamicResource Red}" VerticalOptions="FillAndExpand"/>
+
+                    </StackLayout>
+
+                    <Label Margin="0,24,0,4" FontFamily="Montserrat-Medium" FontSize="12" HeightRequest="18" Text="Car Model"
+                       TextColor="{DynamicResource Gray-800}" IsVisible="{Binding IsDriver}" FontAttributes="Bold"/>
+
+                    <!-- Driver Car Model  -->
+                    <StackLayout IsVisible="{Binding IsDriver}">
+                        <border:SfBorder BorderColor="{Binding Source={x:Reference CarModel}, Path=IsFocused, Converter={StaticResource 
+                                 ColorConverter}, ConverterParameter=3}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                            <Grid ColumnDefinitions="*, Auto">
+
+                                <controls:BorderlessEntry x:Name="CarModel" Margin="12,0" Text="{Binding CarModel.Value}"
+                              Placeholder="Car Model" Style="{StaticResource BorderlessEntryStyle}" HeightRequest="40">
+                                    <Entry.Behaviors>
+                                        <behaviour:EntryLineValidationBehaviour IsValid="{Binding CarModel.IsValid}" />
+                                    </Entry.Behaviors>
+                                </controls:BorderlessEntry>
+
+                                <!--  Label to display error icon  -->
+                                <Label Grid.Column="1" IsVisible="{Binding Path=IsVisible, Source={x:Reference CarModelValidationLabel}}"
+                                   Style="{StaticResource ErrorIconLabelStyle}" Text="{StaticResource Error}" />
+
+                            </Grid>
+                        </border:SfBorder>
+
+                        <!--  Label to display error message  -->
+                        <Label x:Name="CarModelValidationLabel" Margin="15,-3,0,0" Style="{StaticResource SimpleLabelStyle}"
+                           IsVisible="{Binding CarModel.IsValid, Converter={StaticResource InverseBoolConverter}}"  
+                           Text="{Binding CarModel.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                           TextColor="{DynamicResource Red}" VerticalOptions="FillAndExpand" />
+
+                    </StackLayout>
+
+
+                    <Label Margin="0,24,0,4" FontFamily="Montserrat-Medium" FontSize="12" HeightRequest="18" Text="License Plate"
+                       TextColor="{DynamicResource Gray-800}" IsVisible="{Binding IsDriver}" FontAttributes="Bold"/>
+
+                    <!-- Driver License Plate  -->
+                    <StackLayout IsVisible="{Binding IsDriver}">
+                        <border:SfBorder BorderColor="{Binding Source={x:Reference LicensePlate}, Path=IsFocused, Converter={StaticResource 
+                                 ColorConverter}, ConverterParameter=3}" Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                            <Grid ColumnDefinitions="*, Auto">
+
+                                <controls:BorderlessEntry x:Name="LicensePlate" Margin="12,0" Text="{Binding LicensePlate.Value}"
+                              Placeholder="License Plate" Style="{StaticResource BorderlessEntryStyle}" HeightRequest="40">
+                                    <Entry.Behaviors>
+                                        <behaviour:EntryLineValidationBehaviour IsValid="{Binding LicensePlate.IsValid}" />
+                                    </Entry.Behaviors>
+                                </controls:BorderlessEntry>
+
+                                <!--  Label to display error icon  -->
+                                <Label Grid.Column="1" IsVisible="{Binding Path=IsVisible, Source={x:Reference LicensePlateValidationLabel}}"
+                                   Style="{StaticResource ErrorIconLabelStyle}" Text="{StaticResource Error}" />
+
+                            </Grid>
+                        </border:SfBorder>
+
+                        <!--  Label to display error message  -->
+                        <Label x:Name="LicensePlateValidationLabel" Margin="15,-3,0,0" Style="{StaticResource SimpleLabelStyle}"
+                           IsVisible="{Binding LicensePlate.IsValid, Converter={StaticResource InverseBoolConverter}}"  
+                           Text="{Binding LicensePlate.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                           TextColor="{DynamicResource Red}" VerticalOptions="FillAndExpand" />
+
+                    </StackLayout>
+
+
+                    <!--  Submit Button  -->
+                    <buttons:SfButton Margin="0,24,0,0" Command="{Binding SaveSettingsCommand}" Text="SAVE"
+                         Style="{StaticResource GradientButtonStyle}" WidthRequest="200" />
+
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

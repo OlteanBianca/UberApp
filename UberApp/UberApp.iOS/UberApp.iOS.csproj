@@ -230,4 +230,10 @@
   <ItemGroup>
     <BundleResource Include="Resources\finished.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\refresh.png" />
+  </ItemGroup>
 </Project>

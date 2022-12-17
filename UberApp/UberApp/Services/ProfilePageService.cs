@@ -46,11 +46,27 @@ namespace UberApp.Services
             {
                 RequestsListPage requestsListPage = new(_profilePageVM.Client);
                 Application.Current.MainPage = requestsListPage;
+                return;
             }
             if (_profilePageVM.Driver != null)
             {
                 RequestsListPage requestsListPage = new(_profilePageVM.Driver);
                 Application.Current.MainPage = requestsListPage;
+            }
+        }
+
+        public void EditAccountClicked()
+        {
+            if (_profilePageVM.Client != null)
+            {
+                EditAccountPage editAccountPage = new(_profilePageVM.Client);
+                Application.Current.MainPage = editAccountPage;
+                return;
+            }
+            if (_profilePageVM.Driver != null)
+            {
+                EditAccountPage editAccountPage = new(_profilePageVM.Driver);
+                Application.Current.MainPage = editAccountPage;
             }
         }
 
