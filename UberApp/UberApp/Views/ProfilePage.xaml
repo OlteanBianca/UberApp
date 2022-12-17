@@ -22,12 +22,19 @@
 
             <!--  Title View  -->
             <StackLayout Spacing="0">
-                <controls:TitleView Title="Profile">
-                    <controls:TitleView.LeadingView>
-                        <buttons:SfButton x:Name="backButton" Command="{Binding BackButtonCommand}"
-                            Style="{StaticResource IconButtonStyle}" Text="{StaticResource Back}"/>
-                    </controls:TitleView.LeadingView>
+                <controls:TitleView ColumnDefinitions="Auto, *, *, *, Auto">
+
+                    <buttons:SfButton x:Name="backButton" Command="{Binding BackButtonCommand}" FontSize="24"
+                             Style="{StaticResource IconButtonStyle}" Text="{StaticResource Back}"/>
+
+                    <Label Text="Profile" Grid.Column="2" FontSize="Medium" TextColor="Black" VerticalOptions="Center"
+                           HorizontalOptions="CenterAndExpand"/>
+
+                    <buttons:SfButton x:Name="edit" Command="{Binding EditAccountCommand}" Text="{StaticResource Edit}"
+                             Style="{StaticResource IconButtonStyle}" Grid.Column="4" Margin="0,0,7,0" FontSize="24"/>
+
                 </controls:TitleView>
+                <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
                 <ContentPresenter />
             </StackLayout>
 
@@ -45,12 +52,12 @@
                     </buttons:SfButton>
 
                     <!--  Client Profile Name  -->
-                    <Label IsEnabled="{Binding IsDriver, Converter={x:StaticResource InverseBoolConverter}}"
+                    <Label IsVisible="{Binding IsDriver, Converter={x:StaticResource InverseBoolConverter}}"
                            FontFamily="Montserrat-Bold" Style="{StaticResource TitleLabelStyle}"
-                           Text="{Binding Client.Name}" VerticalOptions="Center" Margin="0,0,0,15"/>
+                           Text="{Binding Client.Name}" VerticalOptions="Center" Margin="0,-5,0,15"/>
 
                     <!--Driver Profile Name-->
-                    <Label IsVisible="{Binding IsDriver}" Margin="0,0,0,15" FontFamily="Montserrat-Bold"
+                    <Label IsVisible="{Binding IsDriver}" Margin="0,-5,0,15" FontFamily="Montserrat-Bold"
                            Style="{StaticResource TitleLabelStyle}" Text="{Binding Driver.Name}" VerticalOptions="Center"/>
 
                     <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
@@ -66,7 +73,6 @@
 
                         <Label Grid.Column="2" FontFamily="Montserrat-Medium" HorizontalOptions="Start"
                                Style="{StaticResource TitleLabelStyle}" Text="{Binding Client.Email}" VerticalOptions="Center"/>
-
                     </Grid>
 
                     <BoxView Style="{StaticResource HorizontalSeparatorStyle}" 
@@ -81,8 +87,8 @@
                         <Label Grid.Column="1" FontFamily="Montserrat-Medium" HorizontalOptions="Start"
                                Style="{StaticResource TitleLabelStyle}" Text="Password:" VerticalOptions="Center" />
 
-                        <Label Grid.Column="2" FontFamily="Montserrat-Medium" HorizontalOptions="Start"
-                               Style="{StaticResource TitleLabelStyle}" Text="Password" VerticalOptions="Center" />
+                        <Label Grid.Column="2" FontSize="Medium" HorizontalOptions="Start" Margin="5,0,0,-8"
+                               Style="{StaticResource TitleLabelStyle}" Text="*******" VerticalOptions="Center" />
 
                     </Grid>
 
@@ -112,8 +118,8 @@
                         <Label Grid.Column="1" FontFamily="Montserrat-Medium" HorizontalOptions="Start"
                                Style="{StaticResource TitleLabelStyle}" Text="Password:" VerticalOptions="Center" />
 
-                        <Label Grid.Column="2" FontFamily="Montserrat-Medium" HorizontalOptions="Start"
-                               Style="{StaticResource TitleLabelStyle}" Text="{Binding Driver.Password}" VerticalOptions="Start" />
+                        <Label Grid.Column="2" FontSize="Medium" HorizontalOptions="Start" Margin="5,0,0,-8"
+                               Style="{StaticResource TitleLabelStyle}" Text="********" VerticalOptions="Start" />
 
                     </Grid>
 
@@ -199,9 +205,28 @@
 
                     <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
 
+                    <!--  Grid for card -->
+                    <Grid x:Name="cardGrid" Padding="16" ColumnDefinitions="Auto, *, Auto" ColumnSpacing="16">
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer  />
+                        </Grid.GestureRecognizers>
+
+                        <Label Grid.Column="0" Style="{StaticResource IconLabelStyle}" Text="{StaticResource Settings}" />
+
+                        <Label Grid.Column="1" FontFamily="Montserrat-Medium" HorizontalOptions="Start"
+                               Style="{StaticResource TitleLabelStyle}" Text="Payment Method" VerticalOptions="Center" />
+
+                        <Label Grid.Column="2" HorizontalOptions="End" Style="{StaticResource IconLabelStyle}" 
+                               Text="{StaticResource Next}" HeightRequest="20" WidthRequest="50"/>
+
+                    </Grid>
+
+                    <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+
                 </StackLayout>
             </ScrollView>
-            
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

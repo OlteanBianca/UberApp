@@ -60,32 +60,12 @@ namespace UberApp.ViewModels
             }
         }
 
-        public bool IsPasswordVisible
-        {
-            get => _isPasswordVisible;
-            set
-            {
-                _isPasswordVisible = value;
-                OnPropertyChanged();
-            }
-        }
-
         public bool IsDriver
         {
             get => _isDriver;
             set
             {
                 _isDriver = value;
-
-                if (_isDriver)
-                {
-                    IsPasswordVisible = true;
-                }
-                else
-                {
-                    IsPasswordVisible = false;
-                }
-
                 OnPropertyChanged();
             }
         }
@@ -96,10 +76,6 @@ namespace UberApp.ViewModels
 
         public SignUpVM() : base()
         {
-            InitializeProperties();
-            AddValidationRules();
-
-            IsPasswordVisible = false;
             IsDriver = false;
         }
 
@@ -110,22 +86,13 @@ namespace UberApp.ViewModels
         private Command _signUpCommand;
         public Command SignUpCommand
         {
-            get
-            {
-                _signUpCommand ??= new(LoginService.SignUpClicked);
-                return _signUpCommand;
-            }
+            get => _signUpCommand ??= new(LoginService.SignUpClicked);
         }
-
 
         private Command _openLoginPageCommand;
         public Command OpenLoginPageCommand
         {
-            get
-            {
-                _openLoginPageCommand ??= new(LoginService.OpenLoginPageClicked);
-                return _openLoginPageCommand;
-            }
+            get => _openLoginPageCommand ??= new(LoginService.OpenLoginPageClicked);
         }
 
         #endregion

@@ -12,24 +12,22 @@
              NavigationPage.HasNavigationBar="False" x:Name="driverHomePage">
 
     <ContentPage.Content>
-        <Grid RowDefinitions="Auto, *, Auto" RowSpacing="0">
+        <Grid RowDefinitions="Auto, *" RowSpacing="0">
 
             <!--top bar-->
-            <StackLayout x:Name="TitleView" Grid.Row="0" Padding="8" BackgroundColor="{DynamicResource Gray-Bg}"
+            <StackLayout x:Name="TitleView" Padding="8" BackgroundColor="{DynamicResource Gray-Bg}"
                          HorizontalOptions="FillAndExpand" Orientation="Horizontal" Spacing="0">
 
                 <StackLayout x:Name="TitleLayout" HorizontalOptions="FillAndExpand" IsVisible="True" Orientation="Horizontal"
                              Spacing="0" VerticalOptions="FillAndExpand">
 
                     <!--sign out button-->
-                    <buttons:SfButton Command="{Binding OpenLoginPageCommand}" HorizontalOptions="StartAndExpand" BorderColor="Black"
-                                      Style="{StaticResource ThemeBorderStyle}" VerticalOptions="Start" 
-                                      BackgroundColor="Lavender" BorderWidth="1" TextColor="Black" FontSize="18"
-                                      Text="Sign out" Margin="0,5" FontAttributes="Bold"/>
+                    <buttons:SfButton Command="{Binding OpenLoginPageCommand}" HorizontalOptions="StartAndExpand" FontSize="24"
+                             Style="{StaticResource IconButtonStyle}" TextColor="Black" Text="{StaticResource Back}"/>
 
                     <!--REQUEST TITLE-->
-                    <Label FontAttributes="Bold" FontSize="Medium" HorizontalOptions="StartAndExpand" Text="REQUESTS"
-                           VerticalOptions="Center" VerticalTextAlignment="Center" Style="{StaticResource TitleLabelStyle}"/>
+                    <Label FontAttributes="Bold" FontSize="Subtitle" HorizontalOptions="StartAndExpand" Text="REQUESTS"
+                           VerticalOptions="Center" Style="{StaticResource TitleLabelStyle}" Margin="18,5,0,0"/>
 
                 </StackLayout>
 
@@ -53,16 +51,22 @@
                 </StackLayout>
 
                 <!--Search Button-->
-                <buttons:SfButton x:Name="SearchButton" WidthRequest="60" HeightRequest="60" IsVisible="True"
-                                  Style="{StaticResource IconButtonStyle}" Text="{StaticResource Search}">
+                <buttons:SfButton x:Name="SearchButton" WidthRequest="40" HeightRequest="40" IsVisible="True"
+                                  Style="{StaticResource IconButtonStyle}" Text="{StaticResource Search}" FontSize="24">
                     <buttons:SfButton.Behaviors>
                         <behaviors:SearchBarAnimationBehavior AnimationType="expand" />
                     </buttons:SfButton.Behaviors>
                 </buttons:SfButton>
 
+                <!--refresh requests-->
+                <buttons:SfButton HorizontalOptions="End" BackgroundColor="White" WidthRequest="30"
+                                  Command="{Binding RefreshOrdersCommand}" HeightRequest="30" Margin="8,0">
+                    <Image Source="refresh.png"/>
+                </buttons:SfButton>
+                
                 <!--info button-->
-                <buttons:SfButton HorizontalOptions="End" BackgroundColor="White" WidthRequest="40"
-                                  Command="{Binding ProfilePageCommand}" HeightRequest="40">
+                <buttons:SfButton HorizontalOptions="End" BackgroundColor="White" WidthRequest="35"
+                                  Command="{Binding ProfilePageCommand}" HeightRequest="35">
                     <Image Source="icon_about.png"/>
                 </buttons:SfButton>
 
@@ -132,11 +136,6 @@
                     </controls:SearchableSuggestionList.ItemTemplate>
                 </controls:SearchableSuggestionList>
             </StackLayout>
-
-            <!--refresh orders button-->
-            <buttons:SfButton Text="Refresh Orders" HorizontalOptions="CenterAndExpand"  Grid.Row="2" BorderColor="Black"
-                    Command="{Binding RefreshOrdersCommand}" FontSize="20" TextColor="Black" BackgroundColor="Lavender"
-                    Style="{StaticResource ThemeBorderStyle}" FontAttributes="Bold" Margin="0,5" BorderWidth="1"/>
 
         </Grid>
     </ContentPage.Content>

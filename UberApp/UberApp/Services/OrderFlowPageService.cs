@@ -101,12 +101,16 @@ namespace UberApp.Services
             request.Finished = true;
             _dataBaseService.UpdateRequest(request);
 
+            if (request.Driver is null) return;
+
             DriverHomePage driverHomePage = new(request.Driver);
             Application.Current.MainPage = driverHomePage;
         }
 
         public void GoBackToDriverHomePageClicked()
         {
+            if (_orderFlowVM.Driver is null) return;
+
             DriverHomePage driverHomePage = new(_orderFlowVM.Driver);
             Application.Current.MainPage = driverHomePage;
         }

@@ -80,7 +80,13 @@ namespace UberApp.ViewModels
         public Command GoToRequestsCommand
         {
             get => _goToRequestsCommand ??= new(_profilePageService.GoToRequestsClicked);
-        }       
+        }
+
+        private Command _editAccountCommand;
+        public Command EditAccountCommand
+        {
+            get => _editAccountCommand ??= new(_profilePageService.EditAccountClicked);
+        }
 
         #endregion
     }

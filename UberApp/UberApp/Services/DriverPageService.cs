@@ -41,6 +41,7 @@ namespace UberApp.Services
         public void GoToOrderFlowPage(object obj)
         {
             if (obj is not Request request) return;
+
             request.Driver = _driverHomeVM.Driver;
             request.DriverId = _driverHomeVM.Driver.DriverId;
 

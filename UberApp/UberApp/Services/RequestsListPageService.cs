@@ -53,6 +53,7 @@ namespace UberApp.Services
             {
                 ProfilePage profilePage = new(_requestsListVM.Client);
                 Application.Current.MainPage = profilePage;
+                return;
             }
             if (_requestsListVM.Driver != null)
             {
@@ -69,6 +70,13 @@ namespace UberApp.Services
             {
                 ClientHomePage clientHomePage = new(_requestsListVM.Client, request);
                 Application.Current.MainPage = clientHomePage;
+                return;
+            }
+            if(_requestsListVM.Driver != null)
+            {
+                request.Driver = _requestsListVM.Driver;
+                OrderFlowPage orderFlowPage = new(request);
+                Application.Current.MainPage = orderFlowPage;
             }
         }
 
