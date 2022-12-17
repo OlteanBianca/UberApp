@@ -26320,22 +26320,25 @@ namespace UberApp.Droid
 			public const int sfcheckbox_unchecked_indeterminate = 2131165400;
 			
 			// aapt resource value: 0x7F0700D9
-			public const int test_custom_background = 2131165401;
+			public const int signOut = 2131165401;
 			
 			// aapt resource value: 0x7F0700DA
-			public const int tooltip_frame_dark = 2131165402;
+			public const int test_custom_background = 2131165402;
 			
 			// aapt resource value: 0x7F0700DB
-			public const int tooltip_frame_light = 2131165403;
+			public const int tooltip_frame_dark = 2131165403;
 			
 			// aapt resource value: 0x7F0700DC
-			public const int traffic = 2131165404;
+			public const int tooltip_frame_light = 2131165404;
 			
 			// aapt resource value: 0x7F0700DD
-			public const int user = 2131165405;
+			public const int traffic = 2131165405;
 			
 			// aapt resource value: 0x7F0700DE
-			public const int xamarin_logo = 2131165406;
+			public const int user = 2131165406;
+			
+			// aapt resource value: 0x7F0700DF
+			public const int xamarin_logo = 2131165407;
 			
 			static Drawable()
 			{
