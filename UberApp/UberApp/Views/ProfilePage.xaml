@@ -143,10 +143,10 @@
                     <!--License plate-->
                     <Grid IsVisible="{Binding IsDriver}" Padding="16" ColumnDefinitions="Auto, Auto, *" ColumnSpacing="16">
 
-                        <Label Grid.Column="0" Style="{StaticResource IconLabelStyle}" Text="{StaticResource  AlbumsIcon}" />
+                        <Label Grid.Column="0" Style="{StaticResource IconLabelStyle}" Text="{StaticResource AlbumsIcon}" />
 
                         <Label Grid.Column="1" FontFamily="Montserrat-Medium" HorizontalOptions="Start"
-                               Style="{StaticResource TitleLabelStyle}" Text="Car model:" VerticalOptions="Center" />
+                               Style="{StaticResource TitleLabelStyle}" Text="License plate:" VerticalOptions="Center" />
 
                         <Label Grid.Column="2" FontFamily="Montserrat-Medium" HorizontalOptions="Start"
                                Style="{StaticResource TitleLabelStyle}" Text="{Binding Driver.LicensePlate}" VerticalOptions="Start" />
