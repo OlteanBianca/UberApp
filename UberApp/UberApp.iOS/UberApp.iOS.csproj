@@ -236,4 +236,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\refresh.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\signOut.png" />
+  </ItemGroup>
 </Project>

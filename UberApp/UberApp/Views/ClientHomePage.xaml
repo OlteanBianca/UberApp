@@ -21,20 +21,22 @@
         <StackLayout Orientation="Vertical" HorizontalOptions="Start" VerticalOptions="Start">
 
             <!--sign out button-->
-            <buttons:SfButton Command="{Binding OpenLoginPageCommand}" HorizontalOptions="StartAndExpand" 
-                 BorderColor="Black" BorderWidth="1"
-                 Style="{StaticResource ThemeBorderStyle}" VerticalOptions="Start" BackgroundColor="Lavender"
-                 Text="Sign out" Margin="5,5" FontAttributes="Bold" TextColor="Black" FontSize="18"/>
+            <buttons:SfButton Command="{Binding OpenLoginPageCommand}" HorizontalOptions="Start" HeightRequest="50"     
+                     Style="{StaticResource SimpleButtonStyle}" VerticalOptions="Start" BackgroundColor="White"
+                     Margin="6,5" FontAttributes="Bold" TextColor="Black" WidthRequest="43" CornerRadius="5"
+                              BorderColor="Black" BorderThickness="1">
+                <Image Source="signOut.png" Aspect="AspectFit"/>
+            </buttons:SfButton>
 
             <StackLayout Orientation="Vertical" HorizontalOptions="Start" VerticalOptions="Start">
 
                 <!--info buttton-->
                 <buttons:SfButton Command="{Binding ProfilePageCommand}" HorizontalOptions="StartAndExpand" x:Name="info"
-                         HeightRequest="50" WidthRequest="50" Margin="4,0" BorderThickness="1" BackgroundColor="White"
+                         HeightRequest="50" WidthRequest="48" Margin="4,0" BackgroundColor="White"
                          Style="{StaticResource IconButtonStyle}" VerticalOptions="Start" CornerRadius="29">
                     <Image Source="icon_about.png" Aspect="AspectFill"/>
                 </buttons:SfButton>
-
+  
                 <!--hybrid button-->
                 <buttons:SfButton Clicked="ChangeToDefault" HorizontalOptions="StartAndExpand" x:Name="streets"
                          HeightRequest="58" WidthRequest="48" Margin="5,5" BorderThickness="1" BorderColor="Gray"
