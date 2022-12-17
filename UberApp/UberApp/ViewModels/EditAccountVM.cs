@@ -136,7 +136,7 @@ namespace UberApp.ViewModels
                 isNameValid = Name.Validate();
             }
 
-            if (Password.Item1 != Password.Item2 || Password.Item1.Value != _driver.Password)
+            if (Password.Item1.Value != Password.Item2.Value || Password.Item1.Value != _driver.Password)
             {
                 isPasswordValid = Password.Validate();
             }
