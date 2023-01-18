@@ -104,7 +104,7 @@ namespace UberApp.Services
 
             if (_viewModel.AreFieldsValid())
             {
-                if (signUpVM.Password.IsValid)
+                if (signUpVM.IsDriver)
                 {
                     AddNewDriver(signUpVM);
                     return;

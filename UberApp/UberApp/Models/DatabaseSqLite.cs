@@ -34,7 +34,7 @@ namespace UberApp.Models
 
         private void AddClients()
         {
-           // _database.Table<Client>().Delete(val => true);
+            //_database.Table<Client>().Delete(val => true);
 
             if (_database.Table<Client>().Count() == 0)
             {
@@ -85,6 +85,7 @@ namespace UberApp.Models
                     DestinationLongitude = 25.5840f,
                     DestinationLatitude = 45.6384f,
                     DestinationName = "Colegiul National Andrei Saguna",
+                    Finished = true
                 };
                 Database.Insert(request);
 
@@ -165,7 +166,7 @@ namespace UberApp.Models
                     DestinationLatitude = 45.661057f,
                     DestinationName = "Gara Brasov"
                 };
-                Database.Insert(request);
+                Database.Insert(request);   
             }
         }
 
