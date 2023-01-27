@@ -85,8 +85,6 @@ namespace UberApp.Services
                 _clientHomeVM.Pins.RemoveAt(0);
             }
 
-            var clientLocation = await Geolocation.GetLocationAsync();
-
             var locations = await Geocoding.GetLocationsAsync(_clientHomeVM.Address);
 
             var location = locations?.FirstOrDefault();
